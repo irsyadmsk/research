@@ -1,0 +1,146 @@
+---
+import Base from "../../layouts/Base.astro";
+import "../../styles/judul.css";
+---
+<Base
+  title="Racik Judul Sosiologi"
+  description="Pembuat judul penelitian sosiologi kualitatif dan kuantitatif untuk mahasiswa dan siswa kelas 10, lengkap dengan teori, rumusan masalah, dan hipotesis."
+  active="judul"
+>
+  <div class="rj wrap">
+    <header class="rj-head">
+      <p class="eyebrow reveal">Alat · Skripsi, tugas kelas 10, artikel ilmiah</p>
+      <h1 class="reveal" style="--i:1">Racik Judul Sosiologi</h1>
+      <p class="lede reveal" style="--i:2">Isi fenomena, subjek, dan lokasi penelitianmu. Racikan ini menyusun judul kualitatif atau kuantitatif lengkap dengan teori, rumusan masalah, dan hipotesis awal.</p>
+    </header>
+
+    <div class="rj-main">
+      <aside class="rj-side">
+        <section class="panel reveal" style="--i:3">
+          <div class="panel-top">
+            <h2>Bahan racikan</h2>
+            <a class="jump" href="#hasil">Lihat <span id="jump-n">8</span> judul ↓</a>
+          </div>
+          <form id="f">
+            <div class="field">
+              <span class="legend">Pendekatan</span>
+              <div class="seg" role="radiogroup" aria-label="Pendekatan">
+                <input type="radio" name="ap" id="ap-qual" value="qual" /><label for="ap-qual">Kualitatif</label>
+                <input type="radio" name="ap" id="ap-quant" value="quant" /><label for="ap-quant">Kuantitatif</label>
+                <input type="radio" name="ap" id="ap-both" value="both" checked /><label for="ap-both">Keduanya</label>
+              </div>
+            </div>
+            <div class="field">
+              <span class="legend">Jenjang</span>
+              <div class="seg two" role="radiogroup" aria-label="Jenjang">
+                <input type="radio" name="lv" id="lv-mhs" value="mhs" checked /><label for="lv-mhs">Mahasiswa</label>
+                <input type="radio" name="lv" id="lv-sma" value="sma" /><label for="lv-sma">SMA Kelas 10</label>
+              </div>
+            </div>
+            <div class="field">
+              <label for="bidang">Bidang kajian</label>
+              <select id="bidang"></select>
+            </div>
+            <div class="field">
+              <label for="topik">Fenomena / topik</label>
+              <div class="inline">
+                <input type="text" id="topik" autocomplete="off" />
+                <button type="button" class="btn sm" id="inspirasi" title="Isi contoh dari bidang ini"><span class="dice" aria-hidden="true">⚄</span> Inspirasi</button>
+              </div>
+            </div>
+            <div class="field">
+              <label for="subjek">Subjek / populasi</label>
+              <input type="text" id="subjek" autocomplete="off" />
+            </div>
+            <div class="row2">
+              <div class="field">
+                <label for="lokasi">Lokasi <span class="hint">(opsional)</span></label>
+                <input type="text" id="lokasi" autocomplete="off" list="kecamatan" placeholder="mis. Purwakarta" />
+              </div>
+              <div class="field">
+                <label for="tahun">Tahun</label>
+                <input type="text" id="tahun" inputmode="numeric" placeholder="opsional" autocomplete="off" />
+              </div>
+            </div>
+            <div class="chips" id="lok-chips" aria-label="Pilihan lokasi cepat"></div>
+            <datalist id="kecamatan"></datalist>
+            <div class="field">
+              <label for="teori" id="teori-label">Teori / perspektif</label>
+              <select id="teori"></select>
+            </div>
+
+            <div class="group qual" id="g-qual">
+              <p class="group-title">Khusus kualitatif</p>
+              <div class="field">
+                <label for="mqual">Desain penelitian</label>
+                <select id="mqual">
+                  <option value="">Acak</option>
+                  <option>Studi Kasus</option><option>Studi Fenomenologi</option><option>Studi Etnografi</option>
+                  <option>Studi Grounded Theory</option><option>Studi Naratif</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="group quant" id="g-quant">
+              <p class="group-title">Khusus kuantitatif</p>
+              <div class="field">
+                <label for="vx">Variabel bebas (X)</label>
+                <input type="text" id="vx" autocomplete="off" />
+              </div>
+              <div class="field">
+                <label for="vy">Variabel terikat (Y)</label>
+                <input type="text" id="vy" autocomplete="off" />
+              </div>
+              <div class="field">
+                <label for="vz">Variabel moderasi / mediasi (Z) <span class="hint">(opsional)</span></label>
+                <input type="text" id="vz" autocomplete="off" placeholder="mis. dukungan sosial" />
+              </div>
+              <div class="field" id="f-mquant">
+                <label for="mquant">Desain penelitian</label>
+                <select id="mquant">
+                  <option value="">Acak</option>
+                  <option>Survei</option><option>Korelasional</option><option>Komparatif</option><option>Eksperimen Semu</option>
+                </select>
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary go">Racik judul</button>
+          </form>
+        </section>
+
+        <section class="panel tips reveal" style="--i:4">
+          <h2>Kiat judul yang baik</h2>
+          <ul>
+            <li>Memuat <b>fenomena atau variabel</b>, <b>subjek</b>, dan <b>lokasi</b>.</li>
+            <li>Kualitatif menggali <b>makna dan proses</b> (bagaimana, mengapa). Kuantitatif menguji <b>pengaruh, hubungan, atau perbedaan</b>.</li>
+            <li>Usahakan <b>tidak lebih dari 20 kata</b> untuk mahasiswa dan <b>15 kata</b> untuk tugas kelas 10.</li>
+            <li>Siswa kelas 10 cukup memakai konsep dasar seperti <b>interaksi sosial, nilai dan norma, atau sosialisasi</b>.</li>
+          </ul>
+          <a class="more" href="/alur/">Langkah berikutnya: Alur Penelitian →</a>
+        </section>
+      </aside>
+
+      <section class="rj-results" id="hasil" aria-label="Hasil racikan">
+        <div class="results-head reveal" style="--i:4">
+          <p class="summary" id="summary" aria-live="polite"></p>
+          <button type="button" class="btn sm" id="acak"><span aria-hidden="true">↻</span> Acak ulang</button>
+        </div>
+        <div class="cards" id="cards"></div>
+
+        <section class="saved-wrap">
+          <div class="results-head">
+            <h2>Judul tersimpan <span id="saved-n" class="saved-n"></span></h2>
+            <button type="button" class="btn sm" id="copyall">Salin semua</button>
+          </div>
+          <ol class="saved-list" id="saved"></ol>
+          <p class="empty" id="saved-empty">Belum ada judul tersimpan. Tekan <b>Simpan</b> di kartu judul untuk mengumpulkan kandidat yang ingin kamu ajukan ke dosen atau guru pembimbing. Daftar ini tersimpan di perangkatmu.</p>
+        </section>
+      </section>
+    </div>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</Base>
+
+<script>
+  import "../../scripts/judul.js";
+</script>

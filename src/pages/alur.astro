@@ -1,0 +1,190 @@
+---
+import Base from "../layouts/Base.astro";
+
+const langkah = [
+  {
+    id: "masalah",
+    judul: "Menemukan masalah sosial",
+    isi: "Amati lingkungan terdekat: sekolah, kampung, pasar, tempat wisata, atau media sosial. Catat gejala yang membuatmu bertanya “mengapa ini terjadi?”.",
+    sma: "Pilih gejala yang dekat dan mudah diamati, misalnya kebiasaan bermain HP saat kumpul keluarga atau kerja bakti di RT.",
+    mhs: "Telusuri penelitian terdahulu untuk menemukan celah penelitian (research gap) yang belum banyak dibahas.",
+  },
+  {
+    id: "judul",
+    judul: "Menyusun judul",
+    isi: "Judul yang baik memuat fenomena atau variabel, subjek, dan lokasi. Kualitatif menggali makna dan proses, kuantitatif menguji pengaruh, hubungan, atau perbedaan.",
+    sma: "Cukup sekitar 15 kata. Pakai satu konsep dari buku paket.",
+    mhs: "Sebutkan teori atau desain penelitian bila membantu memperjelas fokus.",
+    link: { href: "/alat/judul/", label: "Buka Racik Judul" },
+  },
+  {
+    id: "rumusan",
+    judul: "Merumuskan masalah dan tujuan",
+    isi: "Ubah judul menjadi pertanyaan penelitian. Tujuan penelitian menjawab setiap rumusan masalah satu per satu.",
+    sma: "Satu atau dua pertanyaan “bagaimana” atau “apa saja” sudah cukup.",
+    mhs: "Kualitatif memakai “bagaimana” dan “mengapa”. Kuantitatif memakai “seberapa besar” dan “apakah”, lalu diturunkan menjadi hipotesis.",
+  },
+  {
+    id: "teori",
+    judul: "Kajian teori dan pustaka",
+    isi: "Kumpulkan konsep dan teori yang menjadi pisau analisis, lalu bandingkan dengan penelitian orang lain tentang topik serupa.",
+    sma: "Gunakan konsep dari buku paket: interaksi sosial, nilai dan norma, sosialisasi, atau gejala sosial.",
+    mhs: "Pakai teori tokoh dan 5–10 penelitian terdahulu dari jurnal di Garuda atau Google Scholar.",
+  },
+  {
+    id: "metode",
+    judul: "Menentukan metode",
+    isi: "Kualitatif mengandalkan observasi, wawancara, dan dokumentasi. Kuantitatif memakai angket untuk populasi atau sampel tertentu.",
+    sma: "Wawancarai 3–5 narasumber, atau bagikan angket ke 20–30 responden.",
+    mhs: "Tentukan teknik sampling dan uji validitas serta reliabilitas instrumen.",
+  },
+  {
+    id: "data",
+    judul: "Mengumpulkan data",
+    isi: "Minta izin sebelum mewawancarai, merekam, atau memotret. Jelaskan tujuan penelitian dan jaga kerahasiaan identitas narasumber.",
+    sma: "Bawa surat pengantar dari sekolah bila meneliti di luar sekolah.",
+    mhs: "Siapkan lembar persetujuan (informed consent) dan simpan data mentah dengan aman.",
+  },
+  {
+    id: "analisis",
+    judul: "Mengolah dan menganalisis data",
+    isi: "Data kualitatif direduksi, disajikan, lalu disimpulkan. Data kuantitatif diolah menjadi tabel dan diuji.",
+    sma: "Buat tabel frekuensi dan persentase, lalu jelaskan polanya dengan kalimat sendiri.",
+    mhs: "Gunakan model Miles dan Huberman, atau uji statistik dengan SPSS atau JASP.",
+  },
+  {
+    id: "laporan",
+    judul: "Menulis laporan",
+    isi: "Susunan umum: Pendahuluan, Kajian Teori, Metode, Hasil dan Pembahasan, Penutup, serta Daftar Pustaka.",
+    sma: "Laporan 5–10 halaman dengan lampiran foto kegiatan dan pedoman wawancara.",
+    mhs: "Ikuti pedoman penulisan kampus dan gaya sitasi yang diminta, misalnya APA.",
+  },
+  {
+    id: "presentasi",
+    judul: "Presentasi dan publikasi",
+    isi: "Sampaikan temuan lewat slide atau poster. Karya terbaik bisa tayang di halaman Karya Murid setelah mendapat izin.",
+    sma: "Siapkan presentasi 5–7 menit dan satu poster temuan utama.",
+    mhs: "Ubah hasil menjadi artikel jurnal atau presentasi seminar.",
+    link: { href: "/karya/", label: "Lihat Karya Murid" },
+  },
+];
+---
+<Base
+  title="Alur Penelitian Sosiologi"
+  description="Sembilan langkah penelitian sosiologi dari menemukan masalah sampai presentasi, untuk siswa kelas 10 dan mahasiswa."
+  active="alur"
+>
+  <section class="wrap head">
+    <p class="eyebrow reveal">Panduan langkah demi langkah</p>
+    <h1 class="reveal" style="--i:1">Alur Penelitian Sosiologi</h1>
+    <p class="lede reveal" style="--i:2">Sembilan langkah dari menemukan masalah sampai mempresentasikan hasil. Tandai langkah yang sudah selesai; tanda centang tersimpan di perangkatmu.</p>
+    <div class="tools reveal" style="--i:3">
+      <div class="seg" role="radiogroup" aria-label="Tampilkan catatan untuk">
+        <input type="radio" name="lv" id="lv-all" value="all" checked /><label for="lv-all">Semua</label>
+        <input type="radio" name="lv" id="lv-sma" value="sma" /><label for="lv-sma">Kelas 10</label>
+        <input type="radio" name="lv" id="lv-mhs" value="mhs" /><label for="lv-mhs">Mahasiswa</label>
+      </div>
+      <div class="progress" aria-live="polite">
+        <span class="bar"><span id="bar-fill"></span></span>
+        <span id="progress-text">0 dari {langkah.length} selesai</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <ol class="steps" data-lv="all">
+      {langkah.map((l, i) => (
+        <li class="step reveal" style={`--i:${Math.min(i, 6) + 3}`} data-id={l.id}>
+          <label class="check">
+            <input type="checkbox" id={`cek-${l.id}`} />
+            <span class="num" aria-hidden="true">{i + 1}</span>
+            <span class="visually-hidden">Tandai langkah {i + 1} selesai</span>
+          </label>
+          <div class="step-body">
+            <h2>{l.judul}</h2>
+            <p>{l.isi}</p>
+            <div class="notes">
+              <p class="note sma"><span>Kelas 10</span>{l.sma}</p>
+              <p class="note mhs"><span>Mahasiswa</span>{l.mhs}</p>
+            </div>
+            {l.link && <a class="btn" href={l.link.href}>{l.link.label} <span class="arrow" aria-hidden="true">→</span></a>}
+          </div>
+        </li>
+      ))}
+    </ol>
+  </section>
+</Base>
+
+<script>
+  const KEY = "research:alur";
+  const boxes = [...document.querySelectorAll<HTMLInputElement>(".step input[type=checkbox]")];
+  let done: string[] = [];
+  try { done = JSON.parse(localStorage.getItem(KEY) || "[]"); } catch {}
+  const fill = document.getElementById("bar-fill")!;
+  const text = document.getElementById("progress-text")!;
+  function sync() {
+    const n = boxes.filter((b) => b.checked).length;
+    fill.style.width = `${(n / boxes.length) * 100}%`;
+    text.textContent = n === boxes.length ? "Semua langkah selesai. Saatnya presentasi!" : `${n} dari ${boxes.length} selesai`;
+    boxes.forEach((b) => b.closest(".step")!.classList.toggle("is-done", b.checked));
+  }
+  boxes.forEach((b) => {
+    const id = b.closest<HTMLElement>(".step")!.dataset.id!;
+    b.checked = done.includes(id);
+    b.addEventListener("change", () => {
+      const ids = boxes.filter((x) => x.checked).map((x) => x.closest<HTMLElement>(".step")!.dataset.id!);
+      try { localStorage.setItem(KEY, JSON.stringify(ids)); } catch {}
+      sync();
+    });
+  });
+  sync();
+  const steps = document.querySelector<HTMLElement>(".steps")!;
+  document.querySelectorAll<HTMLInputElement>("input[name=lv]").forEach((r) =>
+    r.addEventListener("change", () => { steps.dataset.lv = r.value; })
+  );
+</script>
+
+<style>
+  .head { padding-block: 56px 28px; }
+  h1 { font-family: var(--f-display); font-size: clamp(34px, 5vw, 52px); line-height: 1.08; margin: 0; }
+  .lede { color: var(--muted); max-width: 60ch; margin: 14px 0 0; font-size: 17px; }
+  .tools { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 28px; margin-top: 24px; }
+  .seg { display: inline-grid; grid-auto-flow: column; background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 3px; gap: 2px; }
+  .seg input { position: absolute; opacity: 0; pointer-events: none; }
+  .seg label { padding: 7px 14px; border-radius: 999px; font-size: 13.5px; font-weight: 600; color: var(--muted); cursor: pointer; transition: background-color 0.2s, color 0.2s; }
+  .seg input:checked + label { background: var(--ink); color: var(--bg); }
+  .seg input:focus-visible + label { outline: 2px solid var(--accent); }
+  .progress { display: flex; align-items: center; gap: 12px; font-size: 14px; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .bar { width: 160px; height: 8px; border-radius: 99px; background: var(--line); overflow: hidden; }
+  #bar-fill { display: block; height: 100%; width: 0; background: var(--accent); border-radius: 99px; transition: width 0.5s var(--ease); }
+
+  .steps { list-style: none; margin: 0; padding: 0; position: relative; max-width: 860px; }
+  .steps::before { content: ""; position: absolute; left: 21px; top: 24px; bottom: 24px; width: 2px; background: var(--line); }
+  .step { position: relative; display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 18px; padding-bottom: 28px; }
+  .check { position: relative; cursor: pointer; }
+  .check input { position: absolute; opacity: 0; inset: 0; cursor: pointer; }
+  .num { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: var(--surface); border: 2px solid var(--line); font-family: var(--f-display); font-weight: 700; font-size: 18px; transition: background-color 0.3s, border-color 0.3s, color 0.3s, transform 0.3s var(--ease); }
+  .check:hover .num { border-color: var(--accent); }
+  .check input:focus-visible + .num { outline: 2px solid var(--accent); outline-offset: 3px; }
+  .is-done .num { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); font-size: 0; transform: scale(1.04); }
+  .is-done .num::after { content: "✓"; font-size: 20px; font-family: var(--f-body); }
+  .step-body { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 20px 22px; min-width: 0; transition: border-color 0.3s, opacity 0.3s; }
+  .is-done .step-body { border-color: color-mix(in srgb, var(--accent) 45%, var(--line)); }
+  .step-body h2 { font-family: var(--f-display); font-size: 22px; margin: 0 0 6px; }
+  .step-body > p { margin: 0; color: var(--ink); }
+  .notes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin: 14px 0 0; }
+  @media (max-width: 640px) { .notes { grid-template-columns: 1fr; } }
+  .note { margin: 0; padding: 10px 12px; border-radius: 8px; font-size: 14px; color: var(--muted); background: var(--bg); }
+  .note span { display: block; font-family: var(--f-mono); font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 2px; }
+  .note.sma span { color: var(--qual); }
+  .steps[data-lv="sma"] .note.mhs, .steps[data-lv="mhs"] .note.sma { display: none; }
+  .steps[data-lv="sma"] .notes, .steps[data-lv="mhs"] .notes { grid-template-columns: 1fr; }
+  .step-body .btn { margin-top: 14px; }
+  .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  @media (max-width: 520px) {
+    .step { grid-template-columns: 36px minmax(0, 1fr); gap: 12px; }
+    .num { width: 36px; height: 36px; font-size: 16px; }
+    .steps::before { left: 17px; }
+    .step-body { padding: 16px; }
+  }
+</style>

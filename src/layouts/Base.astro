@@ -1,0 +1,136 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title: string;
+  description: string;
+  active?: "beranda" | "alur" | "judul" | "karya";
+}
+const { title, description, active } = Astro.props;
+const fullTitle = active === "beranda" ? title : `${title} · Irsyads Research`;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const nav = [
+  { id: "beranda", href: "/", label: "Beranda" },
+  { id: "alur", href: "/alur/", label: "Alur Penelitian" },
+  { id: "judul", href: "/alat/judul/", label: "Racik Judul" },
+  { id: "karya", href: "/karya/", label: "Karya Murid" },
+];
+---
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="theme-color" content="#f3ede2" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0b1d35" media="(prefers-color-scheme: dark)" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Irsyads Research" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content="id_ID" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&family=Libre+Baskerville:wght@400;700&family=Playfair+Display:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+    />
+  </head>
+  <body>
+    <a class="skip" href="#isi">Langsung ke isi</a>
+    <header class="site-head">
+      <div class="wrap head-row">
+        <a class="brand" href="/" aria-label="Irsyads Research, ke beranda">
+          <svg class="mark" viewBox="0 0 32 32" aria-hidden="true">
+            <rect width="32" height="32" rx="8" fill="currentColor" />
+            <circle cx="14" cy="14" r="6.5" fill="none" stroke="var(--bg)" stroke-width="2.4" />
+            <path d="M19 19l6 6" stroke="var(--bg)" stroke-width="2.6" stroke-linecap="round" />
+            <circle cx="12" cy="13" r="1.4" fill="var(--bg)" /><circle cx="16.4" cy="13" r="1.4" fill="var(--bg)" />
+            <path d="M10.6 17c1-1.2 2.2-1.6 3.4-1.6s2.4.4 3.4 1.6" fill="none" stroke="var(--bg)" stroke-width="1.4" stroke-linecap="round" />
+          </svg>
+          <span class="brand-text"><strong>Irsyads Research</strong><span>Ruang Riset Sosiologi</span></span>
+        </a>
+        <nav class="nav" aria-label="Navigasi utama">
+          {nav.map((n) => (
+            <a href={n.href} aria-current={active === n.id ? "page" : undefined}>{n.label}</a>
+          ))}
+        </nav>
+      </div>
+    </header>
+
+    <main id="isi">
+      <slot />
+    </main>
+
+    <footer class="site-foot">
+      <div class="wrap foot-row">
+        <div>
+          <p class="foot-brand">Irsyads Research</p>
+          <p class="foot-note">Ruang belajar penelitian sosiologi untuk siswa SMA dan mahasiswa, berawal dari Purwakarta.</p>
+        </div>
+        <p class="credit">
+          Dibuat oleh <strong>Muhammad Irsyad Sirojul Khoeir</strong><br />
+          <a href="https://irsyads.com">irsyads.com</a>
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<style>
+  .skip { position: absolute; left: -9999px; top: 8px; background: var(--ink); color: var(--bg); padding: 8px 14px; border-radius: 8px; z-index: 50; }
+  .skip:focus { left: var(--gutter-l); }
+
+  .site-head {
+    position: sticky;
+    top: env(safe-area-inset-top, 0px);
+    z-index: 20;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: saturate(1.4) blur(10px);
+    -webkit-backdrop-filter: saturate(1.4) blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 30; background: var(--bg); }
+  .head-row { display: flex; align-items: center; justify-content: space-between; gap: 12px 24px; padding-block: 12px; flex-wrap: wrap; }
+  .brand { display: flex; align-items: center; gap: 10px; color: var(--ink); text-decoration: none; }
+  .mark { width: 34px; height: 34px; color: var(--ink); flex: none; transition: transform 0.4s var(--ease); }
+  .brand:hover .mark { transform: rotate(-8deg); }
+  .brand-text { display: flex; flex-direction: column; line-height: 1.15; }
+  .brand-text strong { font-family: var(--f-display); font-size: 18px; letter-spacing: 0.01em; }
+  .brand-text span { font-size: 12px; color: var(--muted); }
+
+  .nav { display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; max-width: 100%; }
+  .nav::-webkit-scrollbar { display: none; }
+  .nav a {
+    position: relative;
+    padding: 8px 12px;
+    border-radius: 999px;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    white-space: nowrap;
+    transition: color 0.2s, background-color 0.2s;
+  }
+  .nav a:hover { color: var(--ink); background: var(--surface); }
+  .nav a[aria-current="page"] { color: var(--ink); background: var(--surface); box-shadow: inset 0 0 0 1px var(--line); }
+  @media (max-width: 720px) {
+    .head-row { padding-block: 10px 8px; }
+    .nav { width: 100%; margin-inline: -4px; }
+    .nav a { padding: 7px 11px; font-size: 13.5px; }
+  }
+
+  .site-foot { border-top: 1px solid var(--line); margin-top: 72px; }
+  .foot-row { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 20px 40px; padding-block: 32px 40px; }
+  .foot-brand { font-family: var(--f-display); font-size: 20px; font-weight: 700; margin: 0 0 4px; }
+  .foot-note { margin: 0; color: var(--muted); font-size: 14px; max-width: 46ch; }
+  .credit { margin: 0; font-size: 14px; color: var(--muted); text-align: right; }
+  .credit strong { color: var(--ink); font-weight: 600; }
+  .credit a { font-weight: 600; text-decoration: none; }
+  .credit a:hover { text-decoration: underline; }
+  @media (max-width: 600px) { .credit { text-align: left; } }
+</style>

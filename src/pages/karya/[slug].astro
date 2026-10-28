@@ -1,0 +1,47 @@
+---
+import Base from "../../layouts/Base.astro";
+import { getCollection, render } from "astro:content";
+
+export async function getStaticPaths() {
+  const karya = (await getCollection("karya")).filter((k) => k.data.izin);
+  return karya.map((k) => ({ params: { slug: k.id }, props: { k } }));
+}
+const { k } = Astro.props;
+const { Content } = await render(k);
+const d = k.data;
+---
+<Base title={d.judul} description={d.ringkasan} active="karya">
+  <article class="wrap paper">
+    <a class="back" href="/karya/">← Semua karya</a>
+    <p class="eyebrow">{d.pendekatan} · {d.tema} · {d.tahun}</p>
+    <h1>{d.judul}</h1>
+    <dl class="facts">
+      <div><dt>Penulis</dt><dd>{d.penulis.join(", ")}</dd></div>
+      <div><dt>Jenjang</dt><dd>{d.jenjang === "sma" ? `SMA${d.kelas ? ` · Kelas ${d.kelas}` : ""}` : "Mahasiswa"}</dd></div>
+      {d.lokasi && <div><dt>Lokasi</dt><dd>{d.lokasi}</dd></div>}
+      <div><dt>Pembimbing</dt><dd>{d.pembimbing}</dd></div>
+    </dl>
+    <p class="abstrak"><strong>Ringkasan.</strong> {d.ringkasan}</p>
+    {(d.pdf || d.poster) && (
+      <div class="files">
+        {d.pdf && <a class="btn btn-primary" href={d.pdf}>Buka laporan (PDF)</a>}
+        {d.poster && <a class="btn" href={d.poster}>Lihat poster</a>}
+      </div>
+    )}
+    <div class="body"><Content /></div>
+  </article>
+</Base>
+
+<style>
+  .paper { max-width: 760px; padding-block: 40px 0; }
+  .back { display: inline-block; margin-bottom: 24px; font-size: 14px; font-weight: 600; text-decoration: none; }
+  h1 { font-family: var(--f-serif); font-size: clamp(24px, 3.4vw, 34px); line-height: 1.35; margin: 0; }
+  .facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px 24px; margin: 24px 0; padding: 16px 0; border-block: 1px solid var(--line); }
+  dt { font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted); }
+  dd { margin: 2px 0 0; font-weight: 600; font-size: 14.5px; }
+  .abstrak { font-size: 16px; }
+  .files { display: flex; flex-wrap: wrap; gap: 10px; margin: 20px 0; }
+  .body { font-size: 16.5px; line-height: 1.75; }
+  .body :global(h2) { font-family: var(--f-display); font-size: 24px; margin: 36px 0 8px; }
+  .body :global(img) { border-radius: 8px; }
+</style>

@@ -1,0 +1,22 @@
+node_modules/
+dist/
+.astro/
+.wrangler/
+*-debug.log
+npm-debug.log*
+
+# Rahasia tidak masuk repo
+.env
+.env.*
+!.env.example
+
+# Data murid mentah (roster, NIS, kontak) tidak boleh di repo publik
+data-murid/
+*.xlsx
+*.csv
+
+.DS_Store
+Thumbs.db
+
+# Konfigurasi lokal editor/AI
+.claude/

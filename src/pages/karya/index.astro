@@ -1,0 +1,91 @@
+---
+import Base from "../../layouts/Base.astro";
+import { getCollection } from "astro:content";
+
+const karya = (await getCollection("karya"))
+  .filter((k) => k.data.izin)
+  .sort((a, b) => b.data.tahun - a.data.tahun || a.data.judul.localeCompare(b.data.judul, "id"));
+const tahunList = [...new Set(karya.map((k) => k.data.tahun))];
+---
+<Base
+  title="Karya Murid"
+  description="Etalase penelitian sosiologi murid SMA dan mahasiswa bimbingan Muhammad Irsyad Sirojul Khoeir."
+  active="karya"
+>
+  <section class="wrap head">
+    <p class="eyebrow reveal">Etalase penelitian</p>
+    <h1 class="reveal" style="--i:1">Karya Murid</h1>
+    <p class="lede reveal" style="--i:2">Penelitian sosiologi murid yang sudah melewati bimbingan dan tayang atas izin penulisnya.</p>
+  </section>
+
+  {karya.length > 0 ? (
+    <section class="wrap">
+      {tahunList.length > 1 && (
+        <div class="filter" role="group" aria-label="Saring menurut tahun">
+          <button type="button" class="btn is-on" data-tahun="">Semua</button>
+          {tahunList.map((t) => <button type="button" class="btn" data-tahun={t}>{t}</button>)}
+        </div>
+      )}
+      <div class="grid">
+        {karya.map((k, i) => (
+          <a class="item reveal" href={`/karya/${k.id}/`} data-tahun={k.data.tahun} style={`--i:${Math.min(i, 8) + 2}`}>
+            <span class="meta">
+              <span class={`chip ${k.data.pendekatan}`}>{k.data.pendekatan}</span>
+              <span>{k.data.jenjang === "sma" ? `SMA${k.data.kelas ? ` · ${k.data.kelas}` : ""}` : "Mahasiswa"} · {k.data.tahun}</span>
+            </span>
+            <h2>{k.data.judul}</h2>
+            <p>{k.data.ringkasan}</p>
+            <span class="by">{k.data.penulis.join(", ")}</span>
+          </a>
+        ))}
+      </div>
+    </section>
+  ) : (
+    <section class="wrap">
+      <div class="empty reveal" style="--i:3">
+        <h2>Karya pertama sedang disiapkan</h2>
+        <p>Penelitian murid akan tampil di sini setelah selesai dibimbing dan penulisnya memberi izin. Begini alurnya:</p>
+        <ol>
+          <li><strong>Murid menyelesaikan penelitian</strong> mengikuti <a href="/alur/">Alur Penelitian</a>.</li>
+          <li><strong>Guru meninjau</strong> laporan, abstrak, dan poster.</li>
+          <li><strong>Murid dan orang tua memberi izin</strong> karya ditayangkan.</li>
+          <li><strong>Karya tayang</strong> dengan halaman sendiri yang bisa dibagikan.</li>
+        </ol>
+        <a class="btn btn-primary" href="/alat/judul/">Mulai dari judul <span class="arrow" aria-hidden="true">→</span></a>
+      </div>
+    </section>
+  )}
+</Base>
+
+<script>
+  const btns = document.querySelectorAll<HTMLButtonElement>(".filter [data-tahun]");
+  btns.forEach((b) =>
+    b.addEventListener("click", () => {
+      btns.forEach((x) => x.classList.toggle("is-on", x === b));
+      document.querySelectorAll<HTMLElement>(".item").forEach((it) => {
+        it.hidden = !!b.dataset.tahun && it.dataset.tahun !== b.dataset.tahun;
+      });
+    })
+  );
+</script>
+
+<style>
+  .head { padding-block: 56px 28px; }
+  h1 { font-family: var(--f-display); font-size: clamp(34px, 5vw, 52px); line-height: 1.08; margin: 0; }
+  .lede { color: var(--muted); max-width: 56ch; margin: 14px 0 0; font-size: 17px; }
+  .filter { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+  .filter .is-on { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap: 16px; }
+  .item { display: flex; flex-direction: column; gap: 10px; padding: 22px; border-radius: var(--r); background: var(--surface); border: 1px solid var(--line); color: var(--ink); text-decoration: none; transition: transform 0.3s var(--ease), box-shadow 0.3s, border-color 0.3s; }
+  .item:hover { transform: translateY(-3px); box-shadow: var(--shadow); border-color: var(--accent); }
+  .meta { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-size: 12.5px; color: var(--muted); }
+  .chip { font-size: 11px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; padding: 3px 8px; border-radius: 5px; background: var(--accent-soft); color: var(--accent); }
+  .chip.kualitatif { background: var(--qual-soft); color: var(--qual); }
+  .item h2 { font-family: var(--f-serif); font-size: 17px; line-height: 1.45; margin: 0; }
+  .item p { margin: 0; font-size: 14.5px; color: var(--muted); }
+  .by { margin-top: auto; font-size: 13px; font-weight: 600; }
+  .empty { max-width: 680px; padding: 28px; border-radius: var(--r); border: 1px dashed var(--line); background: var(--surface); }
+  .empty h2 { font-family: var(--f-display); font-size: 26px; margin: 0 0 8px; }
+  .empty p { color: var(--muted); margin: 0 0 14px; }
+  .empty ol { margin: 0 0 22px; padding-left: 22px; display: flex; flex-direction: column; gap: 8px; }
+</style>
