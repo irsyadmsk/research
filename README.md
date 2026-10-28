@@ -13,6 +13,7 @@ Dibuat oleh Muhammad Irsyad Sirojul Khoeir · [irsyads.com](https://irsyads.com)
 | `/` | `src/pages/index.astro` | Beranda |
 | `/alur/` | `src/pages/alur.astro` | Sembilan langkah penelitian, catatan Kelas 10/Mahasiswa, daftar centang |
 | `/alat/judul/` | `src/pages/alat/judul.astro` | Racik Judul Sosiologi. Data di `src/data/judul.js`, logika di `src/scripts/judul.js`, gaya di `src/styles/judul.css` |
+| `/teori/` | `src/pages/teori.astro` | Glosarium 5 konsep kelas 10 dan 15 teori tokoh, dengan pencarian. Isi di `src/data/teori.js`; `id` sama dengan `judul.js` agar tautan `/alat/judul/?teori=<id>` (tambah `lv=sma&` untuk konsep kelas 10) memilih teori itu |
 | `/karya/` | `src/pages/karya/` | Galeri karya murid dari `src/content/karya/*.md` |
 
 Stack: Astro 7 statis, tanpa backend. Warna dan huruf mengikuti merek irsyads (ivory, navy, academic blue; Playfair Display, Libre Baskerville, Plus Jakarta Sans), didefinisikan di `src/styles/global.css`.
@@ -48,6 +49,6 @@ Deploy otomatis lewat GitHub Actions (`.github/workflows/deploy.yml`) berjalan s
 ## Rencana
 
 1. ✅ Fondasi situs, Beranda, Racik Judul, Alur Penelitian, kerangka Karya Murid
-2. Karya murid pertama dan templat poster
-3. Glosarium teori dan konsep (`/teori/`) dari `src/data/judul.js`
+2. ✅ Glosarium teori dan konsep (`/teori/`)
+3. Karya murid pertama dan templat poster
 4. Pencarian karya dan saringan tema

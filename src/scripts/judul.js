@@ -203,6 +203,15 @@ function syncGroups(){
   const ap = radio("ap"), sma = radio("lv")==="sma";
   $("g-qual").hidden = ap==="quant" || sma; $("g-quant").hidden = ap==="qual"; $("f-mquant").hidden = sma;
 }
+function syncTeoriLink(){
+  const id = $("teori").value;
+  $("teori-link").hidden = !id;
+  if(id){
+    $("teori-link").href = `/teori/#${id}`;
+    $("teori-link").textContent = `Pelajari ${radio("lv")==="sma" ? "konsep" : "teori"} ini di glosarium →`;
+  }
+}
+$("teori").addEventListener("change", syncTeoriLink);
 $("bidang").addEventListener("change", setPlaceholders);
 $("inspirasi").addEventListener("click", e=>{
   const b = BIDANG[$("bidang").value];
@@ -216,7 +225,7 @@ document.querySelectorAll("input[name=lv]").forEach(r=>r.addEventListener("chang
   const sma = r.value==="sma";
   if(sma && /^(mahasiswa|pelajar SMA)$/i.test($("subjek").value.trim())) $("subjek").value = "siswa kelas 10";
   if(!sma && /^siswa kelas 10$/i.test($("subjek").value.trim())) $("subjek").value = "mahasiswa";
-  fillTeori(); syncGroups(); generate();
+  fillTeori(); syncTeoriLink(); syncGroups(); generate();
 }));
 $("f").addEventListener("submit", e=>{ e.preventDefault(); generate({scroll:true}); });
 $("acak").addEventListener("click", ()=>generate());
@@ -228,4 +237,9 @@ $("subjek").value = "pelajar SMA";
 $("lokasi").value = "Purwakarta";
 $("vx").value = "intensitas penggunaan media sosial";
 $("vy").value = "interaksi sosial dengan keluarga";
-fillTeori(); setPlaceholders(); syncGroups(); renderSaved(); generate();
+// tautan dari glosarium: /alat/judul/?lv=sma&teori=interaksi
+const params = new URLSearchParams(location.search);
+if(params.get("lv")==="sma"){ $("lv-sma").checked = true; $("subjek").value = "siswa kelas 10"; }
+fillTeori();
+if(params.get("teori") && [...$("teori").options].some(o=>o.value===params.get("teori"))) $("teori").value = params.get("teori");
+syncTeoriLink(); setPlaceholders(); syncGroups(); renderSaved(); generate();

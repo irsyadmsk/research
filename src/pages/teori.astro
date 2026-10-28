@@ -1,0 +1,185 @@
+---
+import Base from "../layouts/Base.astro";
+import { GLOSARIUM_TEORI, GLOSARIUM_KONSEP } from "../data/teori.js";
+
+const entri = [
+  ...GLOSARIUM_KONSEP.map((k) => ({ ...k, jenis: "konsep" })),
+  ...GLOSARIUM_TEORI.map((t) => ({ ...t, jenis: "teori" })),
+];
+const cari = (e: any) =>
+  [e.nama, e.tokoh, e.karya, e.inti, e.contoh, ...(e.konsep || [])].filter(Boolean).join(" ")
+    .toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
+---
+<Base
+  title="Glosarium Teori Sosiologi"
+  description="Ringkasan teori sosiologi untuk penelitian mahasiswa dan konsep dasar sosiologi kelas 10, lengkap dengan konsep kunci dan contoh penelitian."
+  active="teori"
+>
+  <section class="wrap head">
+    <p class="eyebrow reveal">Glosarium</p>
+    <h1 class="reveal" style="--i:1">Teori dan Konsep Sosiologi</h1>
+    <p class="lede reveal" style="--i:2">
+      {GLOSARIUM_KONSEP.length} konsep dasar untuk kelas 10 dan {GLOSARIUM_TEORI.length} teori tokoh untuk mahasiswa. Setiap entri memuat gagasan inti, konsep kunci, dan contoh penelitian yang bisa langsung diracik menjadi judul.
+    </p>
+
+    <div class="tools reveal" style="--i:3">
+      <label class="search" for="q">
+        <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5" fill="none" stroke="currentColor" stroke-width="2" /><path d="M13 13l4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg>
+        <input type="search" id="q" placeholder="Cari teori, tokoh, atau konsep. Mis. habitus, Goffman" autocomplete="off" />
+      </label>
+      <div class="seg" role="radiogroup" aria-label="Saring entri">
+        <input type="radio" name="jenis" id="j-all" value="" checked /><label for="j-all">Semua</label>
+        <input type="radio" name="jenis" id="j-konsep" value="konsep" /><label for="j-konsep">Kelas 10</label>
+        <input type="radio" name="jenis" id="j-teori" value="teori" /><label for="j-teori">Teori tokoh</label>
+      </div>
+    </div>
+
+    <nav class="index reveal" style="--i:4" aria-label="Daftar isi glosarium">
+      {entri.map((e) => <a href={`#${e.id}`} data-for={e.id}>{e.nama}</a>)}
+    </nav>
+  </section>
+
+  <section class="wrap">
+    <p class="count" id="count" aria-live="polite"></p>
+    <div class="list">
+      {entri.map((e, i) => (
+        <article class={`entry ${e.jenis} reveal`} id={e.id} data-jenis={e.jenis} data-cari={cari(e)} style={`--i:${Math.min(i, 6) + 4}`}>
+          <header>
+            <p class="kind">{e.jenis === "konsep" ? "Konsep dasar · Kelas 10" : `Teori · ${(e as any).cocok.map((c: string) => c[0].toUpperCase() + c.slice(1)).join(" / ")}`}</p>
+            <h2>{e.nama}</h2>
+            {e.jenis === "teori" && <p class="who"><strong>{(e as any).tokoh}</strong> · <cite>{(e as any).karya}</cite></p>}
+          </header>
+          <p class="inti">{e.inti}</p>
+          <div class="keys">
+            <h3>Konsep kunci</h3>
+            <ul>{e.konsep.map((k: string) => <li>{k}</li>)}</ul>
+          </div>
+          <p class="contoh"><span>Contoh fokus penelitian</span>{e.contoh}</p>
+          <div class="actions">
+            <a class="btn" href={`/alat/judul/?${e.jenis === "konsep" ? "lv=sma&" : ""}teori=${e.id}`}>Racik judul dengan {e.jenis === "konsep" ? "konsep" : "teori"} ini <span class="arrow" aria-hidden="true">→</span></a>
+            <button type="button" class="link" data-copy={e.id}>Salin tautan</button>
+          </div>
+        </article>
+      ))}
+    </div>
+    <div class="none" id="none" hidden>
+      <p>Tidak ada entri yang cocok dengan pencarianmu. Coba kata lain, misalnya nama tokoh atau konsep seperti “modal” atau “norma”.</p>
+      <button type="button" class="btn" id="reset">Tampilkan semua</button>
+    </div>
+    <p class="note">Ringkasan ini adalah pintu masuk. Untuk skripsi dan artikel, baca karya asli tokohnya atau buku teori sosiologi sebagai rujukan utama.</p>
+  </section>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</Base>
+
+<script>
+  const q = document.getElementById("q") as HTMLInputElement;
+  const items = [...document.querySelectorAll<HTMLElement>(".entry")];
+  const links = [...document.querySelectorAll<HTMLAnchorElement>(".index a")];
+  const count = document.getElementById("count")!;
+  const none = document.getElementById("none")!;
+  const norm = (s: string) => s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").trim();
+
+  function apply() {
+    const words = norm(q.value).split(/\s+/).filter(Boolean);
+    const jenis = (document.querySelector("input[name=jenis]:checked") as HTMLInputElement).value;
+    let n = 0;
+    items.forEach((it) => {
+      const show = (!jenis || it.dataset.jenis === jenis) && words.every((w) => it.dataset.cari!.includes(w));
+      it.hidden = !show;
+      if (show) n++;
+    });
+    links.forEach((a) => { a.hidden = document.getElementById(a.dataset.for!)!.hidden; });
+    count.textContent = words.length || jenis ? `${n} entri ditemukan` : `${n} entri`;
+    none.hidden = n > 0;
+  }
+  q.addEventListener("input", apply);
+  document.querySelectorAll("input[name=jenis]").forEach((r) => r.addEventListener("change", apply));
+  document.getElementById("reset")!.addEventListener("click", () => {
+    q.value = "";
+    (document.getElementById("j-all") as HTMLInputElement).checked = true;
+    apply();
+    q.focus();
+  });
+
+  const toast = document.getElementById("toast")!;
+  let t: number | undefined;
+  document.querySelectorAll<HTMLButtonElement>("[data-copy]").forEach((b) =>
+    b.addEventListener("click", () => {
+      const url = `${location.origin}/teori/#${b.dataset.copy}`;
+      const done = (msg: string) => {
+        toast.textContent = msg; toast.classList.add("show");
+        clearTimeout(t); t = window.setTimeout(() => toast.classList.remove("show"), 1800);
+      };
+      navigator.clipboard?.writeText(url).then(() => done("Tautan disalin"), () => done(url));
+    })
+  );
+
+  // sorot entri yang dibuka lewat tautan #id
+  function highlight() {
+    const el = location.hash && document.getElementById(decodeURIComponent(location.hash.slice(1)));
+    if (!el || !el.classList.contains("entry")) return;
+    el.hidden = false;
+    el.classList.remove("flash"); void el.offsetWidth; el.classList.add("flash");
+  }
+  window.addEventListener("hashchange", highlight);
+  apply();
+  highlight();
+</script>
+
+<style>
+  .head { padding-block: 56px 20px; }
+  h1 { font-family: var(--f-display); font-size: clamp(34px, 5vw, 52px); line-height: 1.08; margin: 0; }
+  .lede { color: var(--muted); max-width: 62ch; margin: 14px 0 0; font-size: 17px; }
+
+  .tools { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 16px; margin-top: 26px; }
+  .search { flex: 1 1 320px; display: flex; align-items: center; gap: 10px; min-height: 48px; padding: 0 14px; background: var(--surface); border: 1px solid var(--line); border-radius: 999px; color: var(--muted); transition: border-color 0.2s, box-shadow 0.2s; }
+  .search:focus-within { border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 22%, transparent); }
+  .search svg { width: 18px; height: 18px; flex: none; }
+  .search input { flex: 1; min-width: 0; border: 0; background: none; outline: none; font: 16px var(--f-body); color: var(--ink); padding: 10px 0; }
+  .seg { display: inline-grid; grid-auto-flow: column; background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 3px; gap: 2px; }
+  .seg input { position: absolute; opacity: 0; pointer-events: none; }
+  .seg label { padding: 9px 14px; border-radius: 999px; font-size: 13.5px; font-weight: 600; color: var(--muted); cursor: pointer; transition: background-color 0.2s, color 0.2s; white-space: nowrap; }
+  .seg input:checked + label { background: var(--ink); color: var(--bg); }
+  .seg input:focus-visible + label { outline: 2px solid var(--accent); }
+
+  .index { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 18px; }
+  .index a { font-size: 13px; padding: 5px 11px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); text-decoration: none; transition: color 0.2s, border-color 0.2s; }
+  .index a:hover { color: var(--accent); border-color: var(--accent); }
+
+  .count { font-size: 13.5px; color: var(--muted); margin: 8px 0 14px; font-variant-numeric: tabular-nums; }
+  .list { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 460px), 1fr)); gap: 16px; align-items: start; }
+  .entry { --c: var(--accent); scroll-margin-top: calc(env(safe-area-inset-top, 0px) + 96px); display: flex; flex-direction: column; gap: 14px; padding: 24px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); min-width: 0; transition: border-color 0.3s, box-shadow 0.3s; }
+  .entry.konsep { --c: var(--qual); }
+  .entry:hover { border-color: color-mix(in srgb, var(--c) 45%, var(--line)); }
+  .entry.flash { animation: flash 1.6s var(--ease); }
+  @keyframes flash { 0%, 40% { box-shadow: 0 0 0 3px var(--c); border-color: var(--c); } 100% { box-shadow: none; } }
+  .entry header { display: flex; flex-direction: column; gap: 4px; }
+  .kind { margin: 0; font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--c); }
+  .entry h2 { font-family: var(--f-display); font-size: 26px; line-height: 1.15; margin: 0; }
+  .who { margin: 0; font-size: 14px; color: var(--muted); }
+  .who strong { color: var(--ink); font-weight: 600; }
+  .who cite { font-style: italic; }
+  .inti { margin: 0; font-size: 15.5px; line-height: 1.65; }
+  .keys h3 { margin: 0 0 8px; font-family: var(--f-mono); font-size: 10.5px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+  .keys ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+  .keys li { font-size: 13px; padding: 4px 10px; border-radius: 6px; background: var(--bg); border: 1px solid var(--line); }
+  .contoh { margin: 0; padding: 12px 14px; border-radius: 8px; background: var(--bg); font-size: 14.5px; font-family: var(--f-serif); line-height: 1.55; }
+  .contoh span { display: block; font-family: var(--f-mono); font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--c); margin-bottom: 4px; }
+  .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; margin-top: auto; padding-top: 4px; }
+  .link { border: 0; background: none; padding: 6px 0; font: 600 13.5px var(--f-body); color: var(--muted); cursor: pointer; }
+  .link:hover { color: var(--accent); }
+
+  .none { padding: 24px; border: 1px dashed var(--line); border-radius: var(--r); text-align: left; }
+  .none p { margin: 0 0 14px; color: var(--muted); }
+  .note { margin: 28px 0 0; font-size: 13.5px; color: var(--muted); max-width: 70ch; }
+
+  .toast { position: fixed; left: 50%; bottom: calc(20px + env(safe-area-inset-bottom, 0px)); transform: translate(-50%, 20px); opacity: 0; background: var(--ink); color: var(--bg); padding: 10px 18px; border-radius: 999px; font-size: 14px; font-weight: 600; transition: opacity 0.25s, transform 0.3s var(--ease); pointer-events: none; z-index: 40; max-width: calc(100vw - 32px); overflow-wrap: anywhere; }
+  .toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+  @media (max-width: 520px) {
+    .entry { padding: 18px; }
+    .entry h2 { font-size: 23px; }
+    .seg { width: 100%; grid-auto-columns: 1fr; }
+    .seg label { padding-inline: 8px; text-align: center; }
+  }
+</style>

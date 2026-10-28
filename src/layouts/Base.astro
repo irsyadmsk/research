@@ -4,7 +4,7 @@ import "../styles/global.css";
 interface Props {
   title: string;
   description: string;
-  active?: "beranda" | "alur" | "judul" | "karya";
+  active?: "beranda" | "alur" | "judul" | "teori" | "karya";
 }
 const { title, description, active } = Astro.props;
 const fullTitle = active === "beranda" ? title : `${title} · Irsyads Research`;
@@ -13,6 +13,7 @@ const nav = [
   { id: "beranda", href: "/", label: "Beranda" },
   { id: "alur", href: "/alur/", label: "Alur Penelitian" },
   { id: "judul", href: "/alat/judul/", label: "Racik Judul" },
+  { id: "teori", href: "/teori/", label: "Glosarium" },
   { id: "karya", href: "/karya/", label: "Karya Murid" },
 ];
 ---
