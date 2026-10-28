@@ -1,0 +1,41 @@
+name: Deploy research.irsyads.com
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-research
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - name: Periksa secret tersedia
+        id: secret
+        env:
+          TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: |
+          if [ -z "$TOKEN" ]; then
+            echo "ada=false" >> "$GITHUB_OUTPUT"
+            echo "::warning::Secret CLOUDFLARE_API_TOKEN belum ada; build berhasil tetapi deploy dilewati."
+          else
+            echo "ada=true" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Deploy ke Cloudflare Workers (aset statis)
+        if: steps.secret.outputs.ada == 'true'
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: npx wrangler deploy
