@@ -35,7 +35,7 @@ npm run build    # hasil di dist/
 
 ## Deploy
 
-Cloudflare Pages, proyek `research`, akun irsyads.com. Workflow `.github/workflows/deploy.yml` membangun dan men-deploy setiap push ke `main` bila secret `CLOUDFLARE_API_TOKEN` tersedia di repo. Tanpa secret itu, build tetap diuji tetapi deploy dilewati.
+Cloudflare Workers dengan aset statis (Worker `research`, akun irsyads.com). Pengaturannya di `wrangler.jsonc`, termasuk domain khusus `research.irsyads.com` yang dipasang otomatis saat deploy.
 
 Deploy manual dari komputer yang sudah `wrangler login`:
 
@@ -43,7 +43,7 @@ Deploy manual dari komputer yang sudah `wrangler login`:
 npm run deploy
 ```
 
-Domain `research.irsyads.com` dipasang di Cloudflare: Workers & Pages → `research` → Custom domains.
+Deploy otomatis lewat GitHub Actions (`.github/workflows/deploy.yml`) berjalan setiap push ke `main` bila secret `CLOUDFLARE_API_TOKEN` tersedia di repo. Tanpa secret itu, build tetap diuji tetapi deploy dilewati. Menambah atau mengubah berkas workflow butuh izin `workflow` pada login GitHub CLI: `gh auth refresh -s workflow`.
 
 ## Rencana
 

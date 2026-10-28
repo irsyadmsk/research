@@ -1,0 +1,11 @@
+{
+  // research.irsyads.com: Worker aset statis (Cloudflare Pages versi baru). Hasil build Astro di ./dist
+  "name": "research",
+  "account_id": "688721d0967c0e45ffcf6fa1c03b02ff",
+  "compatibility_date": "2026-10-23",
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "404-page"
+  },
+  "routes": [{ "pattern": "research.irsyads.com", "custom_domain": true }]
+}
