@@ -1,0 +1,1968 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cetak Biru Peneliti Sosial Modern di Era AI — Media Interaktif Sosiologi</title>
+  <meta name="description" content="Modul interaktif sosiologi kelas X: menyusun latar belakang penelitian, memakai AI dengan aman, merakit prompt, dan kuis." />
+  <link rel="canonical" href="https://research.irsyads.com/materi/cetak-biru-peneliti-ai/" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Irsyads Research" />
+  <meta property="og:title" content="Cetak Biru Peneliti Sosial Modern di Era AI — Media Interaktif Sosiologi" />
+  <meta property="og:description" content="Modul interaktif sosiologi kelas X: menyusun latar belakang penelitian, memakai AI dengan aman, merakit prompt, dan kuis." />
+  <meta property="og:url" content="https://research.irsyads.com/materi/cetak-biru-peneliti-ai/" />
+  <meta property="og:locale" content="id_ID" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Lora:ital,wght@0,500;1,500&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#F7F6F2; --surface:#FFFFFF; --soft:#F6F4EF;
+      --ink:#1E2230; --ink-2:#4A4F60; --muted:#868A98;
+      --line:#ECE9E2; --line-2:#DCD8CF;
+      --violet:#6C4CF1; --violet-50:#F2EEFF; --violet-100:#E2DAFF;
+      --mint:#12A27E;   --mint-50:#E8F7F1;   --mint-100:#C8EDDF;
+      --sky:#2F6FEB;    --sky-50:#EBF2FF;    --sky-100:#D2E1FF;
+      --peach:#EE7440;  --peach-50:#FFF2EA;  --peach-100:#FFDAC6;
+      --sun:#F4B528;    --sun-50:#FFF8E4;    --sun-100:#FCE7A9;
+      --rose:#E3466A;   --rose-50:#FDEDF1;   --rose-100:#F8CAD5;
+      --radius:20px;
+      --shadow:0 1px 2px rgba(30,34,48,.04), 0 10px 30px -16px rgba(30,34,48,.16);
+      --display:'Bricolage Grotesque', system-ui, sans-serif;
+      --mono:'JetBrains Mono', ui-monospace, monospace;
+    }
+    *{box-sizing:border-box}
+    [hidden]{display:none !important}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0; font-family:'Plus Jakarta Sans', system-ui, sans-serif; font-size:15px; line-height:1.6;
+      background:var(--bg); color:var(--ink); -webkit-font-smoothing:antialiased;
+    }
+    body::before, body::after{
+      content:""; position:fixed; z-index:-1; border-radius:50%; filter:blur(80px); opacity:.45; pointer-events:none;
+    }
+    body::before{width:420px;height:420px;background:#E4DCFF;top:-140px;right:-120px}
+    body::after{width:380px;height:380px;background:#FFE3C9;bottom:-160px;left:-140px}
+    h1,h2,h3,h4{font-family:var(--display); margin:0; line-height:1.2; letter-spacing:-.015em}
+    p{margin:0}
+    ul,ol{margin:0;padding:0;list-style:none}
+    button{font:inherit;color:inherit;cursor:pointer}
+    :focus-visible{outline:3px solid var(--violet-100); outline-offset:2px}
+    ::selection{background:var(--violet-100)}
+
+    /* ---------- utilitas ---------- */
+    .mt-4{margin-top:4px}.mt-6{margin-top:6px}.mt-8{margin-top:8px}.mt-12{margin-top:12px}.mt-16{margin-top:16px}.mt-20{margin-top:20px}
+    .stack-8{display:flex;flex-direction:column;gap:8px}
+    .stack-10{display:flex;flex-direction:column;gap:10px}
+    .stack-16{display:flex;flex-direction:column;gap:16px}
+    .small{font-size:13.5px}.muted{color:var(--muted)}
+    .mini-label{font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+
+    /* ---------- topbar ---------- */
+    .topbar{position:sticky;top:0;z-index:50;background:rgba(247,246,242,.86);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+    .topbar-inner{max-width:1360px;margin:0 auto;padding:12px 28px;display:flex;align-items:center;gap:24px}
+    .brand{display:flex;align-items:center;gap:12px;min-width:0;flex:1}
+    .logo{flex:none;width:42px;height:42px;border-radius:13px;display:grid;place-items:center;background:linear-gradient(135deg,var(--violet),#A08BFF);color:#fff;font-family:var(--display);font-weight:800;font-size:15px;box-shadow:0 8px 18px -8px rgba(108,76,241,.7)}
+    .brand-kicker{font-size:12px;font-weight:600;color:var(--muted)}
+    .brand-title{font-family:var(--display);font-weight:700;font-size:16.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .progress-wrap{width:170px;flex:none}
+    .progress-meta{font-size:12px;font-weight:700;color:var(--ink-2);margin-bottom:6px}
+    .progress{height:6px;border-radius:99px;background:var(--line);overflow:hidden}
+    #progressFill{height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--violet),var(--peach));transition:width .35s ease}
+    .controls{display:flex;align-items:center;gap:10px;flex:none}
+
+    /* ---------- tombol ---------- */
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:40px;padding:0 18px;border-radius:999px;border:1px solid var(--line-2);background:var(--surface);font-weight:600;font-size:14px;white-space:nowrap;transition:background .15s,border-color .15s,box-shadow .15s,transform .1s}
+    .btn:hover{border-color:var(--ink-2)}
+    .btn:active{transform:scale(.97)}
+    .btn:disabled{opacity:.35;pointer-events:none}
+    .btn-primary{background:var(--ink);border-color:var(--ink);color:#fff}
+    .btn-primary:hover{background:#000;box-shadow:0 10px 22px -12px rgba(30,34,48,.7)}
+    .btn-accent{background:var(--violet);border-color:var(--violet);color:#fff}
+    .btn-accent:hover{background:#5A3AE0;border-color:#5A3AE0;box-shadow:0 10px 22px -12px rgba(108,76,241,.8)}
+    .btn-lg{height:48px;padding:0 24px;font-size:15px}
+    .btn-block{width:100%}
+    .btn-icon{width:40px;padding:0;font-size:16px}
+    .btn-link{border:0;background:none;padding:0;font-weight:700;font-size:13px;color:var(--violet)}
+    .btn-link:hover{text-decoration:underline}
+
+    .switch{display:inline-flex;align-items:center;gap:10px;height:40px;padding:0 14px 0 9px;border-radius:999px;border:1px solid var(--line-2);background:var(--surface);font-weight:600;font-size:13.5px;transition:border-color .15s}
+    .switch:hover{border-color:var(--ink-2)}
+    .switch-track{position:relative;width:34px;height:20px;border-radius:99px;background:var(--line-2);transition:background .2s}
+    .switch-thumb{position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.25);transition:transform .2s}
+    .switch[aria-checked="true"] .switch-track{background:var(--sun)}
+    .switch[aria-checked="true"] .switch-thumb{transform:translateX(14px)}
+
+    .seg{display:inline-flex;gap:4px;padding:4px;border-radius:999px;background:#EEEBE4;flex:none}
+    .seg-btn{height:34px;padding:0 16px;border:0;border-radius:999px;background:transparent;font-weight:600;font-size:13.5px;color:var(--ink-2);white-space:nowrap;transition:background .15s,color .15s,box-shadow .15s}
+    .seg-btn:hover{color:var(--ink)}
+    .seg-btn.is-active{background:var(--surface);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.06),0 4px 10px -4px rgba(0,0,0,.12)}
+    .seg-btn.is-active[data-tone="mint"]{background:var(--mint);color:#fff}
+    .seg-btn.is-active[data-tone="sky"]{background:var(--sky);color:#fff}
+    .seg-btn.is-active[data-tone="peach"]{background:var(--peach);color:#fff}
+    .seg-lg .seg-btn{height:40px;padding:0 18px;font-size:14px}
+
+    .chips{display:flex;flex-wrap:wrap;gap:8px}
+    .chip{height:36px;padding:0 15px;border-radius:999px;border:1px solid var(--line-2);background:var(--surface);font-weight:600;font-size:13px;color:var(--ink-2);transition:all .15s}
+    .chip:hover{border-color:var(--ink-2);color:var(--ink)}
+    .chip.is-active{background:var(--ink);border-color:var(--ink);color:#fff}
+
+    /* ---------- kerangka ---------- */
+    .shell{max-width:1360px;margin:0 auto;padding:32px 28px 48px;display:grid;grid-template-columns:250px minmax(0,1fr);gap:36px;align-items:start}
+    .sidebar{position:sticky;top:100px}
+    .steps{display:flex;flex-direction:column;gap:4px}
+    .step{display:flex;align-items:center;gap:12px;width:100%;padding:10px 12px;border-radius:15px;border:1px solid transparent;background:transparent;text-align:left;transition:background .15s,border-color .15s,box-shadow .15s}
+    .step:hover{background:rgba(255,255,255,.75)}
+    .step-num{flex:none;width:34px;height:34px;border-radius:11px;display:grid;place-items:center;background:var(--surface);border:1px solid var(--line);font-weight:700;font-size:12.5px;color:var(--muted);transition:all .15s}
+    .step-title{display:block;font-weight:700;font-size:14px;line-height:1.3;color:var(--ink-2)}
+    .step-sub{display:block;font-size:12px;color:var(--muted);line-height:1.35}
+    .step.is-active{background:var(--surface);border-color:var(--line);box-shadow:var(--shadow)}
+    .step.is-active .step-num{background:var(--violet);border-color:var(--violet);color:#fff}
+    .step.is-active .step-title{color:var(--ink)}
+    .side-tip{margin-top:20px;padding:14px 16px;border-radius:15px;border:1px dashed var(--line-2);font-size:12.5px;color:var(--muted)}
+    kbd{display:inline-grid;place-items:center;min-width:22px;height:22px;padding:0 5px;border-radius:6px;border:1px solid var(--line-2);border-bottom-width:2px;background:#fff;font-family:var(--mono);font-size:11px;color:var(--ink-2)}
+
+    .content{min-width:0;display:flex;flex-direction:column;gap:64px}
+    .slide{display:flex;flex-direction:column;gap:20px;scroll-margin-top:100px;animation:fadeUp .35s ease}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+    .section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap}
+    .section-head > div:first-child{flex:1;min-width:300px}
+    .eyebrow{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:999px;background:var(--violet-50);color:var(--violet);font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+    .eyebrow.tone-sun{background:var(--sun-50);color:#9A6A00}
+    .eyebrow.tone-rose{background:var(--rose-50);color:var(--rose)}
+    .h-display{margin-top:14px;font-size:clamp(28px,3.1vw,42px);font-weight:800}
+    .h-section{margin-top:12px;font-size:clamp(24px,2.4vw,32px);font-weight:800}
+    .h-card{font-size:18px;font-weight:700}
+    .lead{margin-top:10px;max-width:72ch;color:var(--ink-2);font-size:15.5px}
+    .hl{padding:0 .1em;border-radius:4px}
+    .hl-sun{background:linear-gradient(180deg,transparent 58%,#FFE08A 58%)}
+    .hl-peach{background:linear-gradient(180deg,transparent 58%,#FFCBB1 58%)}
+    .hl-mint{background:linear-gradient(180deg,transparent 58%,#BDEBD8 58%)}
+    .hl-sky{background:linear-gradient(180deg,transparent 58%,#C9DCFF 58%)}
+    .hl-violet{background:linear-gradient(180deg,transparent 58%,#DCD2FF 58%)}
+
+    .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:28px;box-shadow:var(--shadow)}
+    .card-tight{padding:24px}
+    .card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap}
+    .split{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:20px;align-items:start}
+    .split-even{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;align-items:stretch}
+    .duo{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+
+    .badge{display:inline-flex;align-items:center;gap:6px;padding:5px 11px;border-radius:999px;font-size:12px;font-weight:700;white-space:nowrap}
+    .badge-violet{background:var(--violet-50);color:var(--violet)}
+    .badge-sun{background:var(--sun-50);color:#8A5E00;border:1px solid var(--sun-100)}
+    .badge-mint{background:var(--mint);color:#fff}
+    .badge-sky{background:var(--sky);color:#fff}
+    .badge-peach{background:var(--peach);color:#fff}
+    .badge-ink{background:var(--ink);color:#fff}
+    .tag{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:999px;background:var(--soft);border:1px solid var(--line);font-size:13px;font-weight:600;color:var(--ink-2)}
+
+    .note{display:flex;gap:14px;padding:16px 18px;border-radius:16px;background:var(--sun-50);border:1px solid var(--sun-100);font-size:14px;color:#5B4A1A}
+    .note-icon{flex:none;width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:#FFE9A6;font-size:19px}
+    .note-title{font-weight:700;color:#3B300F;margin-bottom:2px}
+
+    .box{padding:16px 18px;border-radius:16px;border:1px solid var(--line);background:var(--soft)}
+    .box-label{display:inline-flex;align-items:center;gap:6px;padding:4px 11px;margin-bottom:10px;border-radius:999px;font-size:11.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+    .box-sun{background:var(--sun-50);border-color:var(--sun-100)} .box-sun .box-label{background:#FFE08A;color:#5B4300}
+    .box-ink{background:var(--ink);border-color:var(--ink);color:#E6E7EF} .box-ink .box-label{background:var(--peach);color:#fff}
+    .box-mint{background:var(--mint-50);border-color:var(--mint-100);color:#0A4E3E}
+    .box-rose{background:var(--rose-50);border-color:var(--rose-100);color:#6E1530}
+    .box p{font-size:14px}
+
+    .checklist{display:flex;flex-direction:column;gap:9px}
+    .checklist li{position:relative;padding-left:28px;font-size:14px;color:var(--ink-2)}
+    .checklist li::before{content:"✓";position:absolute;left:0;top:1px;width:19px;height:19px;border-radius:50%;display:grid;place-items:center;background:var(--mint-50);color:var(--mint);font-size:11px;font-weight:800}
+    .checklist.small li{font-size:13.5px}
+    .bullets{display:flex;flex-direction:column;gap:7px}
+    .bullets li{position:relative;padding-left:16px;font-size:13.5px}
+    .bullets li::before{content:"";position:absolute;left:2px;top:.62em;width:6px;height:6px;border-radius:50%;background:currentColor;opacity:.55}
+
+    /* ---------- slide 1 ---------- */
+    .hero{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:36px;align-items:center;padding:36px}
+    .hero-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+    .hero-side{padding:20px;border-radius:18px;background:var(--violet-50);display:flex;flex-direction:column;gap:10px}
+    .hero-q{display:flex;gap:12px;padding:14px;border-radius:14px;background:#fff;border:1px solid var(--violet-100)}
+    .hero-q-num{flex:none;width:28px;height:28px;border-radius:9px;display:grid;place-items:center;background:var(--violet);color:#fff;font-weight:700;font-size:13px}
+    .hero-q-title{font-weight:700;font-size:14.5px}
+    .hero-q-title span{font-weight:500;color:var(--muted)}
+    .hero-q p{font-size:13px;color:var(--ink-2);margin-top:2px;line-height:1.5}
+
+    .choice{display:flex;align-items:center;gap:14px;width:100%;padding:14px;border-radius:16px;border:1px solid var(--line);background:var(--surface);text-align:left;transition:all .15s}
+    .choice:hover{border-color:var(--line-2);background:#FCFBF8}
+    .choice-icon{flex:none;width:46px;height:46px;border-radius:13px;display:grid;place-items:center;background:var(--soft);font-size:22px;transition:background .15s}
+    .choice-body{flex:1;min-width:0}
+    .choice-kicker{display:block;font-size:11.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+    .choice-title{display:block;font-weight:700;font-size:14px;line-height:1.4;margin-top:1px}
+    .choice-check{flex:none;width:22px;height:22px;border-radius:50%;border:2px solid var(--line-2);transition:all .15s}
+    .choice.is-active{border-color:var(--violet);background:var(--violet-50);box-shadow:0 0 0 3px var(--violet-100)}
+    .choice.is-active .choice-icon{background:#fff}
+    .choice.is-active .choice-kicker{color:var(--violet)}
+    .choice.is-active .choice-check{border-color:var(--violet);background:var(--violet) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12l5 5L20 7'/%3E%3C/svg%3E") center/12px no-repeat}
+
+    .funnel{display:flex;flex-direction:column;align-items:center;gap:8px}
+    .funnel-item{padding:12px 16px;border-radius:14px;background:var(--soft);border:1px solid var(--line)}
+    .funnel-level{font-size:11.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--peach)}
+    .funnel-text{margin-top:2px;font-size:14px;font-weight:600}
+    .funnel-item.is-final{background:var(--violet);border-color:var(--violet);color:#fff;box-shadow:0 12px 24px -14px rgba(108,76,241,.9)}
+    .funnel-item.is-final .funnel-level{color:#DCD2FF}
+    .funnel-item.is-final .funnel-text{font-family:var(--display);font-size:15.5px}
+
+    /* ---------- slide 2 ---------- */
+    .tone-mint{background:var(--mint-50);border-color:var(--mint-100)}
+    .tone-sky{background:var(--sky-50);border-color:var(--sky-100)}
+    .tone-peach{background:var(--peach-50);border-color:var(--peach-100)}
+    .kv{padding:14px 16px;border-radius:14px;background:#fff;border:1px solid rgba(30,34,48,.06)}
+    .kv-k{font-weight:700;font-size:13.5px}
+    .kv-v{font-size:13.5px;color:var(--ink-2);margin-top:2px}
+    .flow{padding:16px 18px;border-radius:14px;background:var(--ink);color:#E6E7EF}
+    .flow-title{font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--sun);margin-bottom:10px}
+    .flow ol{counter-reset:f;display:flex;flex-direction:column;gap:8px}
+    .flow li{counter-increment:f;position:relative;padding-left:32px;font-size:13.5px;line-height:1.5}
+    .flow li::before{content:counter(f);position:absolute;left:0;top:0;width:22px;height:22px;border-radius:7px;display:grid;place-items:center;background:rgba(255,255,255,.12);font-size:11.5px;font-weight:700;color:#fff}
+    .title-sample{margin-top:6px;font-family:var(--display);font-weight:700;font-size:16px;line-height:1.4}
+
+    .table-wrap{border:1px solid var(--line);border-radius:18px;overflow-x:auto;background:#fff}
+    table{width:100%;border-collapse:collapse;font-size:14px;min-width:720px}
+    th{text-align:left;padding:15px 18px;font-family:var(--display);font-size:15px;font-weight:700;background:var(--soft);border-bottom:1px solid var(--line)}
+    th.th-mint{background:var(--mint-50);color:#0A6A53}
+    th.th-sky{background:var(--sky-50);color:#1D4FB8}
+    td{padding:15px 18px;border-top:1px solid var(--line);vertical-align:top;color:var(--ink-2);line-height:1.55}
+    tr:first-child td{border-top:0}
+    td:first-child{width:200px;font-weight:700;color:var(--ink)}
+    td.td-warn{color:#A8264A}
+
+    /* ---------- slide 3 ---------- */
+    .pyramid{display:flex;flex-direction:column;align-items:center;gap:8px}
+    .pyr{width:100%;padding:13px 16px;border-radius:15px;border:1px solid var(--line);background:#fff;text-align:left;transition:all .15s}
+    .pyr:hover{border-color:var(--line-2);transform:translateY(-1px)}
+    .pyr-top{display:flex;align-items:center;justify-content:space-between;gap:8px}
+    .pyr-kicker{font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--c)}
+    .pyr-tag{font-size:11px;font-weight:600;padding:2px 9px;border-radius:999px;background:var(--soft);color:var(--muted);white-space:nowrap}
+    .pyr-title{margin-top:2px;font-weight:700;font-size:14.5px;line-height:1.35}
+    .pyr.is-active{background:var(--ink);border-color:var(--ink);color:#fff;box-shadow:0 12px 24px -14px rgba(30,34,48,.8)}
+    .pyr.is-active .pyr-kicker{color:var(--sun)}
+    .pyr.is-active .pyr-tag{background:rgba(255,255,255,.14);color:#fff}
+    .tools{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+    .tool{padding:10px 12px;border-radius:12px;background:#fff;border:1px solid var(--line);font-size:12.5px;line-height:1.45;color:var(--ink-2)}
+    .tool b{display:block;color:var(--ink);font-size:13px}
+
+    .prompt{padding:16px 18px;border-radius:14px;background:var(--ink);color:#E9E7F7;font-family:var(--mono);font-size:12.5px;line-height:1.75;white-space:pre-wrap;word-break:break-word}
+    .prompt-bad{background:var(--rose-50);color:#6E1530;border:1px solid var(--rose-100)}
+    .prompt-good{background:var(--mint-50);color:#0A4E3E;border:1px solid var(--mint-100)}
+    .paper{padding:18px 20px;border-radius:14px;background:#FFFDF8;border:1px solid var(--line);font-family:'Lora',Georgia,serif;font-size:14.5px;line-height:1.8;color:#2B2F3D}
+    .do-quote{margin-top:10px;padding:12px 14px;border-radius:12px;background:rgba(255,255,255,.75);font-style:italic;font-size:13.5px}
+
+    /* ---------- slide 4 ---------- */
+    .formula{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+    .f-card{padding:18px;border-radius:18px;background:#fff;border:1px solid var(--line);display:flex;flex-direction:column;gap:8px;position:relative;overflow:hidden}
+    .f-card::after{content:"";position:absolute;inset:auto -30px -30px auto;width:90px;height:90px;border-radius:50%;background:var(--t);opacity:.7;z-index:0}
+    .f-card > *{position:relative;z-index:1}
+    .f-letter{width:42px;height:42px;border-radius:13px;display:grid;place-items:center;background:var(--c);color:#fff;font-family:var(--display);font-weight:800;font-size:20px}
+    .f-name{font-size:11.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--c)}
+    .f-q{font-family:var(--display);font-weight:700;font-size:16px}
+    .f-desc{font-size:13px;color:var(--ink-2);line-height:1.5}
+
+    .panel{display:flex;flex-direction:column;border-radius:20px;border:1px solid var(--line);background:#fff;overflow:hidden;box-shadow:var(--shadow)}
+    .panel-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 20px;border-bottom:1px solid var(--line)}
+    .panel-bad .panel-head{background:var(--rose-50);border-color:var(--rose-100)}
+    .panel-good .panel-head{background:var(--mint-50);border-color:var(--mint-100)}
+    .panel-kicker{font-size:11.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase}
+    .panel-bad .panel-kicker{color:var(--rose)} .panel-good .panel-kicker{color:var(--mint)}
+    .panel-title{font-family:var(--display);font-weight:700;font-size:15.5px;line-height:1.3;margin-top:2px}
+    .panel-body{flex:1;display:flex;flex-direction:column;gap:16px;padding:20px}
+    .panel-foot{padding:16px 20px;border-top:1px solid var(--line);background:#FCFBF8}
+    .panel-bad .panel-foot{color:#6E1530} .panel-good .panel-foot{color:#0A4E3E}
+    .foot-title{font-weight:700;font-size:13.5px;margin-bottom:8px}
+    .pill{display:inline-flex;align-items:center;gap:6px;padding:5px 11px;border-radius:999px;font-size:12px;font-weight:700;white-space:nowrap}
+    .pill-bad{background:var(--rose);color:#fff}
+    .pill-good{background:var(--mint);color:#fff}
+    .score{flex:none;padding:6px 12px;border-radius:999px;background:#fff;font-family:var(--mono);font-size:12.5px;font-weight:600;white-space:nowrap}
+    .panel-bad .score{color:var(--rose);border:1px solid var(--rose-100)}
+    .panel-good .score{color:var(--mint);border:1px solid var(--mint-100)}
+
+    /* ---------- slide 5 ---------- */
+    .toolbar{display:grid;grid-template-columns:minmax(0,1.4fr) auto auto;gap:20px;align-items:end}
+    .field-label{display:block;margin-bottom:7px;font-size:12.5px;font-weight:700;color:var(--ink-2)}
+    .input{width:100%;padding:11px 14px;border-radius:13px;border:1px solid var(--line-2);background:#fff;font:inherit;font-size:14px;color:var(--ink);transition:border-color .15s,box-shadow .15s}
+    .input:hover{border-color:#C9C4B9}
+    .input:focus{outline:none;border-color:var(--violet);box-shadow:0 0 0 4px var(--violet-100)}
+    select.input{appearance:none;-webkit-appearance:none;padding-right:40px;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234A4F60' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") right 14px center/16px no-repeat;cursor:pointer}
+    textarea.input{resize:vertical;line-height:1.55}
+    .output-box{padding:16px 18px;border-radius:14px;background:var(--soft);border:1px solid var(--line);font-size:14px;line-height:1.75;display:flex;flex-direction:column;gap:10px;transition:box-shadow .3s}
+    .flash-bad{box-shadow:0 0 0 3px var(--rose-100)}
+    .flash-good{box-shadow:0 0 0 3px var(--mint-100)}
+    mark.hl-bad{background:#FFD3DE;color:#6E1530;padding:1px 5px;border-radius:5px;font-weight:600}
+    mark.hl-bad[title]{cursor:help;border-bottom:2px dotted var(--rose)}
+    mark.hl-good{background:#C9EEDF;color:#0A4E3E;padding:1px 5px;border-radius:5px;font-weight:600}
+
+    /* ---------- slide 6 ---------- */
+    .form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+    .builder-out{max-height:440px;overflow:auto}
+    .builder-out::-webkit-scrollbar{width:8px}
+    .builder-out::-webkit-scrollbar-thumb{background:rgba(255,255,255,.2);border-radius:8px}
+    .toast{padding:10px 14px;border-radius:12px;background:var(--mint);color:#fff;font-size:13.5px;font-weight:600;text-align:center}
+    .guard-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 14px;font-size:13px}
+
+    /* ---------- slide 7 ---------- */
+    .danger-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+    .danger{padding:22px;border-radius:20px;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow);display:flex;flex-direction:column;gap:10px}
+    .danger-icon{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;font-size:22px;background:var(--t)}
+    .danger-k{font-size:11.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--c)}
+    .danger h3{font-size:17px}
+    .danger p{font-size:13.5px;color:var(--ink-2)}
+    .process-card{padding:26px;border-radius:20px;background:var(--ink);color:#E6E7EF}
+    .process-card h3{color:#fff;font-size:19px}
+    .process{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px;margin-top:18px}
+    .process-step{padding:14px 12px;border-radius:14px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);font-size:13px;font-weight:600;text-align:center}
+    .process-step span{display:block;font-family:var(--mono);font-size:11px;color:var(--sun);margin-bottom:4px}
+    .process-step.is-key{background:var(--sun);border-color:var(--sun);color:var(--ink)}
+    .process-step.is-key span{color:var(--ink)}
+
+    .q{padding:22px;border-radius:18px;background:var(--soft);border:1px solid var(--line)}
+    .q-title{font-weight:700;font-size:15px;line-height:1.5}
+    .q-opts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:14px}
+    .q-opt{padding:13px 15px;border-radius:14px;border:1px solid var(--line-2);background:#fff;text-align:left;font-size:13.5px;line-height:1.5;transition:all .15s}
+    .q-opt:hover{border-color:var(--violet);box-shadow:0 0 0 3px var(--violet-50)}
+    .q-opt:disabled{cursor:default}
+    .q-opt.is-correct{background:var(--mint);border-color:var(--mint);color:#fff;font-weight:600}
+    .q-opt.is-wrong{background:var(--rose);border-color:var(--rose);color:#fff}
+    .q-opt.is-dim{opacity:.45}
+    .q-feedback{margin-top:12px;padding:12px 14px;border-radius:12px;font-size:13.5px}
+    .q-feedback.ok{background:var(--mint-50);color:#0A4E3E;border:1px solid var(--mint-100)}
+    .q-feedback.no{background:var(--rose-50);color:#6E1530;border:1px solid var(--rose-100)}
+    .score-badge{padding:7px 14px;border-radius:999px;background:var(--violet);color:#fff;font-family:var(--mono);font-size:13px;font-weight:600}
+
+    .footer{border-top:1px solid var(--line);margin-top:24px}
+    .footer-inner{max-width:1360px;margin:0 auto;padding:20px 28px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:13px;color:var(--muted)}
+    .footer-inner b{color:var(--ink-2);font-family:var(--display)}
+
+
+    /* ---------- slide panduan AI ---------- */
+    .tool-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+    .ai-card{padding:20px;border-radius:18px;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow);display:flex;flex-direction:column;gap:10px}
+    .ai-card.is-teacher{background:var(--soft);border-style:dashed;box-shadow:none}
+    .ai-head{display:flex;align-items:center;gap:12px}
+    .ai-logo{flex:none;width:44px;height:44px;border-radius:13px;display:grid;place-items:center;background:var(--c);color:#fff;font-family:var(--display);font-weight:800;font-size:17px}
+    .ai-name{font-family:var(--display);font-weight:700;font-size:16.5px;line-height:1.25}
+    .ai-maker{font-size:12.5px;color:var(--muted)}
+    .ai-age{align-self:flex-start;padding:4px 10px;border-radius:999px;background:var(--t);color:var(--c);font-size:12px;font-weight:700}
+    .ai-card p{font-size:13.5px;color:var(--ink-2)}
+    .ai-card p b{color:var(--ink)}
+    .src-note{font-size:12.5px;color:var(--muted)}
+    .src-note a{color:var(--violet);font-weight:600;text-decoration:none}
+    .src-note a:hover{text-decoration:underline}
+    .chat-bubble{padding:14px 16px;border-radius:16px 16px 16px 4px;background:var(--violet-50);border:1px solid var(--violet-100);font-size:14px;color:var(--ink-2)}
+    .step-banner{display:flex;align-items:center;gap:14px}
+    .step-banner .f-letter{flex:none}
+    @media (max-width:1180px){.tool-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media (max-width:680px){.tool-grid{grid-template-columns:1fr}}
+
+    /* ---------- responsif ---------- */
+    @media (max-width:1180px){
+      .formula{grid-template-columns:repeat(3,minmax(0,1fr))}
+      .process{grid-template-columns:repeat(3,minmax(0,1fr))}
+      .progress-wrap{display:none}
+    }
+    @media (max-width:1023px){
+      .shell{grid-template-columns:minmax(0,1fr);padding:20px 20px 40px;gap:20px}
+      .sidebar{position:static}
+      .steps{flex-direction:row;overflow-x:auto;padding-bottom:4px}
+      .step{width:auto;flex:none}
+      .step-sub,.side-tip{display:none}
+      .hero,.split,.split-even,.toolbar{grid-template-columns:minmax(0,1fr)}
+      .brand-title{white-space:normal}
+    }
+    @media (max-width:680px){
+      .topbar-inner{flex-wrap:wrap;padding:10px 16px;gap:10px}
+      .controls{width:100%;justify-content:space-between;flex-wrap:wrap;gap:8px}
+      .seg{max-width:100%;flex-wrap:wrap}
+      .section-head > div:first-child{min-width:0}
+      .badge{white-space:normal;max-width:100%}
+      .brand-kicker{display:none}
+      .card,.hero{padding:20px}
+      .formula,.process,.q-opts,.duo,.danger-grid,.form-grid,.guard-grid{grid-template-columns:1fr}
+      .pyr,.funnel-item{width:100% !important}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ================= TOPBAR ================= -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <a class="logo" href="/" aria-label="Irsyads Research, ke beranda" style="text-decoration:none">SOS</a>
+        <div style="min-width:0">
+          <div class="brand-kicker"><a href="/" style="color:inherit">Irsyads Research</a> · Modul Interaktif Sosiologi · Kelas X</div>
+          <h1 class="brand-title">Cetak Biru Peneliti Sosiologi Modern di Era AI</h1>
+        </div>
+      </div>
+
+      <div class="progress-wrap" aria-hidden="true">
+        <div class="progress-meta" id="slideCounterBadge">Slide 1 / 8</div>
+        <div class="progress"><div id="progressFill"></div></div>
+      </div>
+
+      <div class="controls">
+        <button id="toggleTeacherModeBtn" type="button" class="switch" role="switch" aria-checked="true">
+          <span class="switch-track"><span class="switch-thumb"></span></span>
+          <span>Panduan Guru</span>
+        </button>
+        <div class="seg" id="viewModeSeg" role="group" aria-label="Mode tampilan">
+          <button type="button" class="seg-btn is-active" data-view="slide">Per Slide</button>
+          <button type="button" class="seg-btn" data-view="all">Semua</button>
+        </div>
+        <button id="prevSlideBtn" type="button" class="btn btn-icon" title="Slide sebelumnya (←)" aria-label="Slide sebelumnya">←</button>
+        <button id="nextSlideBtn" type="button" class="btn btn-primary" title="Slide berikutnya (→)">Lanjut →</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="shell">
+
+    <!-- ================= SIDEBAR ================= -->
+    <aside class="sidebar">
+      <nav class="steps" aria-label="Daftar materi">
+        <button type="button" class="step" data-slide-target="0"><span class="step-num">01</span><span><span class="step-title">Fondasi &amp; Masalah</span><span class="step-sub">Das Sollen vs Das Sein</span></span></button>
+        <button type="button" class="step" data-slide-target="1"><span class="step-num">02</span><span><span class="step-title">Kualitatif vs Kuantitatif</span><span class="step-sub">Kompas metodologi</span></span></button>
+        <button type="button" class="step" data-slide-target="2"><span class="step-num">03</span><span><span class="step-title">5 Tahap Latar Belakang</span><span class="step-sub">Piramida terbalik</span></span></button>
+        <button type="button" class="step" data-slide-target="3"><span class="step-num">04</span><span><span class="step-title">Panduan Memulai AI</span><span class="step-sub">Pilih AI &amp; kenalkan diri</span></span></button>
+        <button type="button" class="step" data-slide-target="4"><span class="step-num">05</span><span><span class="step-title">Rumus Prompt Anti-Acak</span><span class="step-sub">R-M-D-S-G</span></span></button>
+        <button type="button" class="step" data-slide-target="5"><span class="step-num">06</span><span><span class="step-title">Simulator Prompt</span><span class="step-sub">Demo langsung di kelas</span></span></button>
+        <button type="button" class="step" data-slide-target="6"><span class="step-num">07</span><span><span class="step-title">Perakit Prompt Siswa</span><span class="step-sub">Studio praktik</span></span></button>
+        <button type="button" class="step" data-slide-target="7"><span class="step-num">08</span><span><span class="step-title">Etika AI &amp; Kuis</span><span class="step-sub">Refleksi &amp; evaluasi</span></span></button>
+      </nav>
+      <div class="side-tip">Gunakan <kbd>←</kbd> <kbd>→</kbd> pada papan ketik untuk berpindah slide saat presentasi.</div>
+    </aside>
+
+    <main class="content">
+
+      <!-- ===================== SLIDE 1 ===================== -->
+      <section id="slide-0" class="slide">
+        <div class="card hero">
+          <div>
+            <span class="eyebrow">Bagian 01 · Arsitektur Berpikir Sosiologis</span>
+            <h2 class="h-display">Penelitian sosial menjembatani <span class="hl hl-sun">harapan</span> dan <span class="hl hl-peach">realitas</span></h2>
+            <p class="lead">Sebelum membuka AI, seorang peneliti sosiologi harus peka melihat <strong>kesenjangan (gap)</strong> antara kondisi ideal masyarakat (<em>Das Sollen</em>) dengan fakta empiris di lapangan (<em>Das Sein</em>). AI adalah <strong>co-pilot</strong> untuk mempercepat riset, tetapi <strong>kamu tetap arsitek utamanya</strong>.</p>
+            <div class="hero-tags">
+              <span class="tag">🧠 Berpikir kritis</span>
+              <span class="tag">🤖 AI sebagai co-pilot</span>
+              <span class="tag">🔍 Peka fenomena</span>
+            </div>
+          </div>
+          <div class="hero-side">
+            <div class="mini-label" style="color:var(--violet)">Dua pertanyaan dasar</div>
+            <div class="hero-q">
+              <div class="hero-q-num">1</div>
+              <div><div class="hero-q-title">Ontologi <span>· hakikat realitas</span></div><p>Apakah realitas sosial itu tunggal &amp; terukur, atau diciptakan secara subjektif oleh pelaku?</p></div>
+            </div>
+            <div class="hero-q">
+              <div class="hero-q-num">2</div>
+              <div><div class="hero-q-title">Epistemologi <span>· cara mengetahui</span></div><p>Bagaimana metode yang sah &amp; kredibel untuk menangkap realitas tersebut?</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="note teacher-note">
+          <div class="note-icon">👨‍🏫</div>
+          <div>
+            <div class="note-title">Tips mengajar guru (apersepsi kelas)</div>
+            <p>Tanyakan ke murid: <em>"Siapa yang pernah menyuruh ChatGPT membuat Latar Belakang tapi hasilnya terdengar seperti koran umum atau karangan bebas?"</em> Jelaskan bahwa penyebab utamanya adalah murid belum memasukkan pertentangan antara <strong>Das Sollen (Harapan)</strong> dan <strong>Das Sein (Kenyataan)</strong>. Klik 3 kasus di bawah ini bersama murid!</p>
+          </div>
+        </div>
+
+        <div class="split">
+          <div class="card card-tight">
+            <div class="card-head">
+              <h3 class="h-card">🔍 Pilih kasus sosial di sekitar kita</h3>
+              <span class="badge badge-violet">Interaktif</span>
+            </div>
+            <p class="small muted mt-6">Klik salah satu fenomena untuk membedah <strong>Das Sollen</strong>, <strong>Das Sein</strong>, dan <strong>corong presisi judulnya</strong>.</p>
+
+            <div class="stack-10 mt-16" id="caseSelectorContainer">
+              <button type="button" class="choice" data-case="0">
+                <span class="choice-icon">📱</span>
+                <span class="choice-body"><span class="choice-kicker">Kasus 1 · Ruang Digital &amp; Pelajar</span><span class="choice-title">Fenomena Second Account (Finsta) &amp; Ekspresi Diri Remaja SMA</span></span>
+                <span class="choice-check"></span>
+              </button>
+              <button type="button" class="choice" data-case="1">
+                <span class="choice-icon">☕</span>
+                <span class="choice-body"><span class="choice-kicker">Kasus 2 · Konsumsi &amp; Kelas Sosial</span><span class="choice-title">Budaya "Nongkrong" di Coffee Shop Premium &amp; FOMO Pelajar</span></span>
+                <span class="choice-check"></span>
+              </button>
+              <button type="button" class="choice" data-case="2">
+                <span class="choice-icon">🗳️</span>
+                <span class="choice-body"><span class="choice-kicker">Kasus 3 · Algoritma &amp; Polarisasi</span><span class="choice-title">Echo Chamber TikTok pada Preferensi Politik Pemilih Pemula</span></span>
+                <span class="choice-check"></span>
+              </button>
+            </div>
+
+            <div class="box mt-16">
+              <div class="mini-label">📐 3 syarat masalah layak diteliti</div>
+              <ul class="checklist small mt-12">
+                <li><strong>Relevansi sosial &amp; akademis:</strong> berdampak nyata pada masyarakat &amp; menyumbang konsep sosiologi.</li>
+                <li><strong>Spesifisitas:</strong> tidak terlalu makro; sesuai waktu, tenaga, dan lokasi murid.</li>
+                <li><strong>Researchability (dapat diteliti):</strong> data empiris tersedia dan bisa diakses secara etis.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="card card-tight">
+            <div class="card-head">
+              <div style="flex:1;min-width:240px">
+                <div class="mini-label" style="color:var(--peach)">Pembedahan masalah sosiologis</div>
+                <h3 id="caseTitleDisplay" class="h-card mt-4"></h3>
+              </div>
+              <span class="badge badge-sun">Soedjono Dirdjosisworo Framework</span>
+            </div>
+
+            <div class="duo mt-16">
+              <div class="box box-sun">
+                <span class="box-label">⚖️ Das Sollen · Harapan ideal</span>
+                <p id="caseSollenDisplay"></p>
+              </div>
+              <div class="box box-ink">
+                <span class="box-label">🔎 Das Sein · Realitas lapangan</span>
+                <p id="caseSeinDisplay"></p>
+              </div>
+            </div>
+
+            <div class="card-head mt-20">
+              <h4 class="h-card" style="font-size:16px">🔻 Corong presisi: dari fenomena makro ke judul spesifik</h4>
+              <span class="small muted">Umum → Spesifik</span>
+            </div>
+            <div id="corongContainer" class="funnel mt-12"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== SLIDE 2 ===================== -->
+      <section id="slide-1" class="slide">
+        <header class="section-head">
+          <div>
+            <span class="eyebrow">Bagian 02 · Kompas Metodologi &amp; Paradigma</span>
+            <h2 class="h-section">Memilih jalur riset: <span class="hl hl-mint">kualitatif</span>, <span class="hl hl-sky">kuantitatif</span>, atau <span class="hl hl-peach">campuran</span></h2>
+            <p class="lead">Pilihan metode <strong>bukan sekadar soal pakai angka atau wawancara</strong>, melainkan menentukan <strong>cara kamu menyusun Latar Belakang</strong> dan <strong>cara kamu memberi instruksi (prompt) ke AI</strong>.</p>
+          </div>
+          <div class="seg seg-lg" id="methodSeg" role="group" aria-label="Pilih metode">
+            <button type="button" class="seg-btn method-tab-btn" data-method="kualitatif" data-tone="mint">🌱 Kualitatif</button>
+            <button type="button" class="seg-btn method-tab-btn" data-method="kuantitatif" data-tone="sky">📊 Kuantitatif</button>
+            <button type="button" class="seg-btn method-tab-btn" data-method="campuran" data-tone="peach">🔄 Campuran</button>
+          </div>
+        </header>
+
+        <div class="note teacher-note">
+          <div class="note-icon">👨‍🏫</div>
+          <div>
+            <div class="note-title">Poin kunci untuk guru sosiologi</div>
+            <p>Sering kali siswa ingin meneliti <strong>kualitatif (studi kasus/fenomenologi)</strong> tetapi saat meminta bantuan AI, AI justru membuatkan latar belakang bergaya <strong>kuantitatif</strong> yang penuh istilah <em>"pengaruh signifikan variabel X terhadap variabel Y"</em>. Tekankan bahwa <strong>latar belakang kualitatif dan kuantitatif punya anatomi yang berbeda!</strong></p>
+          </div>
+        </div>
+
+        <div id="methodShowcasePanel" class="split"></div>
+
+        <div class="card card-tight">
+          <h3 class="h-card">📋 Bagaimana pilihan metode mengubah isi latar belakang &amp; prompt AI?</h3>
+          <div class="table-wrap mt-16">
+            <table>
+              <thead>
+                <tr>
+                  <th>Aspek latar belakang</th>
+                  <th class="th-mint">🌱 Kualitatif (konstruktivisme / induktif)</th>
+                  <th class="th-sky">📊 Kuantitatif (positivisme / deduktif)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Fokus masalah utama</td>
+                  <td>Menggali <strong>makna subjektif (emic)</strong>, proses sosial, alasan mendalam (<em>mengapa &amp; bagaimana</em>), dan keunikan konteks lokal.</td>
+                  <td>Mengukur <strong>hubungan kausalitas / korelasi antar-variabel</strong> (variabel X terhadap Y), menguji hipotesis, dan melihat pola populasi luas (<em>seberapa besar pengaruh</em>).</td>
+                </tr>
+                <tr>
+                  <td>Cara menyajikan data awal (Das Sein)</td>
+                  <td>Menonjolkan <strong>kontradiksi perilaku, observasi unik di lokasi spesifik</strong>, atau fenomena sosial yang tidak bisa dijelaskan hanya dengan persentase statistik.</td>
+                  <td>Menonjolkan <strong>data statistik resmi (BPS, survei, grafik tren)</strong>, angka kenaikan/penurunan masalah, dan celah pengukuran antar-variabel.</td>
+                </tr>
+                <tr>
+                  <td>Posisi teori di latar belakang</td>
+                  <td>Teori sebagai <strong>lensa/pisau analisis (sensitizing concept)</strong> untuk memahami makna tindakan aktor (misal: Dramaturgi Goffman).</td>
+                  <td>Teori sebagai <strong>dasar penurunan variabel &amp; hipotesis</strong> yang akan diuji secara objektif di lapangan.</td>
+                </tr>
+                <tr>
+                  <td>Kata terlarang / rawan salah di prompt AI</td>
+                  <td class="td-warn">✕ Hindari meminta AI menulis <em>"menguji pengaruh variabel X terhadap Y secara signifikan"</em> atau <em>"populasi dan sampel acak"</em>.</td>
+                  <td class="td-warn">✕ Hindari rumusan yang terlalu filosofis/abstrak tanpa indikator variabel yang jelas dan dapat diukur (<em>measurable</em>).</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== SLIDE 3 ===================== -->
+      <section id="slide-2" class="slide">
+        <header class="section-head">
+          <div>
+            <span class="eyebrow">Bagian 03 · Struktur Piramida Terbalik &amp; Akselerasi AI</span>
+            <h2 class="h-section">5 tahapan menyusun latar belakang sosiologi yang <span class="hl hl-violet">kredibel</span></h2>
+            <p class="lead">Rahasia agar hasil AI <strong>tidak acak-acakan</strong>: jangan minta AI menulis seluruh latar belakang dalam satu kali perintah. Bangun <strong>lapis demi lapis mengikuti piramida terbalik</strong> di bawah ini.</p>
+          </div>
+          <div class="seg seg-lg" role="group" aria-label="Mode contoh">
+            <button type="button" id="pyramidModeKual" class="seg-btn" data-tone="mint">🌱 Versi Kualitatif</button>
+            <button type="button" id="pyramidModeKuan" class="seg-btn" data-tone="sky">📊 Versi Kuantitatif</button>
+          </div>
+        </header>
+
+        <div class="note teacher-note">
+          <div class="note-icon">👨‍🏫</div>
+          <div>
+            <div class="note-title">Strategi pembelajaran di kelas</div>
+            <p>Mintalah siswa mengklik setiap lapisan <strong>piramida terbalik (tahap 1 s.d. tahap 5)</strong> di sebelah kiri, lalu bandingkan bagaimana bunyi paragraf dan prompt AI-nya ketika tombol <strong>Versi Kualitatif</strong> dan <strong>Versi Kuantitatif</strong> diganti!</p>
+          </div>
+        </div>
+
+        <div class="split">
+          <div class="card card-tight">
+            <div class="mini-label">👇 Klik tiap lapisan piramida</div>
+            <div class="pyramid mt-12">
+              <button type="button" data-pyramid="0" class="pyr" style="width:100%;--c:var(--violet)"><div class="pyr-top"><span class="pyr-kicker">Tahap 1 · Umum / makro</span><span class="pyr-tag">Paragraf 1</span></div><div class="pyr-title">Konteks global / fenomena makro</div></button>
+              <button type="button" data-pyramid="1" class="pyr" style="width:93%;--c:var(--peach)"><div class="pyr-top"><span class="pyr-kicker">Tahap 2 · Fakta &amp; masalah</span><span class="pyr-tag">Paragraf 2</span></div><div class="pyr-title">Urgensi &amp; bukti data (Das Sollen vs Das Sein)</div></button>
+              <button type="button" data-pyramid="2" class="pyr" style="width:86%;--c:#C98A00"><div class="pyr-top"><span class="pyr-kicker">Tahap 3 · Sintesis literatur</span><span class="pyr-tag">Paragraf 3</span></div><div class="pyr-title">Kesenjangan penelitian (research gap)</div></button>
+              <button type="button" data-pyramid="3" class="pyr" style="width:79%;--c:var(--mint)"><div class="pyr-top"><span class="pyr-kicker">Tahap 4 · Pisau analisis</span><span class="pyr-tag">Paragraf 4</span></div><div class="pyr-title">Konteks teoretis sosiologi</div></button>
+              <button type="button" data-pyramid="4" class="pyr" style="width:72%;--c:var(--sky)"><div class="pyr-top"><span class="pyr-kicker">Tahap 5 · Kerucut spesifik</span><span class="pyr-tag">Paragraf 5</span></div><div class="pyr-title">Tujuan studi &amp; pernyataan kebaruan</div></button>
+            </div>
+
+            <div class="box mt-20">
+              <div class="mini-label">🧰 Alat pendukung (bukan hanya ChatGPT!)</div>
+              <div class="tools mt-12">
+                <div class="tool"><b>Perplexity / BPS</b>Cari data tren sosial &amp; statistik nyata.</div>
+                <div class="tool"><b>Elicit &amp; SciSpace</b>Ekstrak matriks jurnal &amp; cari <em>research gap</em>.</div>
+                <div class="tool"><b>Research Rabbit</b>Visualisasi peta jaringan sitasi jurnal.</div>
+                <div class="tool"><b>Scholarcy</b>Ringkas PDF jurnal panjang jadi kartu poin penting.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card card-tight stack-16" id="pyramidDetailCard"></div>
+        </div>
+
+        <div class="split-even">
+          <div class="box box-rose">
+            <div class="h-card" style="font-size:15.5px">✕ Jangan lakukan: rangkuman serial</div>
+            <p class="small mt-4">Jebakan AI pemula.</p>
+            <p class="do-quote">"Menurut Pratama (2021) media sosial memengaruhi remaja. Sedangkan menurut Sari (2022) Instagram membuat remaja konsumtif. Lalu menurut Wijaya (2023) TikTok mengubah gaya hidup."</p>
+            <p class="small mt-12"><strong>Masalah:</strong> tulisan terpotong-potong seperti daftar belanja, gagal menunjukkan pola perdebatan ilmiah.</p>
+          </div>
+          <div class="box box-mint">
+            <div class="h-card" style="font-size:15.5px">✓ Lakukan: sintesis terpadu</div>
+            <p class="small mt-4">Gaya peneliti sosiologi.</p>
+            <p class="do-quote">"Sejumlah studi terdahulu menunjukkan bahwa algoritma media sosial membentuk ulang konstruksi identitas remaja (Pratama, 2021; Sari, 2022), namun intensitas dampaknya sangat bergantung pada modal budaya dan kontrol kelompok sebaya di sekolah (Wijaya, 2023)."</p>
+            <p class="small mt-12"><strong>Kelebihan:</strong> mengelompokkan temuan berdasarkan pola argumen dan langsung membuka jalan menuju <em>research gap</em>.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== SLIDE 4 (BARU): PANDUAN MEMULAI AI ===================== -->
+      <section id="slide-3" class="slide">
+        <header class="section-head">
+          <div>
+            <span class="eyebrow">Bagian 04 · Panduan Memulai AI</span>
+            <h2 class="h-section">Sebelum bertanya: pilih AI-mu, lalu <span class="hl hl-violet">kenalkan dirimu</span></h2>
+            <p class="lead">AI tidak tahu bahwa kamu siswa kelas X yang sedang belajar meneliti. Tanpa perkenalan, AI menjawab seolah-olah untuk orang dewasa umum: bahasanya bisa terlalu rumit, atau malah langsung membuatkan tugas jadi. Dua langkah ini dikerjakan <strong>sekali di awal setiap percakapan baru</strong>.</p>
+          </div>
+        </header>
+
+        <div class="note teacher-note">
+          <div class="note-icon">👨‍🏫</div>
+          <div>
+            <div class="note-title">Kesepakatan kelas sebelum praktik</div>
+            <p>Sepakati AI yang dipakai di kelas, pastikan siswa memakai akun yang sesuai <strong>syarat usia</strong> layanan (dan izin orang tua/wali bila diwajibkan), lalu minta siswa <strong>menyimpan tautan atau tangkapan layar percakapan</strong> sebagai bahan <em>Log Prompt AI</em> pada penilaian proses (Bagian 08).</p>
+          </div>
+        </div>
+
+        <!-- Langkah 0 -->
+        <div class="card card-tight stack-16">
+          <div class="step-banner">
+            <div class="f-letter" style="background:var(--peach)">0</div>
+            <div>
+              <div class="mini-label" style="color:var(--peach)">Langkah 0 · Persiapan</div>
+              <h3 class="h-card mt-4">AI apa yang dipakai, dan untuk apa?</h3>
+            </div>
+          </div>
+
+          <div class="tool-grid">
+            <div class="ai-card" style="--c:#10A37F;--t:var(--mint-50)">
+              <div class="ai-head"><div class="ai-logo">Ch</div><div><div class="ai-name">ChatGPT</div><div class="ai-maker">OpenAI</div></div></div>
+              <span class="ai-age">Siswa: 13+ · izin orang tua/wali bila &lt; 18</span>
+              <p><b>Cocok untuk:</b> curah gagasan, menyusun kerangka, merapikan bahasa, dan menjelaskan konsep.</p>
+            </div>
+            <div class="ai-card" style="--c:var(--sky);--t:var(--sky-50)">
+              <div class="ai-head"><div class="ai-logo">Ge</div><div><div class="ai-name">Gemini</div><div class="ai-maker">Google</div></div></div>
+              <span class="ai-age">Siswa: 13+ · akun sekolah bila diaktifkan admin</span>
+              <p><b>Cocok untuk:</b> menjelaskan konsep dan bekerja bersama Google Docs/Drive yang biasa dipakai di sekolah.</p>
+            </div>
+            <div class="ai-card" style="--c:#0E7C86;--t:#E4F5F6">
+              <div class="ai-head"><div class="ai-logo">Pe</div><div><div class="ai-name">Perplexity</div><div class="ai-maker">Perplexity AI</div></div></div>
+              <span class="ai-age">Cek syarat usia di situs resminya</span>
+              <p><b>Cocok untuk:</b> mencari informasi dan data awal yang disertai tautan sumber. Tetap buka dan baca sumber aslinya.</p>
+            </div>
+            <div class="ai-card" style="--c:#2B5BD7;--t:#E8EEFF">
+              <div class="ai-head"><div class="ai-logo">Co</div><div><div class="ai-name">Microsoft Copilot</div><div class="ai-maker">Microsoft</div></div></div>
+              <span class="ai-age">Cek syarat usia di situs resminya</span>
+              <p><b>Cocok untuk:</b> pencarian web dengan ringkasan dan tautan rujukan.</p>
+            </div>
+            <div class="ai-card" style="--c:var(--violet);--t:var(--violet-50)">
+              <div class="ai-head"><div class="ai-logo">Sc</div><div><div class="ai-name">Google Scholar · Elicit · SciSpace</div><div class="ai-maker">Alat riset</div></div></div>
+              <span class="ai-age">Wajib untuk verifikasi</span>
+              <p><b>Cocok untuk:</b> mencari dan memeriksa jurnal asli. Inilah tempat memastikan sitasi dari chatbot benar-benar ada.</p>
+            </div>
+            <div class="ai-card is-teacher" style="--c:#8A6A4A;--t:#F3ECE4">
+              <div class="ai-head"><div class="ai-logo">Cl</div><div><div class="ai-name">Claude</div><div class="ai-maker">Anthropic</div></div></div>
+              <span class="ai-age">18+ · khusus guru</span>
+              <p><b>Cocok untuk guru:</b> menyusun perangkat ajar dan menelaah teks panjang. Siswa kelas X belum memenuhi syarat usia layanan konsumennya.</p>
+            </div>
+          </div>
+
+          <div class="split-even">
+            <div class="box">
+              <div class="mini-label">✅ Aturan pakai di kelas</div>
+              <ul class="checklist small mt-12">
+                <li>Pakai akun sendiri yang sesuai syarat usia layanan.</li>
+                <li>Satu topik riset = satu percakapan, agar konteks tidak tercampur.</li>
+                <li>Simpan tautan/tangkapan layar percakapan untuk Log Prompt.</li>
+                <li>Sitasi dan angka dari chatbot selalu dicek ulang di Google Scholar atau sumber resmi (BPS).</li>
+              </ul>
+            </div>
+            <div class="box box-rose">
+              <div class="mini-label" style="color:var(--rose)">🔒 Jangan pernah dimasukkan ke AI</div>
+              <ul class="bullets mt-12">
+                <li>Nama lengkap, alamat, nomor HP, atau kata sandi.</li>
+                <li>Identitas asli teman, guru, atau informan penelitian (gunakan inisial/samaran).</li>
+                <li>Foto dokumen pribadi dan data sekolah yang bersifat rahasia.</li>
+              </ul>
+            </div>
+          </div>
+
+          <p class="src-note">Syarat usia diperiksa 3 November 2026 dan dapat berubah sewaktu-waktu. Rujukan: <a href="https://openai.com/policies/terms-of-use/" target="_blank" rel="noopener">OpenAI Terms of Use</a> · <a href="https://support.google.com/gemini/answer/13278668" target="_blank" rel="noopener">Google: syarat masuk Gemini Apps</a> · <a href="https://www.anthropic.com/legal/consumer-terms" target="_blank" rel="noopener">Anthropic Consumer Terms</a>.</p>
+        </div>
+
+        <!-- Langkah 1 -->
+        <div class="card card-tight stack-16">
+          <div class="step-banner">
+            <div class="f-letter" style="background:var(--violet)">1</div>
+            <div>
+              <div class="mini-label" style="color:var(--violet)">Langkah 1 · Prompt perkenalan</div>
+              <h3 class="h-card mt-4">Beri tahu AI: dengan siapa ia berbicara, dan apa kebutuhanmu</h3>
+            </div>
+          </div>
+          <p class="small" style="color:var(--ink-2);max-width:80ch">Prompt perkenalan dikirim <strong>sekali sebagai pesan pertama</strong>. Setelah AI memahami siapa kamu, setiap permintaan berikutnya cukup memakai rumus R-M-D-S-G (Bagian 05). Beberapa AI juga punya fitur instruksi tetap, misalnya <em>Custom Instructions</em> di ChatGPT atau <em>Gems</em> di Gemini, sehingga perkenalan tidak perlu diketik ulang.</p>
+
+          <div class="formula">
+            <div class="f-card" style="--c:var(--violet);--t:var(--violet-50)">
+              <div class="f-letter">1</div><div class="f-name">Siapa aku</div><div class="f-q">Identitas umum</div>
+              <p class="f-desc">"Aku siswa kelas X MA yang baru belajar metodologi penelitian." Tanpa nama lengkap atau data pribadi.</p>
+            </div>
+            <div class="f-card" style="--c:var(--peach);--t:var(--peach-50)">
+              <div class="f-letter">2</div><div class="f-name">Tugasku</div><div class="f-q">Konteks</div>
+              <p class="f-desc">"Aku sedang menyusun latar belakang karya tulis ilmiah sosiologi."</p>
+            </div>
+            <div class="f-card" style="--c:var(--mint);--t:var(--mint-50)">
+              <div class="f-letter">3</div><div class="f-name">Peranmu</div><div class="f-q">Kebutuhan</div>
+              <p class="f-desc">"Bimbing aku langkah demi langkah, jangan buatkan tugas jadi."</p>
+            </div>
+            <div class="f-card" style="--c:var(--sky);--t:var(--sky-50)">
+              <div class="f-letter">4</div><div class="f-name">Cara bicara</div><div class="f-q">Gaya bahasa</div>
+              <p class="f-desc">"Gunakan bahasa Indonesia baku yang sederhana dan contoh dari kehidupan remaja."</p>
+            </div>
+            <div class="f-card" style="--c:var(--rose);--t:var(--rose-50)">
+              <div class="f-letter">5</div><div class="f-name">Aturan main</div><div class="f-q">Pagar &amp; konfirmasi</div>
+              <p class="f-desc">"Tanya balik bila kurang jelas, jangan mengarang sumber. Jika paham, ringkas peranmu."</p>
+            </div>
+          </div>
+
+          <div class="split-even">
+            <div class="panel panel-bad" style="box-shadow:none">
+              <div class="panel-head"><div><div class="panel-kicker">Pesan pertama tanpa perkenalan</div><div class="panel-title">AI menebak siapa kamu</div></div><span class="pill pill-bad">✕ Kabur</span></div>
+              <div class="panel-body"><div class="prompt prompt-bad">"Bantuin tugas sosiologi dong, tentang medsos."</div></div>
+              <div class="panel-foot">
+                <ul class="bullets">
+                  <li>AI tidak tahu jenjang, tingkat pemahaman, dan jenis tugasmu.</li>
+                  <li>AI cenderung langsung menulis esai jadi, padahal kamu perlu dibimbing.</li>
+                  <li>Tidak ada pagar, sehingga sumber fiktif mudah muncul.</li>
+                </ul>
+              </div>
+            </div>
+            <div class="panel panel-good" style="box-shadow:none">
+              <div class="panel-head"><div><div class="panel-kicker">Pesan pertama dengan perkenalan</div><div class="panel-title">AI tahu peran dan batasnya</div></div><span class="pill pill-good">✓ Jelas</span></div>
+              <div class="panel-body">
+                <div class="mini-label">Contoh balasan AI yang menandakan ia paham (ilustrasi)</div>
+                <div class="chat-bubble">"Baik! Aku akan berperan sebagai guru pembimbingmu. Aku tidak akan menuliskan tugasmu, tetapi menuntunmu dengan pertanyaan, memakai bahasa sederhana, dan memberi penanda [Perlu sumber] bila butuh rujukan. Pertama: fenomena sosial apa yang paling sering kamu amati di sekolah atau lingkunganmu?"</div>
+              </div>
+              <div class="panel-foot">
+                <ul class="bullets">
+                  <li>AI meringkas perannya, jadi kamu bisa mengecek apakah ia paham.</li>
+                  <li>AI bertanya balik sebelum menulis apa pun.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Perakit prompt perkenalan -->
+        <div class="split-even">
+          <div class="card card-tight stack-16">
+            <div>
+              <div class="mini-label" style="color:var(--violet)">Coba sekarang</div>
+              <h3 class="h-card mt-4">🪪 Rakit prompt perkenalanmu</h3>
+            </div>
+            <div class="form-grid">
+              <div>
+                <label for="introLevel" class="field-label">1 · Jenjang</label>
+                <select id="introLevel" class="input">
+                  <option value="kelas X Madrasah Aliyah (MA)">Kelas X MA</option>
+                  <option value="kelas X SMA">Kelas X SMA</option>
+                  <option value="kelas XI Madrasah Aliyah (MA)">Kelas XI MA</option>
+                </select>
+              </div>
+              <div>
+                <label for="introUnderstand" class="field-label">2 · Pemahamanku</label>
+                <select id="introUnderstand" class="input">
+                  <option value="Aku baru mulai belajar metodologi penelitian sosial, jadi tolong jelaskan istilah teknis dengan sederhana.">Baru mulai belajar</option>
+                  <option value="Aku sudah mengenal dasar penelitian kualitatif dan kuantitatif, tetapi masih perlu bimbingan saat menulis.">Sudah tahu dasarnya</option>
+                </select>
+              </div>
+            </div>
+            <div>
+              <label for="introTask" class="field-label">3 · Tugasku</label>
+              <select id="introTask" class="input">
+                <option value="menyusun latar belakang karya tulis ilmiah (Bab I)">Menyusun latar belakang karya tulis ilmiah</option>
+                <option value="menemukan dan merumuskan masalah penelitian">Menemukan &amp; merumuskan masalah penelitian</option>
+                <option value="memahami teori sosiologi sebagai pisau analisis">Memahami teori sosiologi untuk analisis</option>
+                <option value="menyusun pedoman wawancara atau angket penelitian">Menyusun pedoman wawancara/angket</option>
+              </select>
+            </div>
+            <div>
+              <label for="introRole" class="field-label">4 · Peran AI yang kubutuhkan</label>
+              <select id="introRole" class="input">
+                <option value="Bertindaklah sebagai guru pembimbing yang sabar. Tuntun aku dengan pertanyaan-pertanyaan pemandu, bukan jawaban jadi, satu langkah dalam satu waktu.">Pembimbing yang menuntun dengan pertanyaan</option>
+                <option value="Bertindaklah sebagai mentor menulis ilmiah. Berikan contoh singkat, lalu beri umpan balik atas tulisanku sendiri: apa yang sudah baik dan apa yang perlu diperbaiki.">Mentor: contoh + umpan balik</option>
+                <option value="Bertindaklah sebagai penelaah kritis. Periksa logika, konsistensi metode, dan ketepatan bahasa tulisanku, lalu jelaskan alasan setiap saran.">Penelaah kritis tulisanku</option>
+              </select>
+            </div>
+            <div>
+              <label for="introStyle" class="field-label">5 · Gaya bahasa</label>
+              <select id="introStyle" class="input">
+                <option value="Gunakan bahasa Indonesia baku yang sederhana, kalimat pendek, dan contoh dari kehidupan remaja sehari-hari.">Baku, sederhana, banyak contoh</option>
+                <option value="Gunakan bahasa Indonesia akademik yang baku, tetapi tetap jelaskan istilah asing ketika pertama kali muncul.">Akademik, istilah dijelaskan</option>
+              </select>
+            </div>
+            <div>
+              <label for="introTopic" class="field-label">6 · Topik awal (boleh dikosongkan)</label>
+              <input id="introTopic" type="text" class="input" placeholder="Contoh: kebiasaan nongkrong siswa di kafe" />
+            </div>
+          </div>
+
+          <div class="card card-tight stack-16">
+            <div class="card-head" style="align-items:center">
+              <div>
+                <div class="mini-label" style="color:var(--mint)">Pesan pertama</div>
+                <h3 class="h-card mt-4">Tempel di awal percakapan baru</h3>
+              </div>
+              <button type="button" id="introCopyBtn" class="btn btn-accent">📋 Salin</button>
+            </div>
+            <div id="introToast" class="toast" hidden>✅ Tersalin! Tempel sebagai pesan pertamamu.</div>
+            <pre id="introPromptOutput" class="prompt builder-out" style="margin:0"></pre>
+            <div class="box box-mint small">Setelah AI membalas dengan ringkasan perannya, lanjutkan ke <strong>Bagian 05</strong> untuk menyusun permintaan dengan rumus R-M-D-S-G.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== SLIDE 4 ===================== -->
+      <section id="slide-4" class="slide">
+        <header class="section-head">
+          <div>
+            <span class="eyebrow">Bagian 05 · Rekayasa Prompt untuk Sosiologi</span>
+            <h2 class="h-section">Rumus prompt anti-acak: mengapa AI sering <span class="hl hl-peach">ngelantur</span>?</h2>
+            <p class="lead">AI bukan pembaca pikiran. Jika perintahmu singkat dan kabur, AI menebak secara acak dengan bahasa klise internet. Gunakan <strong>rumus 5 komponen (R-M-D-S-G)</strong> agar AI memahami maksud risetmu secara presisi.</p>
+          </div>
+        </header>
+
+        <div class="formula">
+          <div class="f-card" style="--c:var(--violet);--t:var(--violet-50)">
+            <div class="f-letter">R</div><div class="f-name">Role · Peran</div><div class="f-q">Siapa AI-nya?</div>
+            <p class="f-desc">"Bertindaklah sebagai sosiolog akademik dan pembimbing karya tulis ilmiah SMA..."</p>
+          </div>
+          <div class="f-card" style="--c:var(--mint);--t:var(--mint-50)">
+            <div class="f-letter">M</div><div class="f-name">Metode · Jalur</div><div class="f-q">Kualitatif / kuantitatif?</div>
+            <p class="f-desc">Sebutkan eksplisit: "Gunakan paradigma konstruktivis (kualitatif studi kasus)" atau "positivis (kuantitatif survei)".</p>
+          </div>
+          <div class="f-card" style="--c:#C98A00;--t:var(--sun-50)">
+            <div class="f-letter">D</div><div class="f-name">Data &amp; konteks</div><div class="f-q">Das Sein &amp; teori</div>
+            <p class="f-desc">Suplai fakta observasi awalmu di sekolah/masyarakat + teori sosiologi yang dipilih (misal: Goffman/Bourdieu).</p>
+          </div>
+          <div class="f-card" style="--c:var(--sky);--t:var(--sky-50)">
+            <div class="f-letter">S</div><div class="f-name">Stage · Tahapan</div><div class="f-q">Bagian mana?</div>
+            <p class="f-desc">Minta spesifik per tahap piramida terbalik: "Susun kerangka Paragraf 2 (Das Sollen vs Das Sein) dan Paragraf 3 (Gap)".</p>
+          </div>
+          <div class="f-card" style="--c:var(--rose);--t:var(--rose-50)">
+            <div class="f-letter">G</div><div class="f-name">Guardrails · Pagar</div><div class="f-q">Batasan ketat!</div>
+            <p class="f-desc">"DILARANG mengarang sitasi/jurnal fiktif, hindari pembuka klise 'Di era globalisasi', pertahankan istilah lokal."</p>
+          </div>
+        </div>
+
+        <div class="card card-tight">
+          <div class="card-head">
+            <h3 class="h-card">🔬 Bedah kasus: prompt yang tidak dipahami AI vs prompt yang dipahami AI</h3>
+          </div>
+          <div class="chips mt-12" id="promptCompareTabContainer">
+            <button type="button" data-pcomp="0" class="chip pcomp-tab">A · Latar belakang kualitatif</button>
+            <button type="button" data-pcomp="1" class="chip pcomp-tab">B · Latar belakang kuantitatif</button>
+            <button type="button" data-pcomp="2" class="chip pcomp-tab">C · Mencari research gap</button>
+            <button type="button" data-pcomp="3" class="chip pcomp-tab">D · Menjaga makna lokal</button>
+          </div>
+          <div id="promptComparisonDisplay" class="split-even mt-20"></div>
+        </div>
+      </section>
+
+      <!-- ===================== SLIDE 5 ===================== -->
+      <section id="slide-5" class="slide">
+        <header class="section-head">
+          <div>
+            <span class="eyebrow tone-sun">Bagian 06 · Laboratorium Simulasi (Demo Kelas)</span>
+            <h2 class="h-section">⚡ Apa jadinya jika pakai prompt <span class="hl hl-peach">asal</span> vs prompt <span class="hl hl-mint">jelas</span>?</h2>
+            <p class="lead">Pilih <strong>topik</strong> dan <strong>pendekatan metodologi</strong>, lalu jalankan simulasi untuk melihat bagaimana AI merespons kedua jenis prompt beserta diagnosis kesalahannya.</p>
+          </div>
+        </header>
+
+        <div class="card card-tight">
+          <div class="toolbar">
+            <div>
+              <label for="simTopicSelect" class="field-label">1 · Topik penelitian siswa</label>
+              <select id="simTopicSelect" class="input">
+                <option value="finsta">Fenomena Second Account (Finsta) &amp; Identitas Siswa</option>
+                <option value="nongkrong">Budaya Nongkrong di Coffee Shop &amp; Gaya Hidup Remaja</option>
+                <option value="ojol">Solidaritas Komunitas Ojek Online vs Algoritma</option>
+              </select>
+            </div>
+            <div>
+              <span class="field-label">2 · Metode</span>
+              <div class="seg seg-lg" role="group" aria-label="Metode simulasi">
+                <button type="button" id="simMethodKual" class="seg-btn" data-tone="mint">🌱 Kualitatif</button>
+                <button type="button" id="simMethodKuan" class="seg-btn" data-tone="sky">📊 Kuantitatif</button>
+              </div>
+            </div>
+            <button type="button" id="runSimulationBtn" class="btn btn-accent btn-lg">▶ Jalankan simulasi</button>
+          </div>
+        </div>
+
+        <div class="split-even">
+          <div class="panel panel-bad">
+            <div class="panel-head">
+              <div><div class="panel-kicker">Simulasi A · Prompt asal-asalan</div><div class="panel-title">Tanpa konteks, metode, &amp; batasan</div></div>
+              <span class="score">Skor riset 28/100</span>
+            </div>
+            <div class="panel-body">
+              <div>
+                <div class="mini-label">💬 Prompt yang diketik siswa</div>
+                <div id="simBadPromptBox" class="prompt prompt-bad mt-8"></div>
+              </div>
+              <div>
+                <div class="mini-label">🤖 Hasil AI (acak &amp; rawan halusinasi)</div>
+                <div id="simBadOutputBox" class="output-box mt-8"></div>
+              </div>
+            </div>
+            <div class="panel-foot">
+              <div class="foot-title">🚨 Mengapa hasil ini ditolak guru pembimbing?</div>
+              <ul id="simBadDiagnosisList" class="bullets"></ul>
+            </div>
+          </div>
+
+          <div class="panel panel-good">
+            <div class="panel-head">
+              <div><div class="panel-kicker">Simulasi B · Prompt terstruktur (R-M-D-S-G)</div><div class="panel-title">Presisi metodologi &amp; anti-halusinasi</div></div>
+              <span class="score">Skor riset 94/100</span>
+            </div>
+            <div class="panel-body">
+              <div>
+                <div class="mini-label">💬 Prompt terstruktur yang diketik siswa</div>
+                <div id="simGoodPromptBox" class="prompt prompt-good mt-8"></div>
+              </div>
+              <div>
+                <div class="mini-label">🤖 Hasil AI (terarah &amp; siap dikembangkan)</div>
+                <div id="simGoodOutputBox" class="output-box mt-8"></div>
+              </div>
+            </div>
+            <div class="panel-foot">
+              <div class="foot-title">✅ Mengapa hasil ini kredibel &amp; mudah diuji?</div>
+              <ul id="simGoodDiagnosisList" class="bullets"></ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== SLIDE 6 ===================== -->
+      <section id="slide-6" class="slide">
+        <header class="section-head">
+          <div>
+            <span class="eyebrow">Bagian 07 · Mesin Perakit Prompt</span>
+            <h2 class="h-section">🛠️ Studio praktik: rakit prompt <span class="hl hl-violet">latar belakangmu</span> sendiri</h2>
+            <p class="lead">Isi data pengamatan awalmu, pilih jalur <strong>kualitatif</strong> atau <strong>kuantitatif</strong>, tentukan tahapan piramida terbalik, lalu salin prompt yang sudah dilengkapi pagar anti-halusinasi.</p>
+          </div>
+        </header>
+
+        <div class="split-even">
+          <div class="card card-tight stack-16">
+            <div class="card-head" style="align-items:center">
+              <h3 class="h-card">📝 Isi komponen risetmu</h3>
+              <button type="button" id="fillPresetBtn" class="btn-link">Isi contoh otomatis (kuantitatif) →</button>
+            </div>
+
+            <div class="form-grid">
+              <div>
+                <label for="builderMethod" class="field-label">1 · Pendekatan metodologi</label>
+                <select id="builderMethod" class="input">
+                  <option value="Kualitatif (Studi Kasus / Fenomenologi - Induktif)">🌱 Kualitatif (studi kasus / induktif)</option>
+                  <option value="Kuantitatif (Survei Korelasional / Eksplanatif - Deduktif)">📊 Kuantitatif (survei / deduktif)</option>
+                  <option value="Campuran / Mixed-Methods (Pragmatisme)">🔄 Campuran (mixed-methods)</option>
+                </select>
+              </div>
+              <div>
+                <label for="builderStage" class="field-label">2 · Fokus tahap piramida</label>
+                <select id="builderStage" class="input">
+                  <option value="Kerangka Utuh 5 Tahap Piramida Terbalik (Per Poin)">Semua 5 tahap (kerangka utuh)</option>
+                  <option value="Tahap 1 & 2: Konteks Makro dan Pertentangan Das Sollen vs Das Sein">Tahap 1 &amp; 2 (makro + Sollen vs Sein)</option>
+                  <option value="Tahap 3: Sintesis Literatur Terpadu & Identifikasi Research Gap">Tahap 3 (sintesis literatur &amp; gap)</option>
+                  <option value="Tahap 4 & 5: Konteks Teoritis Sosiologi & Tujuan Penelitian">Tahap 4 &amp; 5 (teori &amp; tujuan)</option>
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <label for="builderTopic" class="field-label">3 · Topik / judul sementara &amp; lokasi</label>
+              <input id="builderTopic" type="text" class="input" value="Fenomena Penggunaan Second Account Instagram pada Siswa Kelas XI SMAN 1 Bandung" placeholder="Contoh: Fenomena Thrift Shopping di Kalangan Remaja SMA..." />
+            </div>
+
+            <div>
+              <label for="builderSollenSein" class="field-label">4 · Fakta lapangan (Das Sein) &amp; harapan (Das Sollen)</label>
+              <textarea id="builderSollenSein" rows="4" class="input" placeholder="Tuliskan fakta nyata yang kamu lihat di sekolah/lingkunganmu...">Harapannya media sosial menjadi ruang ekspresi autentik, namun faktanya 70% siswa di kelas membuat akun kedua (finsta) yang dikunci rapat karena takut dihakimi teman dan guru di akun utama.</textarea>
+            </div>
+
+            <div>
+              <label for="builderTheory" class="field-label">5 · Teori sosiologi (pisau analisis)</label>
+              <select id="builderTheory" class="input">
+                <option value="Teori Dramaturgi (Erving Goffman) — Panggung Depan (Front Stage) vs Panggung Belakang (Back Stage)">Teori Dramaturgi (Erving Goffman) — front vs back stage</option>
+                <option value="Teori Masyarakat Konsumsi & Simulakra (Jean Baudrillard) — Nilai Tanda & Gaya Hidup">Teori Masyarakat Konsumsi (Jean Baudrillard) — nilai tanda</option>
+                <option value="Teori Habitus, Arena, dan Modal Budaya/Sosial (Pierre Bourdieu)">Teori Habitus &amp; Modal (Pierre Bourdieu)</option>
+                <option value="Teori Solidaritas Sosial Mekanik & Organik (Emile Durkheim)">Teori Solidaritas Sosial (Emile Durkheim)</option>
+                <option value="Teori Tindakan Sosial (Max Weber) — Rasionalitas Instrumental vs Berorientasi Nilai">Teori Tindakan Sosial (Max Weber)</option>
+              </select>
+            </div>
+
+            <button type="button" id="generateCustomPromptBtn" class="btn btn-primary btn-lg btn-block">⚙️ Rakit prompt sekarang</button>
+          </div>
+
+          <div class="card card-tight stack-16">
+            <div class="card-head" style="align-items:center">
+              <div>
+                <div class="mini-label" style="color:var(--mint)">Hasil prompt R-M-D-S-G</div>
+                <h3 class="h-card mt-4">Siap salin ke AI pilihanmu</h3>
+              </div>
+              <button type="button" id="copyBuiltPromptBtn" class="btn btn-accent">📋 Salin prompt</button>
+            </div>
+            <div id="copyToast" class="toast" hidden>✅ Prompt berhasil disalin! Tempel ke AI pilihanmu.</div>
+            <pre id="builtPromptOutput" class="prompt builder-out" style="margin:0"></pre>
+            <div class="box box-mint">
+              <div class="foot-title">🛡️ Mengapa prompt rakitan ini aman dari hasil acak?</div>
+              <div class="guard-grid">
+                <div>✓ Mengunci paradigma &amp; metode</div>
+                <div>✓ Memisahkan Das Sollen &amp; Das Sein</div>
+                <div>✓ Mencegah sitasi palsu (halusinasi)</div>
+                <div>✓ Menjaga nuansa lokal (emic)</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== SLIDE 7 ===================== -->
+      <section id="slide-7" class="slide">
+        <header class="section-head">
+          <div>
+            <span class="eyebrow tone-rose">Bagian 08 · Bahaya Laten GenAI, Etika Riset &amp; Evaluasi</span>
+            <h2 class="h-section">Waspada jebakan AI &amp; <span class="hl hl-sun">transparansi akademik</span></h2>
+            <p class="lead">AI unggul dalam kerapian bahasa, tetapi memiliki <strong>3 bahaya laten</strong> dalam sosiologi dan tidak pernah bisa menggantikan <strong>verifikasi lapangan serta kepekaan etis manusia</strong>.</p>
+          </div>
+        </header>
+
+        <div class="danger-grid">
+          <div class="danger" style="--c:var(--rose);--t:var(--rose-50)">
+            <div class="danger-icon">⚖️</div>
+            <div class="danger-k">Bahaya laten 01</div>
+            <h3>Bias pelatihan data</h3>
+            <p>Model bahasa besar (LLM) dilatih dari teks internet global sehingga rentan mereproduksi stereotip kelas sosial, gender, atau bias Barat yang tidak cocok dengan konteks masyarakat Indonesia.</p>
+          </div>
+          <div class="danger" style="--c:#C98A00;--t:var(--sun-50)">
+            <div class="danger-icon">🚜</div>
+            <div class="danger-k">Bahaya laten 02</div>
+            <h3>Penyeragaman makna (flattening)</h3>
+            <p>Dalam riset kualitatif, AI sering meratakan istilah lokal yang kaya makna (<strong>emic</strong>, misal: <em>"Solidaritas Protektif Pangkalan"</em>) menjadi kategori generik yang dangkal (<strong>etic</strong>, misal: sekadar <em>"Persahabatan"</em>).</p>
+          </div>
+          <div class="danger" style="--c:var(--violet);--t:var(--violet-50)">
+            <div class="danger-icon">👻</div>
+            <div class="danger-k">Bahaya laten 03</div>
+            <h3>Halusinasi kredibilitas</h3>
+            <p>AI dapat mengarang nama peneliti, tahun jurnal, dan persentase statistik yang terdengar meyakinkan padahal <strong>100% fiktif</strong>. Wajib verifikasi di Google Scholar / Elicit!</p>
+          </div>
+        </div>
+
+        <div class="process-card">
+          <div class="card-head" style="align-items:center">
+            <h3>🔍 Standar penilaian baru: process-visible writing &amp; ethical clearance</h3>
+            <span class="badge" style="background:rgba(255,255,255,.1);color:#fff">Co-authorship kritis</span>
+          </div>
+          <p class="small mt-8" style="color:#C7C9D4">Guru tidak lagi hanya menilai kerapian teks akhir, melainkan bagaimana siswa mempertanggungjawabkan proses berpikir dan etika subjek manusia (<em>informed consent, kemanfaatan, keadilan</em>):</p>
+          <div class="process">
+            <div class="process-step"><span>01</span>Riwayat draf</div>
+            <div class="process-step"><span>02</span>Log prompt AI</div>
+            <div class="process-step"><span>03</span>Anotasi sumber</div>
+            <div class="process-step"><span>04</span>Deklarasi AI</div>
+            <div class="process-step"><span>05</span>Uji kelayakan etik</div>
+            <div class="process-step is-key"><span>06</span>Ujian lisan</div>
+          </div>
+        </div>
+
+        <div class="card card-tight">
+          <div class="card-head" style="align-items:center">
+            <div>
+              <div class="mini-label" style="color:var(--peach)">Uji pemahaman interaktif</div>
+              <h3 class="h-card mt-4">🎯 Tantangan detektif metodologi &amp; prompt sosiologi</h3>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px">
+              <span id="quizScoreDisplay" class="score-badge">Skor 0 / 5</span>
+              <button type="button" id="resetQuizBtn" class="btn">↺ Ulangi</button>
+            </div>
+          </div>
+          <div id="quizContainer" class="stack-16 mt-20"></div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <b>Cetak Biru Peneliti Sosial Modern di Era Kecerdasan Buatan</b>
+      <span>Modul Pembelajaran Sosiologi Interaktif · navigasi dengan ← → atau menu samping</span>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      let currentSlide = 0;
+      const totalSlides = 8;
+      let isSlideMode = true;
+      let isTeacherNotesVisible = true;
+      let selectedCaseIndex = 0;
+      let selectedMethod = 'kualitatif';
+      let selectedPyramidStage = 0;
+      let selectedPyramidMode = 'kualitatif';
+      let selectedPromptCompareIndex = 0;
+      let simTopic = 'finsta';
+      let simMethod = 'kualitatif';
+      let quizAnswers = {};
+      const $ = (id) => document.getElementById(id);
+
+      const casesData = [
+        {
+          title: 'Fenomena Second Account (Finsta) & Ekspresi Diri Remaja SMA',
+          sollen: 'Media sosial seharusnya menjadi ruang jejaring sosial yang autentik, sehat, dan mendukung keterbukaan komunikasi remaja dengan lingkungan sosialnya.',
+          sein: 'Banyak siswa SMA merasa tertekan oleh standar pencitraan di akun utama (first account), sehingga membuat second account tertutup khusus lingkaran terdekat untuk meluapkan keluh kesah dan identitas asli.',
+          corong: [
+            { level: 'Level 1: Fenomena Makro', text: 'Penggunaan Media Sosial Instagram di Kalangan Remaja Gen Z.' },
+            { level: 'Level 2: Lensa Teoritis', text: 'Teori Dramaturgi Erving Goffman (Panggung Depan / Front Stage vs Panggung Belakang / Back Stage).' },
+            { level: 'Level 3: Kesenjangan Empiris (The Gap)', text: 'Studi sebelumnya fokus pada kecanduan medsos secara umum, belum membedah bagaimana siswa SMA mengelola dua akun berbeda untuk menghindari kontrol sosial teman sebaya dan guru.' },
+            { level: 'Level 4: Judul Spesifik (Output)', text: '"Dramaturgi Ruang Digital: Studi Kasus Pengelolaan Identitas Diri melalui Second Account Instagram pada Siswa SMAN 1 Bandung"' }
+          ]
+        },
+        {
+          title: 'Budaya "Nongkrong" di Coffee Shop Premium & FOMO Pelajar',
+          sollen: 'Perilaku konsumsi pelajar idealnya didasarkan pada kebutuhan fungsional belajar dan kemampuan finansial uang saku secara rasional.',
+          sein: 'Terjadi tren pelajar SMA menghabiskan uang saku di kafe premium demi mengunggah foto/story eksklusif agar diterima dalam pergaulan kelompok sebaya (peer group) akibat kecemasan tertinggal tren (FOMO).',
+          corong: [
+            { level: 'Level 1: Fenomena Makro', text: 'Gaya Hidup Konsumtif Remaja Perkotaan di Era Digital.' },
+            { level: 'Level 2: Lensa Teoritis', text: 'Teori Masyarakat Konsumsi Jean Baudrillard (Konsumsi Nilai Tanda / Sign Value & Konformitas).' },
+            { level: 'Level 3: Kesenjangan Empiris (The Gap)', text: 'Banyak riset meneliti belanja online remaja, namun belum mengukur secara spesifik seberapa besar pengaruh FOMO dan konformitas teman sebaya terhadap frekuensi konsumsi simbolik di coffee shop.' },
+            { level: 'Level 4: Judul Spesifik (Output)', text: '"Pengaruh Fear of Missing Out (FOMO) dan Konformitas Teman Sebaya terhadap Perilaku Konsumsi Simbolik di Coffee Shop pada Siswa SMA di Kota Surabaya"' }
+          ]
+        },
+        {
+          title: 'Echo Chamber Algoritma TikTok & Polarisasi Pemilih Pemula',
+          sollen: 'Ruang digital seharusnya menyediakan informasi publik yang berimbang sehingga pemilih pemula (siswa SMA kelas XII) dapat menilai isu sosial-politik secara kritis dan objektif.',
+          sein: 'Algoritma For You Page (FYP) TikTok mengurung siswa dalam gelembung informasi seragam (echo chamber), memicu fanatisme buta dan pelabelan negatif antar-kelompok pertemanan di sekolah.',
+          corong: [
+            { level: 'Level 1: Fenomena Makro', text: 'Media Sosial dan Partisipasi Politik Generasi Z.' },
+            { level: 'Level 2: Lensa Teoritis', text: 'Konsep Echo Chamber, Ruang Publik Digital, dan Kohesi Sosial.' },
+            { level: 'Level 3: Kesenjangan Empiris (The Gap)', text: 'Riset yang ada menyoroti kampanye politisi di TikTok, tetapi jarang membedah bagaimana algoritma FYP memengaruhi interaksi sosial dan polarisasi obrolan harian antar-siswa di kelas.' },
+            { level: 'Level 4: Judul Spesifik (Output)', text: '"Algoritma dan Polarisasi Teman Sebaya: Studi Fenomenologi Dampak Echo Chamber TikTok terhadap Diskusi Sosial Siswa Kelas XII"' }
+          ]
+        }
+      ];
+
+      const methodsData = {
+        kualitatif: {
+          badge: 'Paradigma Konstruktivisme • Jalur Logika Induktif',
+          title: '🌱 Penelitian Kualitatif (Memahami Makna & Proses Sosial)',
+          colorClass: 'border-emeraldInk bg-emerald-50/70',
+          headerBg: 'bg-emeraldInk text-white',
+          ontologi: 'Realitas sosial bersifat majemuk dan diciptakan secara subjektif oleh individu/kelompok melalui interaksi.',
+          epistemologi: 'Peneliti berinteraksi langsung di dalam konteks untuk menginterpretasikan makna lokal (emic) dari sudut pandang subjek.',
+          alurLogika: [
+            '1. Observasi Lapangan (Melihat keunikan perilaku nyata)',
+            '2. Identifikasi Pola & Makna Subjektif (Koding data wawancara/catatan)',
+            '3. Rumusan Konsep / Proposisi Tentatif',
+            '4. Dialog dengan Teori Sosiologi'
+          ],
+          ciriLatarBelakang: [
+            'Menonjolkan keunikan kasus atau fenomena mendalam yang tidak bisa dijawab sekadar dengan kuesioner angka.',
+            'Menggunakan kata kerja eksploratif: "Memahami bagaimana...", "Menggali makna...", "Mendeskripsikan dinamika/strategi...".',
+            'Menempatkan teori sosiologi sebagai kacamata pemandu (sensitizing concept), bukan rumus kaku yang diuji statistik.'
+          ],
+          contohJudul: '"Strategi Bertahan Hidup dan Solidaritas Sosial Komunitas Pengemudi Ojek Online Perempuan di Kota Bekasi (Studi Kasus Kualitatif)"',
+          kunciPrompt: 'Wajib tulis di prompt: "Gunakan pendekatan KUALITATIF (paradigma konstruktivis). Fokuskan latar belakang pada proses sosial, makna subjektif aktor (emic), dan konteks lokal. JANGAN gunakan istilah pengujian hipotesis statistik atau variabel X terhadap Y."'
+        },
+        kuantitatif: {
+          badge: 'Paradigma Positivisme • Jalur Logika Deduktif',
+          title: '📊 Penelitian Kuantitatif (Mengukur Variabel & Menguji Teori)',
+          colorClass: 'border-blue-900 bg-blue-50/70',
+          headerBg: 'bg-blue-950 text-white',
+          ontologi: 'Terdapat realitas sosial yang objektif, terukur, dan memiliki pola hubungan sebab-akibat (kausalitas) yang pasti.',
+          epistemologi: 'Peneliti menjaga jarak objektif (bebas nilai) dan mengukur fenomena menggunakan instrumen terstandar (angket/kuesioner & uji statistik).',
+          alurLogika: [
+            '1. Teori Sosiologi (Berangkat dari teori umum)',
+            '2. Penurunan Hipotesis (Dugaan hubungan Variabel X → Variabel Y)',
+            '3. Observasi & Pengumpulan Data Numerik (Kuesioner pada sampel)',
+            '4. Konfirmasi / Uji Statistik (Menerima atau menolak hipotesis)'
+          ],
+          ciriLatarBelakang: [
+            'Didukung kuat oleh data angka awal (persentase, tren survei, data BPS) untuk membuktikan besarnya masalah.',
+            'Menjelaskan secara tegas alasan pemilihan Variabel Independen (X) dan Variabel Dependen (Y) berdasarkan riset terdahulu.',
+            'Menggunakan kalimat terukur: "Seberapa besar pengaruh...", "Hubungan antara tingkat X dengan Y...".'
+          ],
+          contohJudul: '"Pengaruh Intensitas Penggunaan TikTok (X1) dan Konformitas Teman Sebaya (X2) terhadap Perilaku Konsumtif Siswa (Y) di SMAN 5 Semarang"',
+          kunciPrompt: 'Wajib tulis di prompt: "Gunakan pendekatan KUANTITATIF (paradigma positivis, logika deduktif). Susun latar belakang yang mengerucut pada hubungan kausalitas antara Variabel X dan Variabel Y, sertakan tempat untuk data statistik, dan turunkan dari teori menuju hipotesis."'
+        },
+        campuran: {
+          badge: 'Paradigma Pragmatisme • Kombinasi Deduktif & Induktif',
+          title: '🔄 Penelitian Campuran / Mixed-Methods (Angka + Cerita Mendalam)',
+          colorClass: 'border-amber-800 bg-amber-50/70',
+          headerBg: 'bg-amber-900 text-white',
+          ontologi: 'Realitas sosial terus dinegosiasikan; memiliki dimensi struktural yang bisa dihitung sekaligus dimensi makna yang harus diselami.',
+          epistemologi: 'Menggabungkan kekuatan survei kuantitatif (untuk melihat gambaran luas) dan wawancara kualitatif (untuk menjelaskan alasan di balik angka).',
+          alurLogika: [
+            '1. Survei Kuantitatif Awal (Memetakan seberapa banyak siswa yang mengalami fenomena)',
+            '2. Seleksi Informan Kunci dari Hasil Survei',
+            '3. Wawancara Mendalam Kualitatif (Menggali mengapa angka tersebut terjadi)',
+            '4. Integrasi Temuan Statistik & Narasi Kontekstual'
+          ],
+          ciriLatarBelakang: [
+            'Menunjukkan bahwa masalah penelitian terlalu kompleks jika hanya dilihat dari satu sisi (angka saja kurang dalam, cerita saja kurang mewakili populasi).',
+            'Menjelaskan alasan mengapa data statistik perlu diperdalam dengan eksplorasi wawancara.'
+          ],
+          contohJudul: '"Tingkat Literasi Digital dan Praktik Verifikasi Berita Hoaks pada Siswa SMA: Studi Mixed-Methods Sekuensial Eksplanatori"',
+          kunciPrompt: 'Wajib tulis di prompt: "Gunakan pendekatan MIXED-METHODS (Pragmatisme). Tunjukkan di latar belakang mengapa kita membutuhkan pengukuran survei (kuantitatif) sekaligus pendalaman makna melalui wawancara (kualitatif)."'
+        }
+      };
+
+      const pyramidStagesData = [
+        {
+          stageNum: 1,
+          title: 'Tahap 1: Konteks Global / Fenomena Makro',
+          subtitle: 'Membuka bahasan dengan perubahan sosial yang relevan (Tanpa Klise!)',
+          goal: 'Mengenalkan lanskap sosiologis dari topik yang dibahas secara langsung dan kontekstual. Hindari kalimat klise seperti "Seiring berkembangnya zaman yang semakin canggih...".',
+          kualitatif: {
+            focus: 'Menyoroti pergeseran cara manusia berinteraksi dan membentuk identitas di ruang sosial baru.',
+            prompt: 'Bertindaklah sebagai sosiolog akademik. Tuliskan Paragraf 1 (Konteks Makro) untuk Latar Belakang penelitian KUALITATIF tentang fenomena Second Account Instagram pada remaja SMA. Fokuskan pada bagaimana ruang digital mengubah cara remaja memisahkan ruang publik dan ruang privat. Hindari kalimat klise seperti "Di era globalisasi saat ini". Maksimal 110 kata.',
+            example: 'Transformasi ruang komunikasi digital telah menggeser cara remaja membangun batas antara kehidupan publik dan ruang privat. Media sosial kini tidak lagi sekadar berfungsi sebagai alat jejaring pertemanan tunggal, melainkan berkembang menjadi arena pertunjukan sosial yang berlapis. Di kalangan pelajar sekolah menengah atas (SMA), muncul kecenderungan membelah kehadiran digital mereka ke dalam dua ruang berbeda: akun utama yang terkurasi secara rapi untuk khalayak luas, serta akun kedua (second account) yang bersifat tertutup dan terbatas bagi lingkaran intim.'
+          },
+          kuantitatif: {
+            focus: 'Menyoroti skala penetrasi fenomena secara makro dan kaitannya dengan variabel perilaku sosial remaja.',
+            prompt: 'Bertindaklah sebagai peneliti sosiologi kuantitatif. Tuliskan Paragraf 1 (Konteks Makro) untuk Latar Belakang penelitian KUANTITATIF tentang pengaruh FOMO (Fear of Missing Out) terhadap perilaku konsumtif nongkrong di coffee shop pada siswa SMA. Buka dengan fenomena pergeseran fungsi ruang konsumsi remaja perkotaan secara terukur. Hindari kalimat klise. Maksimal 110 kata.',
+            example: 'Pertumbuhan industri kedai kopi (coffee shop) modern di wilayah perkotaan telah mengubah pola konsumsi dan pemanfaatan waktu luang remaja usia sekolah. Ruang konsumsi komersial kini bertransformasi menjadi penanda status sosial dan arena aktualisasi gaya hidup bagi kelompok sebaya (peer group). Tingginya intensitas paparan konten gaya hidup di media sosial turut mendorong keterikatan psikologis-sosial berupa kecemasan tertinggal tren atau Fear of Missing Out (FOMO), yang berpotensi meningkatkan frekuensi pengeluaran konsumtif di kalangan pelajar SMA.'
+          }
+        },
+        {
+          stageNum: 2,
+          title: 'Tahap 2: Urgensi & Bukti Data (Das Sollen vs Das Sein)',
+          subtitle: 'Membenturkan harapan ideal dengan fakta lapangan agar masalah terlihat tajam',
+          goal: 'Menunjukkan mengapa topik ini merupakan masalah sosiologis yang mendesak dengan mempertentangkan Das Sollen (kondisi ideal) dan Das Sein (fakta empiris/data lapangan).',
+          kualitatif: {
+            focus: 'Menampilkan paradoks atau kontradiksi perilaku nyata yang ditemukan saat observasi awal di lokasi penelitian.',
+            prompt: 'Tuliskan Paragraf 2 (Urgensi: Das Sollen vs Das Sein) untuk riset KUALITATIF studi kasus tentang Second Account siswa SMAN 1 Bandung. Das Sollen: ruang pertemanan sekolah dan medsos seharusnya menjadi wadah ekspresi diri yang jujur dan suportif. Das Sein (fakta observasi awal): siswa justru merasa diawasi dan takut dihakimi di akun utama, sehingga membuat akun kedua untuk mengeluh dan tampil apa adanya.',
+            example: 'Secara ideal (Das Sollen), lingkungan pertemanan sebaya dan jejaring media sosial diharapkan menjadi ruang sosial yang inklusif, tempat remaja dapat mengekspresikan identitas diri secara autentik tanpa tekanan penghakiman. Namun, pengamatan awal di SMAN 1 Bandung menunjukkan realitas empiris (Das Sein) yang kontradiktif. Alih-alih merasa bebas, banyak siswa mengalami kecemasan akibat pengawasan sosial (social surveillance) dari rekan sekolah, senior, hingga guru di akun utama. Akibatnya, siswa membangun second account sebagai mekanisme pelarian untuk mengekspresikan emosi jujur yang tidak berani mereka tampilkan di panggung terbuka.'
+          },
+          kuantitatif: {
+            focus: 'Menampilkan ketimpangan antara norma konsumsi rasional pelajar dengan data angka/persentase tren lapangan.',
+            prompt: 'Tuliskan Paragraf 2 (Urgensi: Das Sollen vs Das Sein) untuk riset KUANTITATIF tentang pengaruh FOMO (X) terhadap perilaku konsumtif di coffee shop (Y) pada siswa SMA. Das Sollen: pelajar mengalokasikan uang saku secara rasional untuk kebutuhan pendidikan. Das Sein: masukkan placeholder data survei awal [misal: survei pra-riset pada 40 siswa menunjukkan 68% mengunjungi coffee shop >3x seminggu demi unggahan media sosial].',
+            example: 'Dalam perspektif sosial-ekonomi pelajar (Das Sollen), pengelolaan uang saku siswa SMA idealnya diprioritaskan pada pemenuhan kebutuhan fungsional akademik dan tabungan. Akan tetapi, fakta empiris di lapangan (Das Sein) memperlihatkan tingginya alokasi pengeluaran pelajar untuk konsumsi simbolik. Berdasarkan penjajakan pra-penelitian terhadap 40 siswa di SMAN 5 Surabaya, tercatat 68% responden mengunjungi coffee shop premium minimal tiga kali seminggu dengan pengeluaran rata-rata 45% dari total uang saku mingguan, di mana mayoritas mengakui dorongan utamanya adalah kekhawatiran tertinggal tren pergaulan (FOMO).'
+          }
+        },
+        {
+          stageNum: 3,
+          title: 'Tahap 3: Kesenjangan Penelitian (Research Gap)',
+          subtitle: 'Menyintesis penelitian terdahulu & menunjukkan apa yang belum terjawab',
+          goal: 'Membuktikan bahwa penelitianmu tidak mengulang penelitian orang lain. Gunakan teknik Sintesis Terpadu (bukan rangkuman satu-satu) untuk memperlihatkan celah yang belum diteliti.',
+          kualitatif: {
+            focus: 'Menunjukkan celah konteks sosial, subjek spesifik, atau kedalaman makna lokal yang belum disentuh studi terdahulu.',
+            prompt: 'Bantu saya menyusun Paragraf 3 (Sintesis Literatur & Research Gap) untuk riset KUALITATIF tentang Second Account siswa SMA. Gunakan gaya sintesis terpadu (JANGAN mengarang nama jurnal fiktif, gunakan penanda [Sitasi Studi A, Tahun] yang nantinya saya isi dari Elicit/Google Scholar). Tunjukkan bahwa studi sebelumnya banyak meneliti dampak kecanduan medsos secara psikologis, namun masih jarang yang membedah strategi negosiasi identitas siswa di antara dua akun dalam konteks budaya sekolah.',
+            example: 'Kajian literatur terdahulu mengenai media sosial dan remaja umumnya terfokus pada dampak adiksi gawai terhadap prestasi belajar serta kesehatan mental secara makro [Sitasi Studi A; Sitasi Studi B]. Beberapa penelitian lain telah menyoroti fenomena pencitraan diri di Instagram [Sitasi Studi C], tetapi masih memperlakukan pengguna sebagai pemilik akun tunggal. Hingga saat ini, masih terdapat kesenjangan kajian sosiologis yang secara mendalam membedah bagaimana remaja SMA secara aktif berpindah peran antara akun utama dan second account sebagai strategi negosiasi identitas di tengah norma pengawasan teman sebaya di sekolah.'
+          },
+          kuantitatif: {
+            focus: 'Menunjukkan celah variabel, inkonsistensi temuan sebelumnya, atau belum diujinya kombinasi variabel X1 dan X2 pada populasi siswa SMA.',
+            prompt: 'Susun Paragraf 3 (Sintesis Literatur & Research Gap) untuk riset KUANTITATIF pengaruh FOMO (X1) dan Konformitas Teman Sebaya (X2) terhadap Konsumsi Simbolik di Coffee Shop (Y). Gunakan penanda [Sitasi, Tahun] tanpa mengarang jurnal palsu. Tunjukkan bahwa riset terdahulu meneliti belanja online pada mahasiswa, namun belum menguji pengaruh simultan FOMO dan konformitas terhadap konsumsi ruang fisik (coffee shop) pada populasi siswa SMA.',
+            example: 'Berbagai penelitian sebelumnya telah mengonfirmasi bahwa literasi keuangan dan gaya hidup berpengaruh terhadap perilaku konsumtif remaja di platform belanja daring [Sitasi Studi A; Sitasi Studi B]. Sementara itu, studi lain menunjukkan bahwa Fear of Missing Out (FOMO) berkorelasi dengan intensitas penggunaan media sosial [Sitasi Studi C]. Meskipun demikian, penelitian yang secara spesifik menguji pengaruh simultan antara tingkat FOMO (X1) dan konformitas teman sebaya (X2) terhadap perilaku konsumsi simbolik di ruang fisik seperti coffee shop (Y) pada populasi siswa SMA masih sangat terbatas.'
+          }
+        },
+        {
+          stageNum: 4,
+          title: 'Tahap 4: Konteks Teoritis Sosiologi (Pisau Analisis)',
+          subtitle: 'Memasukkan konsep & teori sosiologi untuk membedah masalah',
+          goal: 'Menjelaskan mengapa teori sosiologi tertentu tepat digunakan untuk menganalisis fenomena di atas (membedakan karya tulis sosiologi dari esai opini biasa).',
+          kualitatif: {
+            focus: 'Menghubungkan konsep teoretis (misal Front Stage & Back Stage Goffman) sebagai kacamata pembaca makna tindakan aktor.',
+            prompt: 'Tuliskan Paragraf 4 (Konteks Teoritis) untuk riset KUALITATIF Second Account siswa SMA menggunakan Teori Dramaturgi dari Erving Goffman. Jelaskan secara ringkas konsep Front Stage (Panggung Depan) dan Back Stage (Panggung Belakang) serta bagaimana kedua konsep itu membedah perbedaan perilaku siswa di akun utama vs second account.',
+            example: 'Untuk membedah fenomena pembelahan ruang digital tersebut, penelitian ini menggunakan lensa Teori Dramaturgi yang digagas oleh Erving Goffman. Dalam perspektif dramaturgi, interaksi sosial diibaratkan sebagai pertunjukan teater yang terbagi menjadi panggung depan (front stage) dan panggung belakang (back stage). Akun Instagram utama berfungsi sebagai front stage, tempat siswa melakukan pengelolaan kesan (impression management) sesuai ekspektasi norma sekolah. Sebaliknya, second account menjadi ruang back stage digital, di mana siswa dapat menanggalkan atribut pencitraan formal dan mengekspresikan realitas subjektif mereka bersama penonton terpilih.'
+          },
+          kuantitatif: {
+            focus: 'Menurunkan teori sosiologi (misal Masyarakat Konsumsi Baudrillard & Kelompok Acuan) menjadi kerangka hubungan antar-variabel.',
+            prompt: 'Tuliskan Paragraf 4 (Konteks Teoritis) untuk riset KUANTITATIF pengaruh FOMO dan Konformitas terhadap Konsumsi Simbolik di Coffee Shop. Gunakan Teori Masyarakat Konsumsi Jean Baudrillard (nilai tanda/sign value) dan konsep Konformitas Kelompok Sebaya untuk menjelaskan mengapa Variabel X1 dan X2 diduga kuat memengaruhi Variabel Y.',
+            example: 'Kerangka analisis penelitian ini berpijak pada Teori Masyarakat Konsumsi dari Jean Baudrillard serta konsep konformitas kelompok acuan (reference group). Baudrillard menegaskan bahwa konsumsi masyarakat modern tidak lagi didorong oleh nilai guna (use value) suatu barang, melainkan oleh nilai tanda (sign value) dan simbol status yang melekat padanya. Ketika remaja mengalami FOMO yang tinggi dan berada dalam tekanan konformitas kelompok sebaya yang kuat, aktivitas mengonsumsi kopi di gerai premium beralih fungsi menjadi instrumen validasi status sosial agar individu tidak mengalami eksklusi dari lingkaran pergaulannya.'
+          }
+        },
+        {
+          stageNum: 5,
+          title: 'Tahap 5: Tujuan Studi & Pernyataan Kebaruan (Novelty)',
+          subtitle: 'Menutup Latar Belakang dengan kalimat tegas yang mengunci arah riset',
+          goal: 'Menyatakan secara eksplisit tujuan penelitian, metode singkat, lokasi, dan kontribusi penelitian sebagai jembatan langsung menuju Rumusan Masalah.',
+          kualitatif: {
+            focus: 'Pernyataan tegas untuk menggali/memahami proses dan makna mendalam pada subjek penelitian.',
+            prompt: 'Tuliskan Paragraf 5 (Penutup Latar Belakang & Tujuan Studi) untuk penelitian KUALITATIF studi kasus Dramaturgi Second Account Instagram pada siswa SMAN 1 Bandung. Gunakan kalimat penghubung tegas "Berdasarkan kesenjangan dan urgensi tersebut, penelitian ini bertujuan untuk..."',
+            example: 'Berdasarkan kesenjangan empiris dan urgensi sosiologis tersebut, penelitian kualitatif dengan pendekatan studi kasus ini bertujuan untuk memahami secara mendalam bagaimana siswa SMAN 1 Bandung mengonstruksi dan menegosiasikan identitas diri mereka melalui pengelolaan second account Instagram. Secara khusus, studi ini hendak mengungkap motif sosial di balik pemisahan panggung digital serta implikasinya terhadap pola solidaritas dan eksklusi pertemanan sebaya di lingkungan sekolah.'
+          },
+          kuantitatif: {
+            focus: 'Pernyataan tegas untuk menguji dan mengukur besaran pengaruh antar-variabel secara empiris.',
+            prompt: 'Tuliskan Paragraf 5 (Penutup Latar Belakang & Tujuan Studi) untuk penelitian KUANTITATIF survei eksplanatif tentang pengaruh FOMO (X1) dan Konformitas Teman Sebaya (X2) terhadap Perilaku Konsumsi Simbolik di Coffee Shop (Y) pada siswa SMAN 5 Surabaya.',
+            example: 'Bertolak dari pemaparan data dan celah penelitian di atas, studi kuantitatif dengan metode survei eksplanatif ini bertujuan untuk menguji dan mengukur secara empiris seberapa besar pengaruh Fear of Missing Out (FOMO) dan konformitas teman sebaya, baik secara parsial maupun simultan, terhadap perilaku konsumsi simbolik di coffee shop pada siswa SMAN 5 Surabaya. Temuan penelitian ini diharapkan dapat memberikan kontribusi empiris bagi pengembangan literasi konsumsi kritis di kalangan remaja perkotaan.'
+          }
+        }
+      ];
+
+      const promptComparisonsData = [
+        {
+          category: 'Kasus A: Menyusun Latar Belakang Kualitatif',
+          badPrompt: 'Tolong buatkan latar belakang sosiologi tentang fenomena remaja zaman sekarang yang suka pakai second account di Instagram biar bagus dan lengkap.',
+          whyBad: [
+            'Kata "biar bagus dan lengkap" sangat subjektif—AI tidak tahu panjang, struktur, atau kedalaman akademik yang diminta.',
+            'Tidak menyebutkan metode (Kualitatif), sehingga AI rawan mencampur istilah variabel statistik dengan esai populer.',
+            'Tidak ada fakta lapangan (Das Sein) dan tidak ada pisau teori sosiologi.'
+          ],
+          goodPrompt: 'Bertindaklah sebagai sosiolog akademik. Bantu saya menyusun kerangka Latar Belakang penelitian KUALITATIF (Studi Kasus) dengan pola Piramida Terbalik tentang "Pengelolaan Identitas Diri Siswa SMAN 1 Bandung melalui Second Account Instagram". Fakta lapangan (Das Sein): siswa merasa tertekan oleh pengawasan teman/guru di akun utama sehingga membuat akun kedua khusus sahabat dekat. Gunakan Teori Dramaturgi Erving Goffman (Front Stage vs Back Stage). Jangan mengarang kutipan fiktif dan hindari pembuka klise "Di era globalisasi".',
+          whyGood: [
+            'Mengunci peran AI (sosiolog akademik) dan metode spesifik (Kualitatif - Studi Kasus).',
+            'Memberikan struktur Piramida Terbalik dan menyuplai fakta Das Sein nyata dari sekolah.',
+            'Menentukan pisau analisis (Dramaturgi Goffman) dan memberi pagar larangan halusinasi.'
+          ]
+        },
+        {
+          category: 'Kasus B: Menyusun Latar Belakang Kuantitatif',
+          badPrompt: 'Buatkan bab 1 latar belakang tentang anak SMA yang suka nongkrong di kafe mahal karena ikut-ikutan teman.',
+          whyBad: [
+            'Istilah "ikut-ikutan teman" dan "suka nongkrong" belum diterjemahkan menjadi konsep/variabel sosiologi yang terukur.',
+            'AI tidak tahu apakah ini riset survei kuantitatif atau cerita observasi biasa.',
+            'Meminta langsung "bab 1" membuat AI menulis bertele-tele dan dangkal.'
+          ],
+          goodPrompt: 'Bertindaklah sebagai peneliti sosiologi kuantitatif (paradigma positivis, logika deduktif). Tuliskan draf Paragraf 1 (Konteks Makro) dan Paragraf 2 (Das Sollen vs Das Sein) untuk Latar Belakang penelitian berjudul "Pengaruh Konformitas Teman Sebaya (X1) dan FOMO (X2) terhadap Perilaku Konsumsi Simbolik di Coffee Shop (Y) pada Siswa SMA". Sertakan penanda [Isi Data Survei Pra-Riset] pada bagian bukti empiris tanpa mengarang angka palsu.',
+          whyGood: [
+            'Menyebutkan secara eksplisit Variabel X1, X2, dan Y sehingga alur logika deduktif AI langsung terkunci.',
+            'Fokus hanya pada Paragraf 1 dan 2 sehingga hasilnya padat dan mendalam.',
+            'Menggunakan placeholder [Isi Data Survei] agar AI tidak mengarang persentase bohong.'
+          ]
+        },
+        {
+          category: 'Kasus C: Mencari Research Gap & Sintesis Literatur',
+          badPrompt: 'Carikan 5 jurnal sosiologi terbaru tentang dampak TikTok beserta kutipan dan daftar pustakanya untuk latar belakang saya.',
+          whyBad: [
+            'SANGAT BERBAHAYA! Meminta LLM biasa (tanpa akses database jurnal langsung) mencarikan kutipan & daftar pustaka sering memicu HALUSINASI (mengarang judul jurnal dan tahun palsu).',
+            'Hasilnya biasanya berupa rangkuman serial (Jurnal 1 membahas A, Jurnal 2 membahas B) yang terpotong-potong.'
+          ],
+          goodPrompt: 'Berikut adalah 3 ringkasan artikel jurnal asli yang sudah saya temukan dari Google Scholar/Elicit: [Tempel Abstrak 1], [Tempel Abstrak 2], [Tempel Abstrak 3]. Tolong sintesiskan ketiga temuan tersebut ke dalam 1 paragraf terpadu (bukan dirangkum satu per satu) untuk menunjukkan pola persamaan dan celah penelitian (Research Gap) yang belum membahas polarisasi obrolan siswa di ruang kelas.',
+          whyGood: [
+            'Siswa menyuplai abstrak jurnal asli hasil pencarian sendiri, sehingga 0% risiko halusinasi sitasi palsu.',
+            'Meminta "sintesis terpadu" untuk menemukan benang merah dan Research Gap secara kritis.'
+          ]
+        },
+        {
+          category: 'Kasus D: Menjaga Makna Lokal (Anti-Flattening)',
+          badPrompt: 'Perbaiki catatan wawancara saya dengan tukang ojek pangkalan ini supaya bahasanya jadi bahasa ilmiah yang keren.',
+          whyBad: [
+            'AI akan melakukan Flattening (penyeragaman makna): menghapus istilah lokal/khas komunitas (emic) dan menggantinya menjadi bahasa kamus yang kaku dan kehilangan ruh sosiologisnya.'
+          ],
+          goodPrompt: 'Bantu saya merapikan tata bahasa paragraf latar belakang kualitatif ini tanpa mengubah atau menghapus istilah lokal (emic) dari komunitas ojek pangkalan seperti "setoran batin", "jaga batas pangkalan", dan "solidaritas tameng". Pertahankan istilah lokal tersebut dalam tanda kutip, lalu bantu jelaskan relevansinya dengan konsep Solidaritas Mekanik Emile Durkheim.',
+          whyGood: [
+            'Melindungi keberagaman makna lokal (emic diversity) agar tidak diratakan oleh algoritma AI.',
+            'Mengawinkan istilah asli lapangan dengan konsep sosiologi klasik secara harmonis.'
+          ]
+        }
+      ];
+
+      const simulationDatabase = {
+        finsta: {
+          kualitatif: {
+            badPrompt: '"Buatkan latar belakang penelitian sosiologi tentang siswa SMA yang punya second account Instagram."',
+            badOutput: '<p><mark class="hl-bad" title="Pembuka Klise">Seiring dengan perkembangan zaman dan kemajuan teknologi di era globalisasi 4.0 saat ini</mark>, manusia tidak bisa lepas dari internet. Salah satu aplikasi yang paling populer adalah Instagram. Semua kalangan mulai dari anak-anak hingga dewasa menggunakan Instagram setiap hari.</p><p>Menurut penelitian <mark class="hl-bad" title="Halusinasi Sitasi Fiktif!">Prof. Dr. Hendra Wijaya (2023) dalam Jurnal Sosiologi Indonesia</mark>, sebanyak <mark class="hl-bad" title="Angka Karangan AI">87,4% siswa SMA di Indonesia</mark> mengalami gangguan kepribadian ganda karena memiliki second account. Oleh karena itu peneliti ingin <mark class="hl-bad" title="Campur Aduk Metode Kuantitatif!">menguji pengaruh signifikan variabel second account terhadap kesehatan mental siswa</mark>.</p>',
+            badDiagnosis: [
+              'Menggunakan pembuka klise "Seiring perkembangan zaman di era globalisasi 4.0" yang tidak fokus.',
+              'HALUSINASI BERAT: Mengarang nama peneliti ("Prof. Dr. Hendra Wijaya, 2023") dan persentase fiktif (87,4%).',
+              'Gagal memahami metode: Siswa ingin meneliti Kualitatif, tapi AI menulis "menguji pengaruh signifikan variabel" (gaya Kuantitatif) dan melenceng ke psikologi klinis (kepribadian ganda).'
+            ],
+            goodPrompt: '"Bertindaklah sebagai sosiolog akademik. Susun draf ringkas Latar Belakang (Tahap 1 Makro, Tahap 2 Das Sollen vs Das Sein, dan Tahap 4 Lensa Teori) untuk riset KUALITATIF Studi Kasus tentang pengelolaan identitas siswa SMA melalui Second Account Instagram. Fakta lapangan: siswa membuat akun kedua yang dikunci rapat untuk menghindari pengawasan guru/teman di akun utama. Gunakan Teori Dramaturgi Erving Goffman (Front Stage vs Back Stage). Dilarang mengarang sitasi/statistik fiktif dan hindari pembuka klise."',
+            goodOutput: '<p><mark class="hl-good">Transformasi media sosial telah melahirkan pembelahan ruang interaksi di kalangan remaja SMA</mark> antara ruang publik yang terkurasi dan ruang privat yang eksklusif. Idealnya (<em>Das Sollen</em>), jejaring sosial menjadi wadah ekspresi diri remaja yang autentik. Namun, pengamatan empiris di lingkungan sekolah (<em>Das Sein</em>) memperlihatkan bahwa tingginya pengawasan sosial (<em>social surveillance</em>) dari rekan sebaya dan guru pada akun utama mendorong siswa membangun <em>second account</em> tertutup sebagai ruang aman untuk mengekspresikan keluh kesah keseharian.</p><p>Dalam kacamata <mark class="hl-good">Teori Dramaturgi Erving Goffman</mark>, praktik ini merepresentasikan pemisahan tegas antara <em>front stage</em> (panggung depan) pada akun utama yang penuh pengelolaan kesan (<em>impression management</em>), dengan <em>back stage</em> (panggung belakang) pada <em>second account</em>. Penelitian kualitatif studi kasus ini berfokus menggali bagaimana siswa menegosiasikan kedua panggung digital tersebut dalam menjaga penerimaan sosial di sekolah.</p>',
+            goodDiagnosis: [
+              'Langsung masuk ke substansi sosiologis tanpa kalimat pembuka klise.',
+              'Mempertentangkan Das Sollen (harapan ekspresi autentik) dan Das Sein (tekanan pengawasan sosial di sekolah) secara tajam.',
+              'Konsisten menggunakan kosakata Kualitatif (menggali makna, negosiasi identitas, studi kasus) dan mengintegrasikan konsep Front Stage vs Back Stage Goffman tanpa mengarang kutipan palsu.'
+            ]
+          },
+          kuantitatif: {
+            badPrompt: '"Buatkan latar belakang kuantitatif tentang pengaruh second account Instagram pada siswa SMA."',
+            badOutput: '<p><mark class="hl-bad">Di zaman modern ini media sosial sangat penting bagi kehidupan manusia.</mark> Instagram adalah aplikasi berbagi foto yang didirikan oleh Kevin Systrom pada tahun 2010. Banyak remaja menggunakan fitur second account untuk curhat.</p><p>Second account memiliki dampak positif dan dampak negatif bagi siswa. <mark class="hl-bad">Peneliti tertarik untuk memahami makna terdalam di balik cerita hidup siswa</mark> yang memakai second account dengan menyebarkan kuesioner kepada siswa.</p>',
+            badDiagnosis: [
+              'Membahas sejarah pendiri Instagram (Kevin Systrom, 2010) yang sama sekali tidak relevan dengan masalah sosiologi.',
+              'Variabel X dan Variabel Y tidak jelas (pengaruh terhadap apa?).',
+              'Tabrakan metodologi: menulis "memahami makna terdalam cerita hidup" (khas fenomenologi kualitatif) tetapi instrumennya kuesioner kuantitatif.'
+            ],
+            goodPrompt: '"Bertindaklah sebagai peneliti sosiologi kuantitatif (logika deduktif). Susun draf Latar Belakang untuk menguji Pengaruh Tingkat Pengawasan Sosial Teman Sebaya (X1) dan Kecemasan Penilaian Sosial (X2) terhadap Intensitas Pengungkapan Diri (Self-Disclosure) di Second Account Instagram (Y) pada Siswa SMA. Sertakan pertentangan Das Sollen vs Das Sein, placeholder [Data Survei Awal], dan kerangka teori Pengelolaan Kesan. Hindari sejarah aplikasi dan jangan mengarang sitasi."',
+            goodOutput: '<p>Intensitas pengungkapan diri (<em>self-disclosure</em>) remaja di ruang digital sangat dipengaruhi oleh struktur kontrol sosial di sekitarnya. Secara normatif (<em>Das Sollen</em>), interaksi daring diharapkan mendukung keterbukaan komunikasi yang setara. Akan tetapi, data penjajakan awal (<em>Das Sein</em>) pada <mark class="hl-good">[Isi Jumlah Responden Pra-Survei] siswa SMA menunjukkan bahwa [X]% responden</mark> justru membatasi keterbukaan di akun utama dan mengalihkan pengungkapan emosi pribadi secara intensif ke <em>second account</em>.</p><p>Merujuk pada perspektif kontrol sosial dan pengelolaan kesan, tingginya tingkat pengawasan teman sebaya (Variabel X1) serta kecemasan akan penilaian sosial negatif (Variabel X2) diduga kuat mendorong peningkatan intensitas pengungkapan diri di ruang terbatas <em>second account</em> (Variabel Y). <mark class="hl-good">Penelitian kuantitatif eksplanatif ini bertujuan mengukur besaran pengaruh parsial dan simultan X1 dan X2 terhadap Y</mark> pada populasi siswa SMA.</p>',
+            goodDiagnosis: [
+              'Alur logika deduktif sangat rapi: berangkat dari fenomena terukur menuju hubungan kausalitas Variabel X1, X2, dan Y.',
+              'Menyediakan slot terstruktur [Isi Jumlah Responden Pra-Survei] sehingga siswa terdorong memasukkan data observasi asli, bukan angka karangan AI.',
+              'Kalimat tujuan langsung mengunci metode kuantitatif eksplanatif (mengukur pengaruh parsial dan simultan).'
+            ]
+          }
+        },
+        nongkrong: {
+          kualitatif: {
+            badPrompt: '"Buatkan latar belakang tentang anak SMA yang suka nongkrong di coffee shop biar kelihatan keren."',
+            badOutput: '<p><mark class="hl-bad">Kopi adalah minuman yang berasal dari biji kopi yang diseduh dengan air panas.</mark> Saat ini banyak sekali kedai kopi menjamur di berbagai sudut kota. Anak-anak SMA sering terlihat duduk berjam-jam di kafe sambil bermain HP.</p><p><mark class="hl-bad">Hal ini sangat buruk karena membuat siswa menjadi boros dan durhaka kepada orang tua</mark> yang sudah susah payah mencari uang. Oleh sebab itu peneliti ingin meneliti masalah ini.</p>',
+            badDiagnosis: [
+              'Membuka dengan definisi kamus tentang air seduhan biji kopi yang tidak bernilai sosiologis.',
+              'Menggunakan penghakiman moral subjektif ("durhaka kepada orang tua"), padahal sosiologi menuntut analisis empiris terhadap makna tindakan sosial.',
+              'Sama sekali tidak memiliki kerangka teori sosiologi maupun fokus metode kualitatif.'
+            ],
+            goodPrompt: '"Bertindaklah sebagai sosiolog akademik. Susun draf Latar Belakang KUALITATIF (pendekatan Etnografi/Studi Kasus) tentang makna simbolik tradisi nongkrong di coffee shop premium bagi kelompok sebaya (peer group) siswa SMA. Das Sein: siswa rela menabung uang jajan demi membeli kopi berlogo tertentu untuk diunggah ke media sosial sebagai simbol keanggotaan geng. Gunakan Teori Masyarakat Konsumsi Jean Baudrillard (nilai tanda) dan konsep Modal Simbolik Pierre Bourdieu. Bebas penghakiman moral dan tanpa sitasi fiktif."',
+            goodOutput: '<p>Bagi remaja perkotaan, ruang konsumsi komersial seperti <em>coffee shop</em> premium telah bertransformasi dari sekadar tempat pemenuhan kebutuhan biologis menjadi arena pertukaran simbol dan pembentukan identitas kelompok. Meskipun secara ekonomi (<em>Das Sollen</em>) pelajar masih bergantung pada uang saku orang tua, realitas lapangan (<em>Das Sein</em>) menunjukkan bahwa sebagian siswa SMA rela melakukan penghematan ekstrem pada kebutuhan harian demi dapat hadir dan mengunggah atribut merek kopi tertentu bersama kelompok sebayanya.</p><p>Melalui lensa <mark class="hl-good">Masyarakat Konsumsi Jean Baudrillard dan Modal Simbolik Pierre Bourdieu</mark>, secangkir kopi bermerek tidak lagi dikonsumsi karena nilai gunanya (<em>use value</em>), melainkan karena nilai tanda (<em>sign value</em>) yang memberikan prestise dan pengakuan keanggotaan di dalam <em>peer group</em>. Penelitian kualitatif ini berfokus menggali bagaimana siswa memaknai praktik "nongkrong" sebagai mekanisme inklusi dan eksklusi sosial di sekolah.</p>',
+            goodDiagnosis: [
+              'Objektif dan analitis: mengubah pandangan awam "anak boros" menjadi analisis sosiologis tentang "konsumsi nilai tanda dan mekanisme inklusi peer group".',
+              'Mengintegrasikan teori Baudrillard dan Bourdieu secara mulus untuk mendukung pencarian makna subjektif (kualitatif).'
+            ]
+          },
+          kuantitatif: {
+            badPrompt: '"Buatkan latar belakang kuantitatif tentang pengaruh nongkrong di kafe terhadap uang jajan siswa."',
+            badOutput: '<p>Banyak siswa SMA sekarang suka nongkrong di kafe sepulang sekolah. <mark class="hl-bad">Menurut data Kementerian Pemuda (2024), 92,3% remaja Indonesia menghabiskan seluruh uang jajannya untuk membeli kopi susu.</mark></p><p>Oleh karena itu, penelitian ini akan <mark class="hl-bad">mewawancarai secara mendalam 5 orang siswa</mark> untuk menghitung regresi linier pengaruh kafe terhadap uang jajan.</p>',
+            badDiagnosis: [
+              'HALUSINASI FAKTA: Mengarang data fiktif "Kementerian Pemuda (2024) sebesar 92,3%".',
+              'Kekacauan metodologi fatal: Ingin menghitung "regresi linier" (statistik kuantitatif) tetapi sampelnya hanya "mewawancarai 5 orang siswa" (kualitatif).'
+            ],
+            goodPrompt: '"Bertindaklah sebagai peneliti sosiologi kuantitatif. Susun draf Latar Belakang survei eksplanatif tentang Pengaruh Fear of Missing Out / FOMO (X1) dan Konformitas Teman Sebaya (X2) terhadap Perilaku Konsumtif di Coffee Shop (Y) pada Siswa SMA. Tunjukkan kesenjangan Das Sollen vs Das Sein, beri placeholder [Data Pra-Survei] tanpa mengarang statistik palsu, dan gunakan landasan teori Kelompok Acuan (Reference Group)."',
+            goodOutput: '<p>Perilaku konsumsi remaja usia sekolah idealnya (<em>Das Sollen</em>) diarahkan pada pemenuhan kebutuhan akademik secara terencana. Namun, observasi pra-penelitian (<em>Das Sein</em>) di <mark class="hl-good">[Nama Sekolah] memperlihatkan tren peningkatan frekuensi kunjungan siswa ke <em>coffee shop</em> premium hingga [X] kali per minggu</mark>, yang didorong oleh keinginan mengikuti tren unggahan rekan sebaya di media sosial.</p><p>Dalam kerangka teori Kelompok Acuan (<em>Reference Group</em>), tekanan untuk menyesuaikan diri dengan standar kelompok atau konformitas teman sebaya (Variabel X2) yang berpadu dengan kecemasan tertinggal tren/FOMO (Variabel X1) berpotensi memicu perilaku konsumtif (Variabel Y). <mark class="hl-good">Penelitian kuantitatif melalui instrumen kuesioner terstruktur ini bertujuan menguji signifikansi pengaruh X1 dan X2 terhadap Y</mark> secara statistik.</p>',
+            goodDiagnosis: [
+              'Bebas halusinasi statistik dan konsisten antara rumusan variabel (X1, X2, Y) dengan metode kuesioner terstruktur.'
+            ]
+          }
+        },
+        ojol: {
+          kualitatif: {
+            badPrompt: '"Buatkan latar belakang sosiologi tentang komunitas ojek online di pinggir jalan."',
+            badOutput: '<p>Transportasi merupakan kebutuhan pokok manusia untuk berpindah dari satu tempat ke tempat lain. Sejak zaman dahulu manusia menggunakan kuda, lalu sepeda motor, dan sekarang aplikasi ojek online.</p><p><mark class="hl-bad">Para pengemudi ojek online sering berkumpul di pinggir jalan karena mereka berteman baik dan suka mengobrol sambil menunggu penumpang.</mark></p>',
+            badDiagnosis: [
+              'Membuka dengan sejarah kuda dan sepeda motor yang membuang-buang paragraf.',
+              'Melakukan Flattening (pendangkalan makna): mereduksi solidaritas hidup-mati komunitas ojol menjadi sekadar "berteman baik dan suka mengobrol".'
+            ],
+            goodPrompt: '"Bertindaklah sebagai sosiolog akademik. Susun draf Latar Belakang KUALITATIF tentang Solidaritas Sosial Komunitas Pengemudi Ojek Online (Ojol) di Tengah Sistem Kerja Algoritmik. Pertahankan istilah lokal (emic) lapangan seperti \'kopdar pangkalan\', \'dana darurat laka\', dan \'solidaritas aspal\'. Gunakan konsep Solidaritas Sosial Emile Durkheim dan Alienasi Kerja untuk membedah mengapa mereka membentuk komunitas fisik di tengah sistem aplikasi individual. Tanpa sitasi fiktif."',
+            goodOutput: '<p>Sistem ekonomi gig (<em>gig economy</em>) berbasis algoritma menempatkan pengemudi ojek daring sebagai mitra individual yang saling berkompetisi memperebutkan pesanan tanpa jaminan perlindungan kerja formal (<em>Das Sein</em>), jauh dari harapan ideal kerja layak yang terlindungi (<em>Das Sollen</em>). Di tengah individualisasi algoritmik tersebut, para pengemudi justru membangun basis kolektif di ruang fisik melalui pembentukan komunitas lokal.</p><p>Alih-alih sekadar tempat bersantai, praktik lokal seperti <mark class="hl-good">"kopdar pangkalan", iuran "dana darurat laka", dan ikatan "solidaritas aspal"</mark> merupakan mekanisme perlindungan sosial mandiri ketika terjadi kecelakaan atau suspend akun. Menggunakan kacamata <mark class="hl-good">Solidaritas Sosial Emile Durkheim</mark>, riset kualitatif ini menggali bagaimana pengemudi mentransformasikan keterasingan kerja algoritmik menjadi solidaritas komunal yang organik.</p>',
+            goodDiagnosis: [
+              'Berhasil mempertahankan kekayaan makna lokal (emic diversity: "kopdar pangkalan", "dana darurat laka", "solidaritas aspal") tanpa diratakan menjadi istilah generik.',
+              'Mempertemukan realitas algoritma modern dengan teori klasik Durkheim secara tajam.'
+            ]
+          },
+          kuantitatif: {
+            badPrompt: '"Buatkan latar belakang kuantitatif tentang pendapatan ojek online dan komunitasnya."',
+            badOutput: '<p>Ojek online sangat membantu masyarakat Indonesia. Banyak pengemudi ojek online yang pendapatannya naik turun setiap hari tergantung cuaca dan jam sibuk.</p><p>Penelitian ini ingin melihat apakah ikut komunitas ojol membuat pengemudi menjadi kaya raya atau tidak.</p>',
+            badDiagnosis: [
+              'Rumusan masalah tidak akademis ("menjadi kaya raya atau tidak") dan tidak menggunakan konsep sosiologi seperti Modal Sosial atau Ketahanan Ekonomi.'
+            ],
+            goodPrompt: '"Bertindaklah sebagai peneliti sosiologi kuantitatif. Susun draf Latar Belakang untuk mengukur Pengaruh Modal Sosial Komunitas (X1: Kepercayaan, Norma Timbal Balik, Jaringan) terhadap Ketahanan Sosial-Ekonomi Pengemudi Ojek Online (Y). Gunakan Teori Modal Sosial Robert Putnam, tunjukkan Das Sollen vs Das Sein, dan hindari sitasi fiktif."',
+            goodOutput: '<p>Ketidakpastian pendapatan harian dan tingginya risiko kerja di jalan raya menuntut adanya jaring pengaman sosial yang kuat bagi pekerja sektor informal transportasi daring (<em>Das Sollen</em>). Faktanya (<em>Das Sein</em>), ketiadaan jaminan sosial formal dari aplikator membuat pengemudi sangat bergantung pada dukungan jaringan sesama pengemudi saat menghadapi krisis darurat.</p><p>Merujuk pada <mark class="hl-good">Teori Modal Sosial Robert Putnam</mark>, tingkat kepercayaan (<em>trust</em>), norma resiprositas, dan kerapatan jaringan dalam komunitas pengemudi (Variabel X) diduga berkontribusi positif terhadap tingkat ketahanan sosial-ekonomi rumah tangga pengemudi (Variabel Y). Studi kuantitatif ini bertujuan menguji secara statistik kontribusi modal sosial komunitas terhadap ketahanan pengemudi di <mark class="hl-good">[Lokasi Penelitian]</mark>.</p>',
+            goodDiagnosis: [
+              'Mengubah konsep abstrak "ikut komunitas" menjadi indikator variabel sosiologi yang terukur (Modal Sosial Putnam: Kepercayaan, Resiprositas, Jaringan).'
+            ]
+          }
+        }
+      };
+
+      const quizQuestions = [
+        {
+          q: '1. Rina ingin meneliti bagaimana siswa penyandang disabilitas memaknai dukungan teman sebaya di sekolah inklusi melalui wawancara mendalam. Ketika menyusun prompt Latar Belakang untuk AI, instruksi metodologi mana yang PALING TEPAT ditulis Rina?',
+          options: [
+            'A. "Buatkan latar belakang untuk menguji pengaruh signifikan variabel teman sebaya (X) terhadap prestasi siswa disabilitas (Y)."',
+            'B. "Gunakan pendekatan kualitatif (konstruktivis/induktif) yang berfokus pada pengalaman subjektif (emic) dan makna interaksi sosial siswa di sekolah inklusi."',
+            'C. "Carikan 10 jurnal internasional lengkap dengan kutipan halaman untuk membuktikan hipotesis statistik saya."',
+            'D. "Buatkan bab 1 lengkap dari awal sampai akhir tentang sejarah penyandang disabilitas di dunia."'
+          ],
+          correct: 1,
+          explanation: 'Benar! Karena Rina meneliti makna pengalaman subjektif melalui wawancara mendalam, ia menggunakan pendekatan Kualitatif (konstruktivis/induktif) dan harus melarang AI menggunakan istilah variabel X-Y kuantitatif.'
+        },
+        {
+          q: '2. Dalam struktur Piramida Terbalik Latar Belakang Sosiologi, apa fungsi utama mempertentangkan Das Sollen dan Das Sein pada Tahap ke-2?',
+          options: [
+            'A. Agar jumlah halaman proposal terlihat lebih tebal dan memenuhi syarat minimal kata.',
+            'B. Untuk memperlihatkan kesenjangan (gap) nyata antara kondisi ideal/norma yang diharapkan dengan fakta empiris yang terjadi di lapangan.',
+            'C. Untuk menggantikan fungsi daftar pustaka dan kajian teori sosiologi.',
+            'D. Untuk menjelaskan sejarah berdirinya aplikasi media sosial sejak pertama kali ditemukan.'
+          ],
+          correct: 1,
+          explanation: 'Tepat sekali! Masalah sosiologis lahir ketika terdapat jurang antara Das Sollen (harapan ideal masyarakat/kebijakan) dengan Das Sein (kenyataan empiris di lapangan).'
+        },
+        {
+          q: '3. Mengapa perintah prompt seperti "Tolong carikan 5 kutipan jurnal sosiologi terbaru beserta daftar pustakanya tentang kenakalan remaja" sangat berbahaya jika diberikan langsung ke chatbot AI biasa?',
+          options: [
+            'A. Karena AI akan menolak menjawab topik sosiologi.',
+            'B. Karena memicu Halusinasi Kredibilitas: AI sering mengarang nama peneliti, tahun, dan judul jurnal yang terdengar meyakinkan padahal fiktif.',
+            'C. Karena bahasa yang dihasilkan AI terlalu singkat.',
+            'D. Karena AI hanya bisa berbahasa Inggris.'
+          ],
+          correct: 1,
+          explanation: 'Benar! LLM memprediksi kata berdasarkan probabilitas, bukan mengambil langsung dari database jurnal terverifikasi (kecuali menggunakan alat khusus seperti Elicit/SciSpace dan diverifikasi manual). Jangan pernah meminta chatbot mengarang sitasi!'
+        },
+        {
+          q: '4. Dalam penelitian kualitatif tentang komunitas pedagang pasar tradisional, AI mengubah istilah khas pedagang "uang pelicin lapak" menjadi istilah umum "biaya administrasi". Bahaya laten AI apakah ini?',
+          options: [
+            'A. Penyeragaman Makna Kualitatif (Flattening dari nuansa lokal/Emic menjadi kategori generik/Etic).',
+            'B. Uji Statistik Regresi Linier.',
+            'C. Sintesis Literatur Terpadu.',
+            'D. Ethical Clearance Fullboard.'
+          ],
+          correct: 0,
+          explanation: 'Tepat! AI cenderung melakukan Flattening (meratakan nuansa lokal/emic yang penuh makna sosiologis menjadi kata umum/etic yang hambar). Peneliti wajib menjaga istilah emic tersebut!'
+        },
+        {
+          q: '5. Manakah cara penulisan kajian literatur di Latar Belakang yang mencerminkan "Sintesis Terpadu" (bukan Rangkuman Serial yang terpotong-potong)?',
+          options: [
+            'A. "Paragraf 1 membahas jurnal Andi (2020). Paragraf 2 membahas jurnal Budi (2021). Paragraf 3 membahas jurnal Citra (2022)."',
+            'B. "Sejumlah studi terdahulu mengonfirmasi bahwa kontrol teman sebaya memengaruhi konformitas remaja (Andi, 2020; Budi, 2021), namun belum membedah perannya di ruang grup tertutup (Citra, 2022)."',
+            'C. "Menurut kamus besar bahasa Indonesia, remaja adalah penduduk berusia 10 hingga 19 tahun."',
+            'D. "Belum pernah ada satu pun manusia di dunia yang meneliti tentang remaja dan media sosial."'
+          ],
+          correct: 1,
+          explanation: 'Luar biasa! Sintesis terpadu merajut beberapa sumber ke dalam satu argumen tematik untuk menunjukkan pola temuan sekaligus membuka celah penelitian (Research Gap).'
+                },
+        {
+          q: '6. Dimas membuka percakapan baru dengan AI untuk tugas karya tulis sosiologinya. Pesan pertama mana yang PALING TEPAT agar AI tahu ia sedang berbicara dengan siapa dan apa kebutuhannya?',
+          options: [
+            'A. "Bantuin tugas sosiologi dong."',
+            'B. "Buatkan latar belakang lengkap 5 halaman tentang remaja dan media sosial."',
+            'C. "Aku siswa kelas X MA yang baru belajar metodologi. Aku sedang menyusun latar belakang karya tulis sosiologi. Bimbing aku langkah demi langkah tanpa membuatkan tugas jadi, gunakan bahasa sederhana, dan jangan mengarang sumber."',
+            'D. "Namaku Dimas Pratama, aku tinggal di Jl. Melati No. 5 dan ini nomor HP-ku. Tolong ingat, ya."'
+          ],
+          correct: 2,
+          explanation: 'Tepat! Prompt perkenalan yang baik memuat identitas umum (tanpa data pribadi), konteks tugas, peran AI yang dibutuhkan, gaya bahasa, dan aturan main. Pilihan D justru membocorkan data pribadi.'
+        }
+      ];
+
+      /* ---------- navigasi ---------- */
+      function updateSlideVisibility() {
+        document.querySelectorAll('.slide').forEach((sec, i) => {
+          sec.hidden = isSlideMode && i !== currentSlide;
+        });
+        document.querySelectorAll('.step').forEach((b, i) => {
+          b.classList.toggle('is-active', i === currentSlide);
+          b.setAttribute('aria-current', i === currentSlide ? 'step' : 'false');
+        });
+        $('slideCounterBadge').textContent = `Slide ${currentSlide + 1} / ${totalSlides}`;
+        $('progressFill').style.width = ((currentSlide + 1) / totalSlides * 100) + '%';
+        $('prevSlideBtn').disabled = currentSlide === 0;
+        $('nextSlideBtn').disabled = currentSlide === totalSlides - 1;
+        document.querySelectorAll('#viewModeSeg .seg-btn').forEach(b =>
+          b.classList.toggle('is-active', (b.dataset.view === 'slide') === isSlideMode));
+      }
+
+      function goTo(i) {
+        if (i < 0 || i >= totalSlides) return;
+        currentSlide = i;
+        updateSlideVisibility();
+        if (isSlideMode) window.scrollTo({ top: 0, behavior: 'smooth' });
+        else $('slide-' + i).scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+
+      function renderTeacherNotesVisibility() {
+        document.querySelectorAll('.teacher-note').forEach(n => { n.hidden = !isTeacherNotesVisible; });
+        $('toggleTeacherModeBtn').setAttribute('aria-checked', String(isTeacherNotesVisible));
+      }
+
+      /* ---------- slide 1 ---------- */
+      function renderCaseExplorer() {
+        const d = casesData[selectedCaseIndex];
+        $('caseTitleDisplay').textContent = d.title;
+        $('caseSollenDisplay').textContent = d.sollen;
+        $('caseSeinDisplay').textContent = d.sein;
+        const widths = [100, 94, 88, 82];
+        $('corongContainer').innerHTML = d.corong.map((it, i) => `
+          <div class="funnel-item${i === d.corong.length - 1 ? ' is-final' : ''}" style="width:${widths[i]}%">
+            <div class="funnel-level">${it.level}</div>
+            <div class="funnel-text">${it.text}</div>
+          </div>`).join('');
+        document.querySelectorAll('.choice').forEach((b, i) => {
+          b.classList.toggle('is-active', i === selectedCaseIndex);
+          b.setAttribute('aria-pressed', String(i === selectedCaseIndex));
+        });
+      }
+
+      /* ---------- slide 2 ---------- */
+      function renderMethodShowcase() {
+        const m = methodsData[selectedMethod];
+        const tone = { kualitatif: 'mint', kuantitatif: 'sky', campuran: 'peach' }[selectedMethod];
+        $('methodShowcasePanel').innerHTML = `
+          <div class="card card-tight tone-${tone}">
+            <span class="badge badge-${tone}">${m.badge}</span>
+            <h3 class="h-card mt-12">${m.title}</h3>
+            <div class="stack-10 mt-16">
+              <div class="kv"><div class="kv-k">🏛️ Ontologi · hakikat realitas</div><div class="kv-v">${m.ontologi}</div></div>
+              <div class="kv"><div class="kv-k">🔬 Epistemologi · cara mengetahui</div><div class="kv-v">${m.epistemologi}</div></div>
+            </div>
+            <div class="flow mt-16">
+              <div class="flow-title">🧭 Alur logika penalaran</div>
+              <ol>${m.alurLogika.map(s => `<li>${s.replace(/^\d+\.\s*/, '')}</li>`).join('')}</ol>
+            </div>
+          </div>
+          <div class="card card-tight stack-16">
+            <div>
+              <h4 class="h-card">📝 Karakteristik latar belakang pada metode ini</h4>
+              <ul class="checklist mt-12">${m.ciriLatarBelakang.map(c => `<li>${c}</li>`).join('')}</ul>
+            </div>
+            <div class="box">
+              <div class="mini-label">📌 Contoh judul penelitian sosiologi</div>
+              <div class="title-sample">${m.contohJudul}</div>
+            </div>
+            <div>
+              <div class="mini-label">🔑 Kalimat kunci yang wajib masuk ke prompt AI</div>
+              <div class="prompt mt-8">${m.kunciPrompt}</div>
+            </div>
+          </div>`;
+        document.querySelectorAll('.method-tab-btn').forEach(b =>
+          b.classList.toggle('is-active', b.dataset.method === selectedMethod));
+      }
+
+      /* ---------- slide 3 ---------- */
+      function renderPyramidStage() {
+        const stage = pyramidStagesData[selectedPyramidStage];
+        const md = stage[selectedPyramidMode];
+        const isKual = selectedPyramidMode === 'kualitatif';
+        $('pyramidDetailCard').innerHTML = `
+          <div class="card-head">
+            <div style="flex:1;min-width:220px">
+              <div class="mini-label" style="color:var(--peach)">Lapisan ke-${stage.stageNum} dari 5</div>
+              <h3 class="h-card mt-4" style="font-size:20px">${stage.title}</h3>
+              <p class="small muted mt-4">${stage.subtitle}</p>
+            </div>
+            <span class="badge ${isKual ? 'badge-mint' : 'badge-sky'}">${isKual ? '🌱 Kualitatif · induktif' : '📊 Kuantitatif · deduktif'}</span>
+          </div>
+          <div class="box">
+            <div class="kv-k">🎯 Tujuan tahap ini</div>
+            <p class="small mt-4" style="color:var(--ink-2)">${stage.goal}</p>
+            <div class="kv-k mt-12">🧭 Fokus spesifik (${isKual ? 'kualitatif' : 'kuantitatif'})</div>
+            <p class="small mt-4" style="color:var(--ink-2)">${md.focus}</p>
+          </div>
+          <div>
+            <div class="mini-label">💬 Contoh prompt tahap ${stage.stageNum}</div>
+            <div class="prompt mt-8">${md.prompt}</div>
+          </div>
+          <div>
+            <div class="mini-label">📄 Contoh hasil paragraf yang baik</div>
+            <div class="paper mt-8">${md.example}</div>
+          </div>`;
+        document.querySelectorAll('.pyr').forEach((b, i) => b.classList.toggle('is-active', i === selectedPyramidStage));
+        $('pyramidModeKual').classList.toggle('is-active', isKual);
+        $('pyramidModeKuan').classList.toggle('is-active', !isKual);
+      }
+
+      /* ---------- slide 4 ---------- */
+      function renderPromptComparison() {
+        const it = promptComparisonsData[selectedPromptCompareIndex];
+        $('promptComparisonDisplay').innerHTML = `
+          <div class="panel panel-bad" style="box-shadow:none">
+            <div class="panel-head">
+              <div><div class="panel-kicker">Prompt tidak jelas / ambigu</div><div class="panel-title">${it.category}</div></div>
+              <span class="pill pill-bad">✕ Ditolak</span>
+            </div>
+            <div class="panel-body"><div class="prompt prompt-bad">"${it.badPrompt}"</div></div>
+            <div class="panel-foot">
+              <div class="foot-title">🔍 Mengapa AI bingung / hasilnya acak?</div>
+              <ul class="bullets">${it.whyBad.map(w => `<li>${w}</li>`).join('')}</ul>
+            </div>
+          </div>
+          <div class="panel panel-good" style="box-shadow:none">
+            <div class="panel-head">
+              <div><div class="panel-kicker">Prompt dipahami AI</div><div class="panel-title">Terstruktur dengan rumus R-M-D-S-G</div></div>
+              <span class="pill pill-good">✓ Tepat</span>
+            </div>
+            <div class="panel-body"><div class="prompt prompt-good">"${it.goodPrompt}"</div></div>
+            <div class="panel-foot">
+              <div class="foot-title">🎯 Mengapa hasil AI menjadi tajam &amp; akademis?</div>
+              <ul class="bullets">${it.whyGood.map(w => `<li>${w}</li>`).join('')}</ul>
+            </div>
+          </div>`;
+        document.querySelectorAll('.pcomp-tab').forEach((b, i) => b.classList.toggle('is-active', i === selectedPromptCompareIndex));
+      }
+
+      /* ---------- slide 5 ---------- */
+      function renderSimulation() {
+        const d = simulationDatabase[simTopic][simMethod];
+        $('simBadPromptBox').textContent = d.badPrompt;
+        $('simBadOutputBox').innerHTML = d.badOutput;
+        $('simBadDiagnosisList').innerHTML = d.badDiagnosis.map(x => `<li>${x}</li>`).join('');
+        $('simGoodPromptBox').textContent = d.goodPrompt;
+        $('simGoodOutputBox').innerHTML = d.goodOutput;
+        $('simGoodDiagnosisList').innerHTML = d.goodDiagnosis.map(x => `<li>${x}</li>`).join('');
+        $('simMethodKual').classList.toggle('is-active', simMethod === 'kualitatif');
+        $('simMethodKuan').classList.toggle('is-active', simMethod === 'kuantitatif');
+      }
+
+      /* ---------- slide 6 ---------- */
+      function buildCustomStudentPrompt() {
+        const method = $('builderMethod').value;
+        const stage = $('builderStage').value;
+        const topic = $('builderTopic').value.trim() || '[Topik Penelitian Sosiologi]';
+        const sollenSein = $('builderSollenSein').value.trim() || '[Fakta pengamatan awal di lapangan]';
+        const theory = $('builderTheory').value;
+        const isKual = method.toLowerCase().includes('kualitatif');
+        const methodGuardrail = isKual
+          ? '2. Gunakan kosakata dan alur penalaran INDUKTIF-KUALITATIF (fokus pada makna subjektif/emic, proses sosial, dan konteks spesifik). JANGAN gunakan istilah pengujian hipotesis statistik atau pengaruh variabel X terhadap Y.'
+          : '2. Gunakan kosakata dan alur penalaran DEDUKTIF-KUANTITATIF (fokus pada definisi operasional variabel, hubungan kausalitas/korelasi yang terukur, dan tempat untuk data numerik).';
+
+        $('builtPromptOutput').textContent = `[ROLE / PERAN]
+Bertindaklah sebagai sosiolog akademik dan pembimbing karya tulis ilmiah remaja SMA yang kritis dan sistematis.
+
+[METHODOLOGY / JALUR METODE]
+Pendekatan Penelitian: ${method}
+
+[TASK & STRUCTURE / TUGAS PIRAMIDA TERBALIK]
+Bantu saya menyusun draf ${stage} untuk Latar Belakang penelitian sosiologi dengan topik:
+"${topic}"
+
+[DATA & CONTEXT / FAKTA LAPANGAN & TEORI]
+- Kesenjangan Harapan (Das Sollen) vs Realitas Empiris (Das Sein) yang saya amati: ${sollenSein}
+- Lensa Teori Sosiologi (Pisau Analisis): ${theory}
+
+[GUARDRAILS / ATURAN KETAT ANTI-ACAK-ACAKAN]
+1. Susun alur paragraf mengikuti logika Piramida Terbalik (dari konteks makro mengerucut ke urgensi empiris, research gap, teori, hingga tujuan studi).
+${methodGuardrail}
+3. DILARANG KERAS mengarang nama peneliti, tahun jurnal, atau angka statistik fiktif (halusinasi). Jika membutuhkan dukungan jurnal atau data angka, tuliskan penanda [ Masukkan Sitasi Jurnal / Data Resmi di Sini ] agar saya memverifikasinya sendiri.
+4. Hindari kalimat pembuka klise seperti "Seiring perkembangan zaman di era globalisasi".
+5. Pertahankan istilah khas lapangan (emic) dan gunakan bahasa Indonesia akademik yang lugas.`;
+      }
+
+
+      /* ---------- slide panduan AI: prompt perkenalan ---------- */
+      function buildIntroPrompt() {
+        const topic = $('introTopic').value.trim();
+        $('introPromptOutput').textContent = `Halo! Sebelum mulai, aku ingin memperkenalkan diri dan kebutuhanku.
+
+[SIAPA AKU]
+Aku siswa ${$('introLevel').value}. ${$('introUnderstand').value}
+
+[TUGASKU]
+Aku sedang mengerjakan tugas mata pelajaran Sosiologi: ${$('introTask').value}. ${topic ? `Topik awalku: "${topic}".` : 'Topikku akan kusampaikan setelah ini.'}
+
+[PERANMU]
+${$('introRole').value}
+
+[CARA BERBICARA]
+${$('introStyle').value}
+
+[ATURAN MAIN]
+1. Jangan langsung membuatkan tugasku sampai jadi; bantu aku berpikir dan menulis sendiri.
+2. Jika permintaanku kurang jelas, ajukan pertanyaan balik terlebih dahulu.
+3. Jangan mengarang nama peneliti, judul jurnal, atau angka statistik. Jika perlu sumber, beri penanda [Perlu sumber] agar aku mencarinya sendiri di Google Scholar.
+4. Jika kamu tidak yakin, katakan terus terang.
+5. Aku tidak akan membagikan data pribadi, dan tolong jangan memintanya.
+
+Jika kamu paham, ringkas peranmu dalam 2–3 kalimat, lalu tanyakan satu hal pertama yang perlu kamu ketahui tentang tugasku.`;
+      }
+
+      function copyText(text, toastId) {
+        const done = () => { $(toastId).hidden = false; setTimeout(() => { $(toastId).hidden = true; }, 2500); };
+        const fallback = () => {
+          const ta = document.createElement('textarea');
+          ta.value = text; document.body.appendChild(ta); ta.select();
+          try { document.execCommand('copy'); } catch (err) {}
+          document.body.removeChild(ta); done();
+        };
+        if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done).catch(fallback);
+        else fallback();
+      }
+
+      /* ---------- slide 7 ---------- */
+      function renderQuiz() {
+        let correct = 0;
+        Object.keys(quizAnswers).forEach(q => { if (quizAnswers[q] === quizQuestions[q].correct) correct++; });
+        $('quizScoreDisplay').textContent = `Skor ${correct} / ${quizQuestions.length}`;
+        $('quizContainer').innerHTML = quizQuestions.map((it, qi) => {
+          const answered = quizAnswers[qi] !== undefined;
+          const choice = quizAnswers[qi];
+          const ok = choice === it.correct;
+          return `
+            <div class="q">
+              <div class="q-title">${it.q}</div>
+              <div class="q-opts">
+                ${it.options.map((opt, oi) => {
+                  let cls = '';
+                  if (answered) cls = oi === it.correct ? 'is-correct' : (oi === choice ? 'is-wrong' : 'is-dim');
+                  return `<button type="button" class="q-opt ${cls}" data-qidx="${qi}" data-oidx="${oi}" ${answered ? 'disabled' : ''}>${opt}</button>`;
+                }).join('')}
+              </div>
+              ${answered ? `<div class="q-feedback ${ok ? 'ok' : 'no'}"><strong>${ok ? '✅ Jawaban tepat!' : '❌ Kurang tepat.'}</strong> ${it.explanation}</div>` : ''}
+            </div>`;
+        }).join('');
+      }
+
+      /* ---------- event ---------- */
+      window.addEventListener('DOMContentLoaded', () => {
+        renderCaseExplorer();
+        renderMethodShowcase();
+        renderPyramidStage();
+        renderPromptComparison();
+        renderSimulation();
+        buildCustomStudentPrompt();
+        buildIntroPrompt();
+        renderQuiz();
+        updateSlideVisibility();
+        renderTeacherNotesVisibility();
+
+        document.querySelectorAll('.step').forEach(b =>
+          b.addEventListener('click', () => goTo(parseInt(b.dataset.slideTarget, 10))));
+        $('prevSlideBtn').addEventListener('click', () => goTo(currentSlide - 1));
+        $('nextSlideBtn').addEventListener('click', () => goTo(currentSlide + 1));
+
+        window.addEventListener('keydown', (e) => {
+          const tag = (e.target && e.target.tagName || '').toLowerCase();
+          if (['input', 'textarea', 'select'].includes(tag)) return;
+          if (e.key === 'ArrowRight') goTo(currentSlide + 1);
+          if (e.key === 'ArrowLeft') goTo(currentSlide - 1);
+        });
+
+        $('toggleTeacherModeBtn').addEventListener('click', () => {
+          isTeacherNotesVisible = !isTeacherNotesVisible;
+          renderTeacherNotesVisibility();
+        });
+
+        document.querySelectorAll('#viewModeSeg .seg-btn').forEach(b => b.addEventListener('click', () => {
+          isSlideMode = b.dataset.view === 'slide';
+          updateSlideVisibility();
+          if (isSlideMode) window.scrollTo({ top: 0 });
+          else $('slide-' + currentSlide).scrollIntoView({ block: 'start' });
+        }));
+
+        // Mode "Semua": menu samping mengikuti posisi gulir
+        const io = new IntersectionObserver((entries) => {
+          if (isSlideMode) return;
+          entries.forEach(en => {
+            if (en.isIntersecting) {
+              currentSlide = parseInt(en.target.id.split('-')[1], 10);
+              updateSlideVisibility();
+            }
+          });
+        }, { rootMargin: '-35% 0px -60% 0px' });
+        document.querySelectorAll('.slide').forEach(s => io.observe(s));
+
+        $('caseSelectorContainer').addEventListener('click', (e) => {
+          const b = e.target.closest('.choice'); if (!b) return;
+          selectedCaseIndex = parseInt(b.dataset.case, 10);
+          renderCaseExplorer();
+        });
+
+        document.querySelectorAll('.method-tab-btn').forEach(b => b.addEventListener('click', () => {
+          selectedMethod = b.dataset.method;
+          renderMethodShowcase();
+        }));
+
+        document.querySelectorAll('.pyr').forEach(b => b.addEventListener('click', () => {
+          selectedPyramidStage = parseInt(b.dataset.pyramid, 10);
+          renderPyramidStage();
+        }));
+        $('pyramidModeKual').addEventListener('click', () => { selectedPyramidMode = 'kualitatif'; renderPyramidStage(); });
+        $('pyramidModeKuan').addEventListener('click', () => { selectedPyramidMode = 'kuantitatif'; renderPyramidStage(); });
+
+        $('promptCompareTabContainer').addEventListener('click', (e) => {
+          const b = e.target.closest('.pcomp-tab'); if (!b) return;
+          selectedPromptCompareIndex = parseInt(b.dataset.pcomp, 10);
+          renderPromptComparison();
+        });
+
+        $('simTopicSelect').addEventListener('change', (e) => { simTopic = e.target.value; renderSimulation(); });
+        $('simMethodKual').addEventListener('click', () => { simMethod = 'kualitatif'; renderSimulation(); });
+        $('simMethodKuan').addEventListener('click', () => { simMethod = 'kuantitatif'; renderSimulation(); });
+        $('runSimulationBtn').addEventListener('click', () => {
+          renderSimulation();
+          const bad = $('simBadOutputBox'), good = $('simGoodOutputBox');
+          bad.classList.add('flash-bad'); good.classList.add('flash-good');
+          setTimeout(() => { bad.classList.remove('flash-bad'); good.classList.remove('flash-good'); }, 700);
+        });
+
+        ['builderMethod', 'builderStage', 'builderTopic', 'builderSollenSein', 'builderTheory'].forEach(id => {
+          $(id).addEventListener('input', buildCustomStudentPrompt);
+          $(id).addEventListener('change', buildCustomStudentPrompt);
+        });
+        $('generateCustomPromptBtn').addEventListener('click', buildCustomStudentPrompt);
+
+        $('fillPresetBtn').addEventListener('click', () => {
+          $('builderMethod').value = 'Kuantitatif (Survei Korelasional / Eksplanatif - Deduktif)';
+          $('builderStage').value = 'Kerangka Utuh 5 Tahap Piramida Terbalik (Per Poin)';
+          $('builderTopic').value = 'Pengaruh FOMO dan Konformitas Teman Sebaya terhadap Perilaku Konsumsi Simbolik di Coffee Shop pada Siswa SMA';
+          $('builderSollenSein').value = 'Idealnya uang saku pelajar digunakan secara rasional untuk kebutuhan sekolah (Das Sollen), tetapi faktanya banyak siswa menghabiskan uang saku di coffee shop premium demi mengunggah story eksklusif agar diakui kelompok pergaulan (Das Sein).';
+          $('builderTheory').value = 'Teori Masyarakat Konsumsi & Simulakra (Jean Baudrillard) — Nilai Tanda & Gaya Hidup';
+          buildCustomStudentPrompt();
+        });
+
+        $('copyBuiltPromptBtn').addEventListener('click', () => {
+          const text = $('builtPromptOutput').textContent;
+          const done = () => { $('copyToast').hidden = false; setTimeout(() => { $('copyToast').hidden = true; }, 2500); };
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text).then(done).catch(fallback);
+          } else fallback();
+          function fallback() {
+            const ta = document.createElement('textarea');
+            ta.value = text; document.body.appendChild(ta); ta.select();
+            try { document.execCommand('copy'); } catch (err) {}
+            document.body.removeChild(ta); done();
+          }
+        });
+
+
+        ['introLevel', 'introUnderstand', 'introTask', 'introRole', 'introStyle', 'introTopic'].forEach(id => {
+          $(id).addEventListener('input', buildIntroPrompt);
+          $(id).addEventListener('change', buildIntroPrompt);
+        });
+        $('introCopyBtn').addEventListener('click', () => copyText($('introPromptOutput').textContent, 'introToast'));
+
+        $('quizContainer').addEventListener('click', (e) => {
+          const b = e.target.closest('.q-opt'); if (!b || b.disabled) return;
+          quizAnswers[parseInt(b.dataset.qidx, 10)] = parseInt(b.dataset.oidx, 10);
+          renderQuiz();
+        });
+        $('resetQuizBtn').addEventListener('click', () => { quizAnswers = {}; renderQuiz(); });
+      });
+    })();
+  </script>
+</body>
+</html>

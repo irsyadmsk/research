@@ -14,6 +14,7 @@ Dibuat oleh Muhammad Irsyad Sirojul Khoeir · [irsyads.com](https://irsyads.com)
 | `/alur/` | `src/pages/alur.astro` | Sembilan langkah penelitian, catatan Kelas 10/Mahasiswa, daftar centang |
 | `/alat/judul/` | `src/pages/alat/judul.astro` | Racik Judul Sosiologi. Data di `src/data/judul.js`, logika di `src/scripts/judul.js`, gaya di `src/styles/judul.css` |
 | `/teori/` | `src/pages/teori.astro` | Glosarium 5 konsep kelas 10 dan 15 teori tokoh, dengan pencarian. Isi di `src/data/teori.js`; `id` sama dengan `judul.js` agar tautan `/alat/judul/?teori=<id>` (tambah `lv=sma&` untuk konsep kelas 10) memilih teori itu |
+| `/materi/cetak-biru-peneliti-ai/` | `public/materi/cetak-biru-peneliti-ai/index.html` | Modul interaktif kelas 10, satu berkas HTML mandiri dengan gaya sendiri. Terbuka tanpa login |
 | `/karya/` | `src/pages/karya/` | Galeri karya murid dari `src/content/karya/*.md` |
 
 Stack: Astro 7 statis, tanpa backend. Warna dan huruf mengikuti merek irsyads (ivory, navy, academic blue; Playfair Display, Libre Baskerville, Plus Jakarta Sans), didefinisikan di `src/styles/global.css`.
